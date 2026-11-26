@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TRIØ Clothing Store</title>
+<meta name="description" content="TRIØ Clothing: streetwear, shoes and accessories from Leeds.">
+<link rel="icon" type="image/png" href="img/crown.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap">
+<style>
+/* VOICE occasion: a streetwear drop, loud but clean
+   IDEA the brand's shop window at night: chrome logo lit up, the rack below
+   PICTURE the chrome TRIØ logo as the hero, then the product rack on white tiles
+   COLOUR black ground, chrome silver ink, snapback red #e0262f as the one accent
+   TYPE Anton display + Inter text
+   LAYOUT laptop: logo hero across the top, rack of 4 per row; phone: logo, buttons, 2 per row */
+:root{color-scheme:dark;--bg:#070707;--band:#0e0e0e;--card:#161616;--line:#2a2a2a;--ink:#f2f2f2;--muted:#a8a8a8;--red:#e0262f;--paper:#9e9e9e}
+:root[data-theme=light],:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:76px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.band{padding:clamp(32px,5vw,72px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+.disp{font-family:Anton,Impact,sans-serif;font-weight:400;letter-spacing:.01em;line-height:1.05;margin:0;text-wrap:balance}
+nav{position:sticky;top:0;z-index:20;background:rgba(7,7,7,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.navin{max-width:1240px;margin:0 auto;padding:10px max(5vw,16px);display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:8px;text-decoration:none}
+.brand img{width:54px;height:36px;object-fit:cover;mix-blend-mode:screen}
+.brand span{font-family:Anton,Impact,sans-serif;font-size:26px;letter-spacing:.04em}
+.links{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
+.links a{text-decoration:none;color:var(--muted);font-weight:500;padding:10px 2px}
+.links a:hover{color:var(--ink)}
+.bagbtn{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);cursor:pointer;font-weight:600}
+.bagbtn b{background:var(--red);color:#fff;border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:13px;padding:0 6px}
+.hero{text-align:center;padding-top:clamp(24px,4vw,48px)}
+.hero .logo{width:min(720px,100%);margin:0 auto;mix-blend-mode:screen}
+.hero p{color:var(--muted);font-size:17px;max-width:560px;margin:8px auto 22px}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:999px;font-weight:700;text-decoration:none;border:1px solid var(--line);background:var(--card);cursor:pointer}
+.btn.red{background:var(--red);border-color:var(--red);color:#fff}
+.btn:hover{filter:brightness(1.12)}
+.shop{background:var(--band);border-top:1px solid var(--line)}
+.shophead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.shophead h2{font-size:clamp(34px,5vw,52px)}
+.note{color:var(--muted);font-size:14px;margin:6px 0 0}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:transparent;cursor:pointer;font-weight:600;color:var(--muted)}
+.chip[aria-pressed=true]{background:var(--ink);color:#0a0a0a;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(230px,100%),1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.tile{background:#fff;aspect-ratio:1/1;display:grid;place-items:center;padding:14px;border:0;cursor:pointer;position:relative;width:100%}
+.tile img{position:absolute;inset:14px;width:calc(100% - 28px);height:calc(100% - 28px);object-fit:contain}
+.tag{position:absolute;left:10px;top:10px;background:#0a0a0a;color:#fff;font-size:12px;font-weight:700;padding:4px 9px;border-radius:999px}
+.cbody{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;flex:1}
+.crow{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.cname{font-weight:700;font-size:16px;margin:0}
+.price{font-weight:700;white-space:nowrap}
+.cdet{color:var(--muted);font-size:14px;margin:0}
+.add{margin-top:10px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:#0a0a0a;font-weight:700;cursor:pointer}
+.add:hover{border-color:var(--ink)}
+.king{background:var(--paper);color:#111}
+.kingin{display:grid;gap:18px}
+.shoe{position:relative;width:min(980px,100%);aspect-ratio:2/1;margin:0 auto}
+.shoe .cr{position:absolute;left:9.33%;top:16.55%;width:10.85%;mix-blend-mode:multiply;filter:invert(1) contrast(2);pointer-events:none}
+.kingtxt{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start;max-width:980px;margin:0 auto;width:100%}
+.kingtxt h2{font-size:clamp(36px,5vw,52px)}
+.kingtxt p{margin:0;font-size:17px}
+.sports{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.sports span{border:1.5px solid #111;border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px}
+.hand{font-family:Caveat,cursive;font-size:24px;font-weight:700}
+.about .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center}
+.about h2{font-size:clamp(34px,5vw,52px);margin-bottom:12px}
+.about p{color:var(--muted);font-size:17px;max-width:60ch;margin:0 0 12px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+.facts div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.facts b{display:block;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:22px;letter-spacing:.02em}
+.facts span{color:var(--muted);font-size:14px}
+footer{border-top:1px solid var(--line);padding:28px max(5vw,16px);color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer a{text-decoration:none;margin-right:16px}
+.veil{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:40;display:none}
+.veil.on{display:block}
+.modal{position:fixed;z-index:50;left:50%;top:50%;transform:translate(-50%,-50%);width:min(900px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:20px;display:none}
+.modal.on{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.gal{background:#fff;padding:18px;display:flex;flex-direction:column;gap:10px}
+.gal .main{aspect-ratio:1/1;object-fit:contain;width:100%}
+.thumbs{display:flex;gap:8px}
+.thumbs button{width:64px;height:64px;padding:4px;border-radius:10px;border:2px solid #ddd;background:#fff;cursor:pointer}
+.thumbs button[aria-pressed=true]{border-color:#111}
+.thumbs img{width:100%;height:100%;object-fit:contain}
+.info{padding:24px;display:flex;flex-direction:column;gap:12px}
+.info h3{font-size:34px}
+.info .price{font-size:22px}
+.qty{display:flex;align-items:center;gap:10px}
+.qty button,.x{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:#0a0a0a;cursor:pointer;font-size:20px}
+.x{position:absolute;right:12px;top:12px;background:rgba(10,10,10,.85);color:#fff}
+.drawer{position:fixed;z-index:50;top:0;right:0;height:100dvh;width:min(420px,100vw);background:var(--card);border-left:1px solid var(--line);transform:translateX(105%);transition:transform .25s ease;display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.dhead{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dhead h3{font-size:30px}
+.dhead .x{position:static}
+.items{flex:1;overflow:auto;padding:8px 20px}
+.item{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.item img{width:64px;height:64px;object-fit:contain;background:#fff;border-radius:10px;padding:4px}
+.item .qty button{width:36px;height:36px;font-size:16px}
+.rm{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:6px 0;min-height:32px}
+.empty{color:var(--muted);padding:24px 0}
+.dfoot{padding:18px 20px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.sub{display:flex;justify-content:space-between;font-weight:700;font-size:18px}
+.msg{color:var(--muted);font-size:14px;margin:0;min-height:1.2em}
+@media(max-width:760px){.modal.on{grid-template-columns:minmax(0,1fr)}.kingtxt,.about .wrap{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.links{order:3;width:100%;margin-left:0;gap:14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cbody{padding:10px 12px 12px}.cname{font-size:15px}.facts{grid-template-columns:minmax(0,1fr)}.info h3{font-size:28px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.drawer{transition:none}}
+</style>
+</head>
+<body>
+<nav aria-label="Main">
+<div class="navin">
+<a class="brand" href="#top"><img src="img/crown.png" alt=""><span>TRIØ</span></a>
+<div class="links"><a href="#shop">Shop</a><a href="#shop" data-jump="Shoes">Shoes</a><a href="#king-1">KING 1</a><a href="#about">About</a></div>
+<button class="bagbtn" id="openBag" type="button" aria-label="Open bag">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l1 13H5L6 7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>
+Bag <b id="bagCount">0</b>
+</button>
+</div>
+</nav>
+<header class="band hero" id="top">
+<div class="wrap">
+<img class="logo" src="img/logo.jpg" alt="TRIØ Clothing chrome logo with crown">
+<h1 class="disp" style="font-size:clamp(40px,6vw,64px)">Drop 01 is here</h1>
+<p>Streetwear, shoes and accessories from TRIØ Clothing in Leeds. Every piece is printed to order.</p>
+<div class="btns"><a class="btn red" href="#shop">Shop the drop</a><a class="btn" href="#king-1">See the KING 1</a></div>
+</div>
+</header>
+<section class="band shop" id="shop" aria-labelledby="shopTitle">
+<div class="wrap">
+<div class="shophead">
+<div><h2 class="disp" id="shopTitle">Shop the drop</h2><p class="note">Example prices in GBP while the store is being set up.</p></div>
+<div class="chips" id="chips" role="group" aria-label="Filter products"></div>
+</div>
+<div class="grid" id="grid"></div>
+</div>
+</section>
+<section class="band king" id="king-1" aria-labelledby="kingTitle">
+<div class="wrap kingin">
+<div class="shoe">
+<svg viewBox="0 0 800 400" role="img" aria-label="Side view of the TRIØ King 1 hybrid high-top" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; overflow: visible">
+<defs>
+<filter id="kSketch" x="-3%" y="-6%" width="106%" height="112%">
+<feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"></feTurbulence>
+<feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+</filter>
+<filter id="kSketch2" x="-3%" y="-6%" width="106%" height="112%">
+<feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="9" result="n"></feTurbulence>
+<feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+</filter>
+<pattern id="kHatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><line x1="0" y1="0" x2="0" y2="7" stroke="#000000" stroke-opacity="0.45" stroke-width="1.1"></line></pattern>
+<pattern id="kHerring" width="14" height="10" patternUnits="userSpaceOnUse"><path d="M0,8 L7,2 L14,8" fill="none" stroke="#ffffff" stroke-opacity="0.5" stroke-width="1.5"></path></pattern>
+<clipPath id="kPods">
+<path d="M56,262 C100,258 160,258 214,262 C220,290 222,320 214,350 C170,356 110,356 78,352 C52,346 40,320 44,292 C46,276 50,266 56,262 Z"></path>
+<path d="M214,262 C270,264 340,264 404,262 C410,290 410,322 402,352 C340,358 270,358 216,352 C222,322 222,290 214,262 Z"></path>
+<path d="M404,262 C470,262 540,260 594,258 C600,288 600,318 592,348 C530,354 460,354 402,352 C410,322 410,290 404,262 Z"></path>
+<path d="M594,258 C660,256 730,254 762,258 C782,268 790,290 784,312 C776,334 752,344 718,346 C680,348 630,348 592,348 C600,318 600,288 594,258 Z"></path>
+</clipPath>
+<clipPath id="kUpper"><path d="M60,256 C48,196 50,120 66,64 C72,48 84,40 100,40 C150,44 196,62 230,86 C252,82 274,82 292,88 C380,124 480,170 560,200 C640,212 720,226 760,252 L762,262 L60,262 Z"></path></clipPath>
+<clipPath id="kBand"><path d="M58,258 C44,196 48,120 70,72 C96,52 150,58 204,84 C260,110 340,136 420,160 C480,180 530,196 556,203 C566,207 564,215 552,217 C512,218 470,212 430,206 C380,200 330,198 290,204 C240,212 190,226 170,258 Z"></path></clipPath>
+<mask id="kCut" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="400">
+<rect x="0" y="0" width="800" height="400" fill="#ffffff"></rect>
+<ellipse cx="124" cy="160" rx="30" ry="44" transform="rotate(-12 124 160)" fill="#000000"></ellipse>
+<ellipse cx="300" cy="162" rx="26" ry="10" transform="rotate(16 300 162)" fill="#000000"></ellipse>
+<ellipse cx="385" cy="178" rx="24" ry="9" transform="rotate(16 385 178)" fill="#000000"></ellipse>
+<ellipse cx="465" cy="193" rx="17" ry="6" transform="rotate(14 465 193)" fill="#000000"></ellipse>
+</mask>
+</defs>
+<g display="inline">
+<line x1="-20" y1="358" x2="830" y2="358" stroke="#000000" stroke-opacity="0.25" stroke-width="1"></line>
+<line x1="-10" y1="250" x2="820" y2="242" stroke="#000000" stroke-opacity="0.12" stroke-width="1"></line>
+<line x1="58" y1="10" x2="58" y2="390" stroke="#000000" stroke-opacity="0.1" stroke-width="1"></line>
+<ellipse cx="124" cy="160" rx="46" ry="62" transform="rotate(-12 124 160)" fill="none" stroke="#000000" stroke-opacity="0.15" stroke-width="1" stroke-dasharray="4 5"></ellipse>
+</g>
+<ellipse cx="415" cy="358" rx="380" ry="9" fill="#000000" opacity="0.18"></ellipse>
+<g filter="url(#kSketch)" stroke="#111111" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+<g display="none" fill="#d9d9d9">
+<path d="M91,354 L109,354 L106,378 Q100,381 94,378 Z"></path>
+<path d="M151,354 L169,354 L166,378 Q160,381 154,378 Z"></path>
+<path d="M241,354 L259,354 L256,378 Q250,381 244,378 Z"></path>
+<path d="M321,354 L339,354 L336,378 Q330,381 324,378 Z"></path>
+<path d="M431,354 L449,354 L446,378 Q440,381 434,378 Z"></path>
+<path d="M511,354 L529,354 L526,378 Q520,381 514,378 Z"></path>
+<path d="M611,352 L629,352 L626,376 Q620,379 614,376 Z"></path>
+<path d="M691,348 L709,348 L706,372 Q700,375 694,372 Z"></path>
+</g>
+<g display="none" fill="#2a2a2a">
+<path d="M67,352 L93,352 L90,366 L70,366 Z"></path>
+<path d="M122,355 L148,355 L145,369 L125,369 Z"></path>
+<path d="M177,358 L203,358 L200,372 L180,372 Z"></path>
+<path d="M237,360 L263,360 L260,374 L240,374 Z"></path>
+<path d="M297,360 L323,360 L320,374 L300,374 Z"></path>
+<path d="M357,360 L383,360 L380,374 L360,374 Z"></path>
+<path d="M417,360 L443,360 L440,374 L420,374 Z"></path>
+<path d="M477,360 L503,360 L500,374 L480,374 Z"></path>
+<path d="M537,359 L563,359 L560,373 L540,373 Z"></path>
+<path d="M597,358 L623,358 L620,372 L600,372 Z"></path>
+<path d="M657,355 L683,355 L680,369 L660,369 Z"></path>
+<path d="M717,350 L743,350 L740,364 L720,364 Z"></path>
+</g>
+<path display="none" d="M60,344 C200,352 420,354 600,350 C680,348 740,342 774,330 L776,338 C740,352 680,358 600,360 C420,364 200,362 62,354 Z" fill="#1a1a1a"></path>
+<g fill="#f4f4f2">
+<path d="M56,262 C100,258 160,258 214,262 C220,290 222,320 214,350 C170,356 110,356 78,352 C52,346 40,320 44,292 C46,276 50,266 56,262 Z"></path>
+<path d="M214,262 C270,264 340,264 404,262 C410,290 410,322 402,352 C340,358 270,358 216,352 C222,322 222,290 214,262 Z"></path>
+<path d="M404,262 C470,262 540,260 594,258 C600,288 600,318 592,348 C530,354 460,354 402,352 C410,322 410,290 404,262 Z"></path>
+<path d="M594,258 C660,256 730,254 762,258 C782,268 790,290 784,312 C776,334 752,344 718,346 C680,348 630,348 592,348 C600,318 600,288 594,258 Z"></path>
+</g>
+<g clip-path="url(#kPods)" stroke="none">
+<rect x="0" y="318" width="800" height="40" fill="#000000" opacity="0.14"></rect>
+<rect x="0" y="310" width="800" height="50" fill="url(#kHatch)" opacity="0.55"></rect>
+<rect x="0" y="340" width="800" height="40" fill="#1a1a1a"></rect>
+<rect x="0" y="340" width="800" height="40" fill="url(#kHerring)" display="inline"></rect>
+</g>
+<g fill="none" stroke="#ffffff" stroke-opacity="0.75" stroke-width="4">
+<path d="M72,272 C110,268 160,268 204,272"></path>
+<path d="M226,274 C280,272 340,272 394,274"></path>
+<path d="M414,274 C470,272 530,270 584,270"></path>
+<path d="M604,270 C660,268 720,266 756,270"></path>
+</g>
+<g stroke-opacity="0.7" stroke-width="2.5">
+<path d="M114,331 L126,331"></path>
+<path d="M294,333 L306,333"></path>
+<path d="M494,331 L506,331"></path>
+<path d="M684,328 L696,328"></path>
+</g>
+<g>
+<ellipse cx="243" cy="300" rx="24" ry="16" fill="#3046ff" fill-opacity="0.3"></ellipse>
+<ellipse cx="333" cy="300" rx="24" ry="16" fill="#3046ff" fill-opacity="0.3"></ellipse>
+<ellipse cx="432" cy="300" rx="24" ry="16" fill="#3046ff" fill-opacity="0.3"></ellipse>
+<ellipse cx="508" cy="300" rx="24" ry="16" fill="#3046ff" fill-opacity="0.3"></ellipse>
+</g>
+<g fill="#ffffff" fill-opacity="0.35" stroke-width="1.8">
+<ellipse cx="243" cy="300" rx="24" ry="16"></ellipse>
+<ellipse cx="333" cy="300" rx="24" ry="16"></ellipse>
+<ellipse cx="432" cy="300" rx="24" ry="16"></ellipse>
+<ellipse cx="508" cy="300" rx="24" ry="16"></ellipse>
+</g>
+<g fill="none" stroke="#ffffff" stroke-opacity="0.9" stroke-width="2.2">
+<path d="M227,294 Q231,286 241,285"></path>
+<path d="M317,294 Q321,286 331,285"></path>
+<path d="M416,294 Q420,286 430,285"></path>
+<path d="M492,294 Q496,286 506,285"></path>
+</g>
+<text x="86" y="318" stroke="none" font-family="Anton, Impact, sans-serif" font-size="18" letter-spacing="3" fill="#8a8a8a">TRIØ</text>
+<text x="636" y="312" stroke="none" font-family="Anton, Impact, sans-serif" font-size="14" letter-spacing="3" fill="#8a8a8a">KING 1</text>
+<g display="none" fill="#1a1a1a">
+<rect x="111" y="320" width="18" height="34" rx="5"></rect>
+<rect x="291" y="322" width="18" height="34" rx="5"></rect>
+<rect x="491" y="320" width="18" height="34" rx="5"></rect>
+<rect x="681" y="316" width="18" height="32" rx="5"></rect>
+<g stroke="none" fill="#6a6a6a">
+<rect x="115" y="326" width="10" height="5" rx="2"></rect>
+<rect x="295" y="328" width="10" height="5" rx="2"></rect>
+<rect x="495" y="326" width="10" height="5" rx="2"></rect>
+<rect x="685" y="322" width="10" height="5" rx="2"></rect>
+</g>
+</g>
+<path d="M60,256 C48,196 50,120 66,64 C72,48 84,40 100,40 C150,44 196,62 230,86 C252,82 274,82 292,88 C380,124 480,170 560,200 C640,212 720,226 760,252 L762,262 L60,262 Z" fill="#e6e6e3"></path>
+<g clip-path="url(#kUpper)" stroke="none">
+<rect x="0" y="196" width="800" height="70" fill="url(#kHatch)" opacity="0.4"></rect>
+<rect x="560" y="200" width="240" height="70" fill="#000000" opacity="0.06"></rect>
+</g>
+<path d="M250,92 C330,110 430,152 540,194" fill="none" stroke="#ffffff" stroke-opacity="0.6" stroke-width="3"></path>
+<path d="M100,46 C150,48 196,64 230,86 C200,76 150,62 108,58 Z" fill="#262626"></path>
+<path d="M230,200 C228,226 226,242 228,264 L254,264 C258,242 264,226 270,200 Z" fill="#fafafa"></path>
+<path d="M320,190 C318,218 316,240 318,264 L344,264 C348,240 354,218 360,190 Z" fill="#151515"></path>
+<path d="M410,194 C408,222 406,242 408,264 L434,264 C438,242 444,222 450,194 Z" fill="#fafafa"></path>
+<path d="M495,204 C493,228 492,246 494,264 L520,264 C524,246 530,228 535,204 Z" fill="#151515"></path>
+<g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="3">
+<path d="M235,214 C233,232 233,246 234,256"></path>
+<path d="M325,206 C323,226 322,242 323,256"></path>
+<path d="M415,210 C413,230 412,244 413,256"></path>
+<path d="M500,218 C498,234 498,246 499,256"></path>
+</g>
+<path d="M58,258 C44,196 48,120 70,72 C96,52 150,58 204,84 C260,110 340,136 420,160 C480,180 530,196 556,203 C566,207 564,215 552,217 C512,218 470,212 430,206 C380,200 330,198 290,204 C240,212 190,226 170,258 Z" fill="#fafafa" mask="url(#kCut)"></path>
+<g clip-path="url(#kBand)" mask="url(#kCut)" stroke="none">
+<rect x="0" y="196" width="800" height="70" fill="url(#kHatch)" opacity="0.45"></rect>
+<rect x="0" y="222" width="800" height="40" fill="#000000" opacity="0.1"></rect>
+</g>
+<path d="M80,74 C110,58 160,64 204,88 C260,114 340,140 418,164" fill="none" stroke="#ffffff" stroke-opacity="0.7" stroke-width="4"></path>
+<path d="M64,236 C54,190 56,140 74,96" fill="none" stroke="#ffffff" stroke-opacity="0.7" stroke-width="3"></path>
+<path d="M96,210 L106,214 L156,112 L146,108 Z" fill="#fafafa"></path>
+<g fill="none">
+<ellipse cx="124" cy="160" rx="30" ry="44" transform="rotate(-12 124 160)"></ellipse>
+<ellipse cx="300" cy="162" rx="26" ry="10" transform="rotate(16 300 162)"></ellipse>
+<ellipse cx="385" cy="178" rx="24" ry="9" transform="rotate(16 385 178)"></ellipse>
+<ellipse cx="465" cy="193" rx="17" ry="6" transform="rotate(14 465 193)"></ellipse>
+</g>
+<path d="M48,252 C200,258 500,258 774,246 L776,262 C500,272 200,272 50,268 Z" fill="#d9d9d6"></path>
+<path d="M70,259 C220,264 500,264 760,254" fill="none" stroke="#3046ff" stroke-width="2.5"></path>
+<path d="M60,96 C40,64 46,26 80,20 C106,16 124,28 124,52 L106,58 C104,42 94,36 82,38 C66,42 62,66 76,90 Z" fill="#3046ff"></path>
+<path d="M56,76 C50,54 58,34 80,28 C98,24 114,32 116,48" fill="none" stroke="#ffffff" stroke-opacity="0.5" stroke-width="1.5" stroke-dasharray="4 4"></path>
+</g>
+<g display="inline" filter="url(#kSketch2)" fill="none" stroke="#111111" stroke-opacity="0.35" stroke-width="1.2" transform="translate(1.5 -1)">
+<path d="M60,256 C48,196 50,120 66,64 C72,48 84,40 100,40 C150,44 196,62 230,86 C252,82 274,82 292,88 C380,124 480,170 560,200 C640,212 720,226 760,252"></path>
+<path d="M58,258 C44,196 48,120 70,72 C96,52 150,58 204,84 C260,110 340,136 420,160 C480,180 530,196 556,203 C566,207 564,215 552,217 C512,218 470,212 430,206 C380,200 330,198 290,204 C240,212 190,226 170,258"></path>
+<path d="M56,262 C100,258 160,258 214,262 C220,290 222,320 214,350 C170,356 110,356 78,352 C52,346 40,320 44,292"></path>
+<path d="M404,262 C410,290 410,322 402,352 C340,358 270,358 216,352"></path>
+<path d="M594,258 C660,256 730,254 762,258 C782,268 790,290 784,312 C776,334 752,344 718,346 C680,348 630,348 592,348"></path>
+<path d="M320,190 C318,218 316,240 318,264"></path>
+<path d="M495,204 C493,228 492,246 494,264"></path>
+</g>
+<g display="none">
+<g font-family="Caveat, cursive" fill="#1a1a1a">
+<text x="566" y="50" font-size="34" font-weight="700">TRIØ KING 1</text>
+<text x="566" y="80" font-size="19" font-weight="500">high-top hybrid: court · pitch · trail</text>
+<text x="140" y="22" font-size="20" font-weight="500">heel strap</text>
+<text x="-80" y="176" font-size="20" font-weight="500">Ø cutout</text>
+<text x="330" y="76" font-size="20" font-weight="500">crown teeth</text>
+<text x="226" y="402" font-size="20" font-weight="500">air pod under each tooth</text>
+<text x="560" y="402" font-size="20" font-weight="500">clip-on football + hiking studs</text>
+</g>
+<path d="M566,58 C620,63 680,61 740,55" fill="none" stroke="#3046ff" stroke-width="3" stroke-linecap="round"></path>
+<g fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round">
+<path d="M136,18 C128,20 122,24 118,32"></path>
+<path d="M118,32 L118,24 M118,32 L125,29"></path>
+<path d="M-8,170 C20,160 60,158 92,162"></path>
+<path d="M92,162 L85,158 M92,162 L85,166"></path>
+<path d="M372,82 C392,140 366,200 346,226"></path>
+<path d="M346,226 L345,218 M346,226 L352,221"></path>
+<path d="M282,386 C300,366 318,330 326,316"></path>
+<path d="M326,316 L318,318 M326,316 L325,324"></path>
+<path d="M600,386 C620,376 640,368 652,358"></path>
+<path d="M652,358 L644,357 M652,358 L647,364"></path>
+</g>
+</g>
+</svg>
+<img class="cr" src="img/crown.png" alt="">
+</div>
+<div class="kingtxt">
+<div>
+<div class="hand">Signature shoe, in development</div>
+<h2 class="disp" id="kingTitle">TRIØ KING 1</h2>
+<div class="sports"><span>Basketball</span><span>Football</span><span>Hiking</span></div>
+</div>
+<p>A high-top with an organic cage, a Ø cutout and four crown teeth, each sitting on its own air bubble. One sole for the court, plus clip-on plates with football studs or hiking studs. Royal White shown.</p>
+</div>
+</div>
+</section>
+<section class="band about" id="about" aria-labelledby="aboutTitle">
+<div class="wrap">
+<div>
+<h2 class="disp" id="aboutTitle">Crown on everything</h2>
+<p>TRIØ Clothing is an independent streetwear brand from Leeds. The crown and the chrome TRIØ wordmark show up across the range, from caps and hoodies to powerbanks and puzzles.</p>
+<p>Everything is made to order with print-on-demand, so nothing sits in a warehouse and new designs can drop fast.</p>
+<div class="facts">
+<div><b>Leeds</b><span>Where TRIØ started</span></div>
+<div><b>8 pieces</b><span>In Drop 01</span></div>
+<div><b>Made to order</b><span>Printed when you buy</span></div>
+</div>
+</div>
+<img src="img/crown.png" alt="TRIØ crown logo" style="width:100%;max-width:460px;margin:0 auto;mix-blend-mode:screen">
+</div>
+</section>
+<footer>
+<div class="wrap">
+<div><a href="#shop">Shop</a><a href="#king-1">KING 1</a><a href="#about">About</a></div>
+<div>© 2026 TRIØ Clothing · Leeds</div>
+</div>
+</footer>
+<div class="veil" id="veil"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mName">
+<div class="gal" style="position:relative">
+<img class="main" id="mImg" src="img/tee.png" alt="">
+<div class="thumbs" id="mThumbs"></div>
+<button class="x" id="mClose" type="button" aria-label="Close">×</button>
+</div>
+<div class="info">
+<div class="note" id="mType"></div>
+<h3 class="disp" id="mName"></h3>
+<div class="price" id="mPrice"></div>
+<p style="margin:0;color:var(--muted)" id="mDesc"></p>
+<p style="margin:0;font-weight:600" id="mOpts"></p>
+<div class="qty"><button type="button" id="mMinus" aria-label="Fewer">−</button><span id="mQty" style="min-width:24px;text-align:center;font-weight:700">1</span><button type="button" id="mPlus" aria-label="More">+</button></div>
+<button class="btn red" type="button" id="mAdd">Add to bag</button>
+<p class="note">Size and colour are picked at checkout.</p>
+</div>
+</div>
+<aside class="drawer" id="drawer" aria-label="Bag">
+<div class="dhead"><h3 class="disp">Your bag</h3><button class="x" id="dClose" type="button" aria-label="Close bag">×</button></div>
+<div class="items" id="items"></div>
+<div class="dfoot">
+<div class="sub"><span>Subtotal</span><span id="subtotal">£0</span></div>
+<button class="btn red" type="button" id="checkout">Checkout</button>
+<p class="msg" id="msg" role="status"></p>
+</div>
+</aside>
+<script>
+{
+const P = [
+  { id: 'tee', name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 22, imgs: ['img/tee.png', 'img/tee-close.png', 'img/tee-folded.png'], opts: '9 sizes · black', desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
+  { id: 'hoodie', name: 'Crown Hoodie', type: 'Youth Heavy Blend hooded sweatshirt', cat: 'Clothing', price: 30, imgs: ['img/hoodie.png'], opts: '4 youth sizes · black', desc: 'Black hoodie with the crown printed on the chest.' },
+  { id: 'anorak', name: 'Zipped Pocket Anorak', type: 'Sport-Tek anorak', cat: 'Clothing', price: 48, imgs: ['img/anorak.png'], opts: '8 sizes · charcoal', tag: '1 size out of stock', desc: 'Charcoal pullover anorak with a zipped pocket and a small logo patch on the chest.' },
+  { id: 'cap', name: 'Crown Snapback', type: 'Embroidered snapback cap', cat: 'Accessories', price: 22, imgs: ['img/cap.png'], opts: 'One size · 3 colours', desc: 'Flat-peak snapback with the crown embroidered on the front. Red and black shown.' },
+  { id: 'sneakers', name: 'Mesh Sneakers', type: "Men's mesh sneakers", cat: 'Shoes', price: 55, imgs: ['img/sneakers.png'], opts: '9 sizes', desc: 'Black mesh sneakers with a printed design.' },
+  { id: 'slippers', name: 'Indoor Slippers', type: "Men's indoor slippers", cat: 'Shoes', price: 25, imgs: ['img/slippers.png'], opts: 'One size · black', desc: 'Black slip-on indoor slippers with a white lining.' },
+  { id: 'powerbank', name: 'Crown Powerbank', type: 'Magnetic powerbank', cat: 'Accessories', price: 28, imgs: ['img/powerbank.png'], opts: '2 finishes', desc: 'Magnetic phone powerbank in black with the chrome crown.' },
+  { id: 'puzzle', name: 'TRIØ Jigsaw Puzzle', type: 'Jigsaw puzzle with tin', cat: 'Accessories', price: 18, imgs: ['img/puzzle.png'], opts: 'Comes in a tin', desc: 'Jigsaw puzzle of the chrome TRIØ logo. Comes in a tin.' }
+];
+const CATS = ['All', 'Clothing', 'Shoes', 'Accessories'];
+const $ = (id) => document.getElementById(id);
+const gbp = (n) => '£' + (Number.isInteger(n) ? n : n.toFixed(2));
+let filter = 'All';
+let bag = [];
+try { bag = JSON.parse(localStorage.getItem('trio-bag') || '[]').filter((b) => P.some((p) => p.id === b.id)); } catch (e) { bag = []; }
+const save = () => { try { localStorage.setItem('trio-bag', JSON.stringify(bag)); } catch (e) {} };
+
+function renderChips() {
+  $('chips').innerHTML = CATS.map((c) => '<button class="chip" type="button" data-cat="' + c + '" aria-pressed="' + (c === filter) + '">' + c + '</button>').join('');
+}
+function renderGrid() {
+  const list = P.filter((p) => filter === 'All' || p.cat === filter);
+  $('grid').innerHTML = list.map((p) => '<article class="card">' +
+    '<button class="tile" type="button" data-open="' + p.id + '" aria-label="View ' + p.name + '"><img src="' + p.imgs[0] + '" alt="' + p.name + '" loading="lazy">' + (p.tag ? '<span class="tag">' + p.tag + '</span>' : '') + '</button>' +
+    '<div class="cbody"><div class="crow"><h3 class="cname">' + p.name + '</h3><span class="price">' + gbp(p.price) + '</span></div>' +
+    '<p class="cdet">' + p.opts + '</p>' +
+    '<button class="add" type="button" data-add="' + p.id + '">Add to bag</button></div></article>').join('');
+}
+function addToBag(id, qty) {
+  const line = bag.find((b) => b.id === id);
+  if (line) line.qty += qty; else bag.push({ id: id, qty: qty });
+  save(); renderBag();
+}
+function renderBag() {
+  const count = bag.reduce((s, b) => s + b.qty, 0);
+  $('bagCount').textContent = count;
+  if (!bag.length) {
+    $('items').innerHTML = '<p class="empty">Your bag is empty. Pick something from the drop.</p>';
+  } else {
+    $('items').innerHTML = bag.map((b) => {
+      const p = P.find((x) => x.id === b.id);
+      return '<div class="item"><img src="' + p.imgs[0] + '" alt=""><div><div style="font-weight:700">' + p.name + '</div>' +
+        '<div class="qty" style="margin-top:6px"><button type="button" data-dec="' + p.id + '" aria-label="One fewer ' + p.name + '">−</button><span>' + b.qty + '</span><button type="button" data-inc="' + p.id + '" aria-label="One more ' + p.name + '">+</button></div>' +
+        '<button class="rm" type="button" data-rm="' + p.id + '">Remove</button></div><div class="price">' + gbp(p.price * b.qty) + '</div></div>';
+    }).join('');
+  }
+  $('subtotal').textContent = gbp(bag.reduce((s, b) => s + P.find((x) => x.id === b.id).price * b.qty, 0));
+  $('msg').textContent = '';
+}
+
+let cur = null;
+let mq = 1;
+function openModal(id) {
+  cur = P.find((p) => p.id === id);
+  if (!cur) return;
+  mq = 1;
+  $('mType').textContent = cur.type;
+  $('mName').textContent = cur.name;
+  $('mPrice').textContent = gbp(cur.price);
+  $('mDesc').textContent = cur.desc;
+  $('mOpts').textContent = cur.opts + (cur.tag ? ' · ' + cur.tag : '');
+  $('mQty').textContent = mq;
+  setImg(0);
+  $('modal').classList.add('on');
+  $('veil').classList.add('on');
+  $('mClose').focus();
+}
+function setImg(i) {
+  $('mImg').src = cur.imgs[i];
+  $('mImg').alt = cur.name;
+  $('mThumbs').innerHTML = cur.imgs.length > 1 ? cur.imgs.map((src, k) => '<button type="button" data-img="' + k + '" aria-label="Photo ' + (k + 1) + '" aria-pressed="' + (k === i) + '"><img src="' + src + '" alt=""></button>').join('') : '';
+}
+function closeAll() {
+  $('modal').classList.remove('on');
+  $('drawer').classList.remove('on');
+  $('veil').classList.remove('on');
+}
+function openBag() {
+  $('modal').classList.remove('on');
+  $('drawer').classList.add('on');
+  $('veil').classList.add('on');
+  $('dClose').focus();
+}
+
+document.addEventListener('click', (e) => {
+  const t = e.target.closest('button, a');
+  if (!t) return;
+  if (t.dataset.cat) { filter = t.dataset.cat; renderChips(); renderGrid(); }
+  else if (t.dataset.jump) { filter = t.dataset.jump; renderChips(); renderGrid(); }
+  else if (t.dataset.open) openModal(t.dataset.open);
+  else if (t.dataset.add) { addToBag(t.dataset.add, 1); t.textContent = 'Added ✓'; setTimeout(() => { t.textContent = 'Add to bag'; }, 1200); }
+  else if (t.dataset.img) setImg(Number(t.dataset.img));
+  else if (t.dataset.inc) addToBag(t.dataset.inc, 1);
+  else if (t.dataset.dec) { const l = bag.find((b) => b.id === t.dataset.dec); if (l) { l.qty -= 1; if (l.qty < 1) bag = bag.filter((b) => b !== l); save(); renderBag(); } }
+  else if (t.dataset.rm) { bag = bag.filter((b) => b.id !== t.dataset.rm); save(); renderBag(); }
+});
+$('mPlus').addEventListener('click', () => { mq += 1; $('mQty').textContent = mq; });
+$('mMinus').addEventListener('click', () => { mq = Math.max(1, mq - 1); $('mQty').textContent = mq; });
+$('mAdd').addEventListener('click', () => { if (cur) { addToBag(cur.id, mq); openBag(); } });
+$('mClose').addEventListener('click', closeAll);
+$('dClose').addEventListener('click', closeAll);
+$('veil').addEventListener('click', closeAll);
+$('openBag').addEventListener('click', openBag);
+$('checkout').addEventListener('click', () => {
+  $('msg').textContent = bag.length ? 'Checkout opens when the TRIØ store goes live. Your bag is saved on this device.' : 'Add something to your bag first.';
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+
+renderChips();
+renderGrid();
+renderBag();
+}
+</script>
+</body>
+</html>
