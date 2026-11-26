@@ -113,6 +113,18 @@ footer a{text-decoration:none;margin-right:16px}
 .dfoot{padding:18px 20px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
 .sub{display:flex;justify-content:space-between;font-weight:700;font-size:18px}
 .msg{color:var(--muted);font-size:14px;margin:0;min-height:1.2em}
+.msg.ok{color:var(--ink);font-weight:600}
+.pickwrap{display:grid;gap:8px}
+.pickwrap[hidden]{display:none}
+.picklab{font-weight:700;font-size:14px;margin:0}
+.pick{display:flex;flex-wrap:wrap;gap:8px}
+.pick button{min-height:44px;min-width:52px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:#0a0a0a;font-weight:700;cursor:pointer}
+.pick button[aria-pressed=true]{background:var(--ink);color:#0a0a0a;border-color:var(--ink)}
+.warn{color:#ff6b72;font-size:14px;font-weight:600;margin:0;min-height:1.2em}
+.row{display:flex;justify-content:space-between;color:var(--muted);font-size:15px}
+.opt{color:var(--muted);font-size:14px}
+#paypal{display:none;background:#fff;border-radius:14px;padding:12px 12px 2px;min-height:60px}
+#paypal.on{display:block}
 @media(max-width:760px){.modal.on{grid-template-columns:minmax(0,1fr)}.kingtxt,.about .wrap{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:600px){.links{order:3;width:100%;margin-left:0;gap:14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cbody{padding:10px 12px 12px}.cname{font-size:15px}.facts{grid-template-columns:minmax(0,1fr)}.info h3{font-size:28px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.drawer{transition:none}}
@@ -140,7 +152,7 @@ Bag <b id="bagCount">0</b>
 <section class="band shop" id="shop" aria-labelledby="shopTitle">
 <div class="wrap">
 <div class="shophead">
-<div><h2 class="disp" id="shopTitle">Shop the drop</h2><p class="note">Example prices in GBP while the store is being set up.</p></div>
+<div><h2 class="disp" id="shopTitle">Shop the drop</h2><p class="note">Prices in GBP · Printed to order · UK delivery £3.99</p></div>
 <div class="chips" id="chips" role="group" aria-label="Filter products"></div>
 </div>
 <div class="grid" id="grid"></div>
@@ -353,7 +365,7 @@ Bag <b id="bagCount">0</b>
 <div>
 <h2 class="disp" id="aboutTitle">Crown on everything</h2>
 <p>TRIØ Clothing is an independent streetwear brand from Leeds. The crown and the chrome TRIØ wordmark show up across the range, from caps and hoodies to powerbanks and puzzles.</p>
-<p>Everything is made to order with print-on-demand, so nothing sits in a warehouse and new designs can drop fast.</p>
+<p>Everything is printed to order in Leeds and posted to you, so nothing sits in a warehouse and new designs can drop fast.</p>
 <div class="facts">
 <div><b>Leeds</b><span>Where TRIØ started</span></div>
 <div><b>8 pieces</b><span>In Drop 01</span></div>
@@ -382,39 +394,63 @@ Bag <b id="bagCount">0</b>
 <div class="price" id="mPrice"></div>
 <p style="margin:0;color:var(--muted)" id="mDesc"></p>
 <p style="margin:0;font-weight:600" id="mOpts"></p>
+<div class="pickwrap" id="mPickWrap"><p class="picklab" id="mPickLab">Size</p><div class="pick" id="mPick" role="group" aria-labelledby="mPickLab"></div></div>
 <div class="qty"><button type="button" id="mMinus" aria-label="Fewer">−</button><span id="mQty" style="min-width:24px;text-align:center;font-weight:700">1</span><button type="button" id="mPlus" aria-label="More">+</button></div>
 <button class="btn red" type="button" id="mAdd">Add to bag</button>
-<p class="note">Size and colour are picked at checkout.</p>
+<p class="warn" id="mWarn" role="status"></p>
+<p class="note">Printed to order and posted to you. UK delivery £3.99.</p>
 </div>
 </div>
 <aside class="drawer" id="drawer" aria-label="Bag">
 <div class="dhead"><h3 class="disp">Your bag</h3><button class="x" id="dClose" type="button" aria-label="Close bag">×</button></div>
 <div class="items" id="items"></div>
 <div class="dfoot">
-<div class="sub"><span>Subtotal</span><span id="subtotal">£0</span></div>
+<div class="row"><span>Subtotal</span><span id="subtotal">£0</span></div>
+<div class="row"><span>UK delivery</span><span id="shipping">£0</span></div>
+<div class="sub"><span>Total</span><span id="total">£0</span></div>
 <button class="btn red" type="button" id="checkout">Checkout</button>
+<div id="paypal" aria-label="Pay with PayPal or card"></div>
 <p class="msg" id="msg" role="status"></p>
+<p class="note" style="margin:0">Pay with PayPal or a debit or credit card. UK delivery only.</p>
 </div>
 </aside>
 <script>
 {
+// ===== SHOP SETTINGS (change these) =====
+// Paste the Live Client ID from developer.paypal.com (Apps & Credentials, Live) between the quotes.
+const PAYPAL_CLIENT_ID = '';
+// Flat UK delivery price in pounds.
+const SHIPPING = 3.99;
+// ========================================
+
+const SIZES = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'];
 const P = [
-  { id: 'tee', name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 22, imgs: ['img/tee.png', 'img/tee-close.png', 'img/tee-folded.png'], opts: '9 sizes · black', desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
-  { id: 'hoodie', name: 'Crown Hoodie', type: 'Youth Heavy Blend hooded sweatshirt', cat: 'Clothing', price: 30, imgs: ['img/hoodie.png'], opts: '4 youth sizes · black', desc: 'Black hoodie with the crown printed on the chest.' },
-  { id: 'anorak', name: 'Zipped Pocket Anorak', type: 'Sport-Tek anorak', cat: 'Clothing', price: 48, imgs: ['img/anorak.png'], opts: '8 sizes · charcoal', tag: '1 size out of stock', desc: 'Charcoal pullover anorak with a zipped pocket and a small logo patch on the chest.' },
-  { id: 'cap', name: 'Crown Snapback', type: 'Embroidered snapback cap', cat: 'Accessories', price: 22, imgs: ['img/cap.png'], opts: 'One size · 3 colours', desc: 'Flat-peak snapback with the crown embroidered on the front. Red and black shown.' },
-  { id: 'sneakers', name: 'Mesh Sneakers', type: "Men's mesh sneakers", cat: 'Shoes', price: 55, imgs: ['img/sneakers.png'], opts: '9 sizes', desc: 'Black mesh sneakers with a printed design.' },
+  { id: 'tee', name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 22, imgs: ['img/tee.png', 'img/tee-close.png', 'img/tee-folded.png'], opts: '9 sizes · black', pick: { label: 'Size', options: SIZES }, desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
+  { id: 'hoodie', name: 'Crown Hoodie', type: 'Youth Heavy Blend hooded sweatshirt', cat: 'Clothing', price: 30, imgs: ['img/hoodie.png'], opts: '4 youth sizes · black', pick: { label: 'Size', options: ['Youth S', 'Youth M', 'Youth L', 'Youth XL'] }, desc: 'Black hoodie with the crown printed on the chest.' },
+  { id: 'anorak', name: 'Zipped Pocket Anorak', type: 'Sport-Tek anorak', cat: 'Clothing', price: 48, imgs: ['img/anorak.png'], opts: '8 sizes · charcoal', pick: { label: 'Size', options: SIZES.slice(0, 8) }, desc: 'Charcoal pullover anorak with a zipped pocket and a small logo patch on the chest.' },
+  { id: 'cap', name: 'Crown Snapback', type: 'Embroidered snapback cap', cat: 'Accessories', price: 22, imgs: ['img/cap.png'], opts: 'One size · red or black', pick: { label: 'Colour', options: ['Red', 'Black'] }, desc: 'Flat-peak snapback with the crown embroidered on the front.' },
+  { id: 'sneakers', name: 'Mesh Sneakers', type: "Men's mesh sneakers", cat: 'Shoes', price: 55, imgs: ['img/sneakers.png'], opts: '9 sizes', pick: { label: 'Size', options: ['UK 5', 'UK 6', 'UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11', 'UK 12', 'UK 13'] }, desc: 'Black mesh sneakers with a printed design.' },
   { id: 'slippers', name: 'Indoor Slippers', type: "Men's indoor slippers", cat: 'Shoes', price: 25, imgs: ['img/slippers.png'], opts: 'One size · black', desc: 'Black slip-on indoor slippers with a white lining.' },
-  { id: 'powerbank', name: 'Crown Powerbank', type: 'Magnetic powerbank', cat: 'Accessories', price: 28, imgs: ['img/powerbank.png'], opts: '2 finishes', desc: 'Magnetic phone powerbank in black with the chrome crown.' },
+  { id: 'powerbank', name: 'Crown Powerbank', type: 'Magnetic powerbank', cat: 'Accessories', price: 28, imgs: ['img/powerbank.png'], opts: 'Black · magnetic', desc: 'Magnetic phone powerbank in black with the chrome crown.' },
   { id: 'puzzle', name: 'TRIØ Jigsaw Puzzle', type: 'Jigsaw puzzle with tin', cat: 'Accessories', price: 18, imgs: ['img/puzzle.png'], opts: 'Comes in a tin', desc: 'Jigsaw puzzle of the chrome TRIØ logo. Comes in a tin.' }
 ];
 const CATS = ['All', 'Clothing', 'Shoes', 'Accessories'];
 const $ = (id) => document.getElementById(id);
 const gbp = (n) => '£' + (Number.isInteger(n) ? n : n.toFixed(2));
+const money = (pence) => (pence / 100).toFixed(2);
+const SHIP_P = Math.round(SHIPPING * 100);
+const find = (id) => P.find((p) => p.id === id);
+const valid = (b) => {
+  const p = b && find(b.id);
+  if (!p || !(Number.isInteger(b.qty) && b.qty >= 1)) return false;
+  return p.pick ? p.pick.options.includes(b.opt) : !b.opt;
+};
 let filter = 'All';
 let bag = [];
-try { bag = JSON.parse(localStorage.getItem('trio-bag') || '[]').filter((b) => P.some((p) => p.id === b.id)); } catch (e) { bag = []; }
+try { bag = JSON.parse(localStorage.getItem('trio-bag') || '[]').filter(valid); } catch (e) { bag = []; }
 const save = () => { try { localStorage.setItem('trio-bag', JSON.stringify(bag)); } catch (e) {} };
+const subPence = () => bag.reduce((s, b) => s + Math.round(find(b.id).price * 100) * b.qty, 0);
+function say(text, ok) { $('msg').textContent = text; $('msg').classList.toggle('ok', !!ok); }
 
 function renderChips() {
   $('chips').innerHTML = CATS.map((c) => '<button class="chip" type="button" data-cat="' + c + '" aria-pressed="' + (c === filter) + '">' + c + '</button>').join('');
@@ -425,11 +461,14 @@ function renderGrid() {
     '<button class="tile" type="button" data-open="' + p.id + '" aria-label="View ' + p.name + '"><img src="' + p.imgs[0] + '" alt="' + p.name + '" loading="lazy">' + (p.tag ? '<span class="tag">' + p.tag + '</span>' : '') + '</button>' +
     '<div class="cbody"><div class="crow"><h3 class="cname">' + p.name + '</h3><span class="price">' + gbp(p.price) + '</span></div>' +
     '<p class="cdet">' + p.opts + '</p>' +
-    '<button class="add" type="button" data-add="' + p.id + '">Add to bag</button></div></article>').join('');
+    (p.pick
+      ? '<button class="add" type="button" data-open="' + p.id + '">Choose ' + p.pick.label.toLowerCase() + '</button>'
+      : '<button class="add" type="button" data-add="' + p.id + '">Add to bag</button>') +
+    '</div></article>').join('');
 }
-function addToBag(id, qty) {
-  const line = bag.find((b) => b.id === id);
-  if (line) line.qty += qty; else bag.push({ id: id, qty: qty });
+function addToBag(id, qty, opt) {
+  const line = bag.find((b) => b.id === id && (b.opt || '') === (opt || ''));
+  if (line) line.qty += qty; else bag.push(opt ? { id: id, opt: opt, qty: qty } : { id: id, qty: qty });
   save(); renderBag();
 }
 function renderBag() {
@@ -438,30 +477,48 @@ function renderBag() {
   if (!bag.length) {
     $('items').innerHTML = '<p class="empty">Your bag is empty. Pick something from the drop.</p>';
   } else {
-    $('items').innerHTML = bag.map((b) => {
-      const p = P.find((x) => x.id === b.id);
+    $('items').innerHTML = bag.map((b, i) => {
+      const p = find(b.id);
       return '<div class="item"><img src="' + p.imgs[0] + '" alt=""><div><div style="font-weight:700">' + p.name + '</div>' +
-        '<div class="qty" style="margin-top:6px"><button type="button" data-dec="' + p.id + '" aria-label="One fewer ' + p.name + '">−</button><span>' + b.qty + '</span><button type="button" data-inc="' + p.id + '" aria-label="One more ' + p.name + '">+</button></div>' +
-        '<button class="rm" type="button" data-rm="' + p.id + '">Remove</button></div><div class="price">' + gbp(p.price * b.qty) + '</div></div>';
+        (b.opt ? '<div class="opt">' + p.pick.label + ': ' + b.opt + '</div>' : '') +
+        '<div class="qty" style="margin-top:6px"><button type="button" data-dec="' + i + '" aria-label="One fewer ' + p.name + '">−</button><span>' + b.qty + '</span><button type="button" data-inc="' + i + '" aria-label="One more ' + p.name + '">+</button></div>' +
+        '<button class="rm" type="button" data-rm="' + i + '">Remove</button></div><div class="price">' + gbp(p.price * b.qty) + '</div></div>';
     }).join('');
   }
-  $('subtotal').textContent = gbp(bag.reduce((s, b) => s + P.find((x) => x.id === b.id).price * b.qty, 0));
-  $('msg').textContent = '';
+  const sub = subPence();
+  const ship = bag.length ? SHIP_P : 0;
+  $('subtotal').textContent = '£' + money(sub);
+  $('shipping').textContent = '£' + money(ship);
+  $('total').textContent = '£' + money(sub + ship);
+  if (!bag.length) hidePay();
+  say('');
 }
 
 let cur = null;
 let mq = 1;
+let mopt = '';
 function openModal(id) {
-  cur = P.find((p) => p.id === id);
+  cur = find(id);
   if (!cur) return;
   mq = 1;
+  mopt = '';
   $('mType').textContent = cur.type;
   $('mName').textContent = cur.name;
   $('mPrice').textContent = gbp(cur.price);
   $('mDesc').textContent = cur.desc;
   $('mOpts').textContent = cur.opts + (cur.tag ? ' · ' + cur.tag : '');
   $('mQty').textContent = mq;
+  $('mWarn').textContent = '';
+  if (cur.pick) {
+    $('mPickWrap').hidden = false;
+    $('mPickLab').textContent = 'Pick a ' + cur.pick.label.toLowerCase();
+    $('mPick').innerHTML = cur.pick.options.map((o) => '<button type="button" data-pick="' + o + '" aria-pressed="false">' + o + '</button>').join('');
+  } else {
+    $('mPickWrap').hidden = true;
+    $('mPick').innerHTML = '';
+  }
   setImg(0);
+  $('drawer').classList.remove('on');
   $('modal').classList.add('on');
   $('veil').classList.add('on');
   $('mClose').focus();
@@ -483,28 +540,113 @@ function openBag() {
   $('dClose').focus();
 }
 
+// ===== Checkout with PayPal (PayPal or debit/credit card) =====
+let ppLoad = null;
+let ppRendered = false;
+function hidePay() { $('paypal').classList.remove('on'); $('checkout').style.display = ''; }
+function loadPayPal() {
+  if (window.paypal && window.paypal.Buttons) return Promise.resolve();
+  if (!ppLoad) {
+    ppLoad = new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(PAYPAL_CLIENT_ID) + '&currency=GBP&intent=capture&components=buttons';
+      s.onload = () => resolve();
+      s.onerror = () => { ppLoad = null; s.remove(); reject(new Error('PayPal did not load')); };
+      document.head.appendChild(s);
+    });
+  }
+  return ppLoad;
+}
+function orderBody() {
+  const sub = subPence();
+  const items = bag.map((b) => {
+    const p = find(b.id);
+    return {
+      name: (p.name + (b.opt ? ' (' + p.pick.label + ': ' + b.opt + ')' : '')).slice(0, 127),
+      unit_amount: { currency_code: 'GBP', value: money(Math.round(p.price * 100)) },
+      quantity: String(b.qty),
+      category: 'PHYSICAL_GOODS'
+    };
+  });
+  return {
+    intent: 'CAPTURE',
+    purchase_units: [{
+      description: 'TRIØ Clothing order',
+      amount: {
+        currency_code: 'GBP',
+        value: money(sub + SHIP_P),
+        breakdown: {
+          item_total: { currency_code: 'GBP', value: money(sub) },
+          shipping: { currency_code: 'GBP', value: money(SHIP_P) }
+        }
+      },
+      items: items
+    }],
+    application_context: { brand_name: 'TRIØ Clothing', shipping_preference: 'GET_FROM_FILE' }
+  };
+}
+async function startCheckout() {
+  if (!bag.length) { say('Add something to your bag first.'); return; }
+  if (!PAYPAL_CLIENT_ID) { say('Online payment is being switched on. Check back soon. Your bag is saved on this device.'); return; }
+  say('Loading secure checkout…');
+  try { await loadPayPal(); } catch (e) { say('Checkout could not load. Check your internet and try again.'); return; }
+  $('checkout').style.display = 'none';
+  $('paypal').classList.add('on');
+  say('');
+  if (ppRendered) return;
+  ppRendered = true;
+  window.paypal.Buttons({
+    style: { layout: 'vertical', shape: 'pill', label: 'pay' },
+    createOrder: (data, actions) => {
+      if (!bag.length) throw new Error('Bag is empty');
+      return actions.order.create(orderBody());
+    },
+    onShippingAddressChange: (data, actions) => {
+      if (data.shippingAddress && data.shippingAddress.countryCode !== 'GB') {
+        return actions.reject(data.errors ? data.errors.COUNTRY_ERROR : undefined);
+      }
+    },
+    onApprove: (data, actions) => actions.order.capture().then((d) => {
+      const name = d && d.payer && d.payer.name ? d.payer.name.given_name : '';
+      bag = []; save(); renderBag();
+      say('Paid! Thanks' + (name ? ' ' + name : '') + '. Order ' + d.id + ' is confirmed. We will print it and post it to you, and your receipt is in your email.', true);
+    }),
+    onCancel: () => say('Payment cancelled. Your bag is still here.'),
+    onError: () => say('Something went wrong, so nothing was charged. Please try again.')
+  }).render('#paypal').catch(() => { ppRendered = false; hidePay(); say('Checkout could not load. Please try again.'); });
+}
+
 document.addEventListener('click', (e) => {
   const t = e.target.closest('button, a');
   if (!t) return;
-  if (t.dataset.cat) { filter = t.dataset.cat; renderChips(); renderGrid(); }
-  else if (t.dataset.jump) { filter = t.dataset.jump; renderChips(); renderGrid(); }
-  else if (t.dataset.open) openModal(t.dataset.open);
-  else if (t.dataset.add) { addToBag(t.dataset.add, 1); t.textContent = 'Added ✓'; setTimeout(() => { t.textContent = 'Add to bag'; }, 1200); }
-  else if (t.dataset.img) setImg(Number(t.dataset.img));
-  else if (t.dataset.inc) addToBag(t.dataset.inc, 1);
-  else if (t.dataset.dec) { const l = bag.find((b) => b.id === t.dataset.dec); if (l) { l.qty -= 1; if (l.qty < 1) bag = bag.filter((b) => b !== l); save(); renderBag(); } }
-  else if (t.dataset.rm) { bag = bag.filter((b) => b.id !== t.dataset.rm); save(); renderBag(); }
+  const d = t.dataset;
+  if (d.cat) { filter = d.cat; renderChips(); renderGrid(); }
+  else if (d.jump) { filter = d.jump; renderChips(); renderGrid(); }
+  else if (d.open) openModal(d.open);
+  else if (d.add) { addToBag(d.add, 1, ''); t.textContent = 'Added ✓'; setTimeout(() => { t.textContent = 'Add to bag'; }, 1200); }
+  else if (d.pick) {
+    mopt = d.pick;
+    $('mWarn').textContent = '';
+    $('mPick').querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === t)));
+  }
+  else if (d.img) setImg(Number(d.img));
+  else if (d.inc) { const l = bag[Number(d.inc)]; if (l) { l.qty += 1; save(); renderBag(); } }
+  else if (d.dec) { const i = Number(d.dec); const l = bag[i]; if (l) { l.qty -= 1; if (l.qty < 1) bag.splice(i, 1); save(); renderBag(); } }
+  else if (d.rm) { bag.splice(Number(d.rm), 1); save(); renderBag(); }
 });
 $('mPlus').addEventListener('click', () => { mq += 1; $('mQty').textContent = mq; });
 $('mMinus').addEventListener('click', () => { mq = Math.max(1, mq - 1); $('mQty').textContent = mq; });
-$('mAdd').addEventListener('click', () => { if (cur) { addToBag(cur.id, mq); openBag(); } });
+$('mAdd').addEventListener('click', () => {
+  if (!cur) return;
+  if (cur.pick && !mopt) { $('mWarn').textContent = 'Pick a ' + cur.pick.label.toLowerCase() + ' first.'; return; }
+  addToBag(cur.id, mq, cur.pick ? mopt : '');
+  openBag();
+});
 $('mClose').addEventListener('click', closeAll);
 $('dClose').addEventListener('click', closeAll);
 $('veil').addEventListener('click', closeAll);
 $('openBag').addEventListener('click', openBag);
-$('checkout').addEventListener('click', () => {
-  $('msg').textContent = bag.length ? 'Checkout opens when the TRIØ store goes live. Your bag is saved on this device.' : 'Add something to your bag first.';
-});
+$('checkout').addEventListener('click', startCheckout);
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
 
 renderChips();
