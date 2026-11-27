@@ -102,7 +102,22 @@ footer a{text-decoration:none;margin-right:16px}
 .modal.on{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 .gal{background:#fff;padding:18px;display:flex;flex-direction:column;gap:10px}
 .gal .main{aspect-ratio:1/1;object-fit:contain;width:100%}
-.thumbs{display:flex;gap:8px}
+.thumbs{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:thin}
+.thumbs button{flex:0 0 auto}
+.stage{position:relative}
+.stage .main{cursor:zoom-in;touch-action:pan-y;user-select:none;-webkit-user-drag:none}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid #ddd;background:rgba(255,255,255,.94);color:#111;font-size:26px;line-height:1;cursor:pointer;display:grid;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.nav.prev{left:4px}.nav.next{right:4px}
+.nav[hidden],.count[hidden]{display:none}
+.count{position:absolute;left:8px;bottom:8px;background:rgba(10,10,10,.82);color:#fff;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px}
+.zoombtn{position:absolute;right:8px;bottom:8px;min-height:36px;padding:0 12px;border-radius:999px;border:1px solid #ddd;background:rgba(255,255,255,.94);color:#111;cursor:pointer;font-size:13px;font-weight:700}
+.zoom{position:fixed;inset:0;z-index:60;background:#fff;display:none;align-items:center;justify-content:center}
+.zoom.on{display:flex}
+.zoom img{max-width:100vw;max-height:100dvh;object-fit:contain;touch-action:pan-y;user-select:none;-webkit-user-drag:none;cursor:zoom-out}
+.zoom .x{position:absolute;right:12px;top:12px}
+.zoom .count{left:16px;bottom:16px}
+.zoom .nav.prev{left:12px}.zoom .nav.next{right:12px}
+.photos{position:absolute;right:10px;bottom:10px;background:rgba(10,10,10,.82);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;z-index:1}
 .thumbs button{width:64px;height:64px;padding:4px;border-radius:10px;border:2px solid #ddd;background:#fff;cursor:pointer}
 .thumbs button[aria-pressed=true]{border-color:#111}
 .thumbs img{width:100%;height:100%;object-fit:contain}
@@ -160,6 +175,7 @@ footer a{text-decoration:none;margin-right:16px}
 #paypal.on{display:block}
 @media(max-width:760px){.aboutcrown{max-width:180px!important}.modal.on{grid-template-columns:minmax(0,1fr)}.kingtxt,.about .wrap{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:600px){.crow{flex-direction:column;gap:0}.pol{padding:6px 6px 2px}.look{gap:8px}.ticker span{font-size:17px}.links{order:3;width:100%;margin-left:0;gap:14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cbody{padding:10px 12px 12px}.cname{font-size:15px}.facts{grid-template-columns:minmax(0,1fr)}.info h3{font-size:28px}}
+@media(max-width:600px){.photos{right:6px;bottom:6px;font-size:11px;padding:3px 8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.drawer{transition:none}.ticker div{animation:none}.pol,.tile img{transition:none}}
 </style>
 </head>
@@ -432,7 +448,13 @@ Bag <b id="bagCount">0</b>
 <div class="veil" id="veil"></div>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mName">
 <div class="gal" style="position:relative">
-<img class="main" id="mImg" src="img/tee.jpg" alt="">
+<div class="stage">
+<img class="main" id="mImg" src="img/tee.jpg" alt="" draggable="false">
+<button class="nav prev" id="mPrev" type="button" aria-label="Previous photo">‹</button>
+<button class="nav next" id="mNext" type="button" aria-label="Next photo">›</button>
+<span class="count" id="mCount" aria-live="polite"></span>
+<button class="zoombtn" id="mZoom" type="button">Full screen</button>
+</div>
 <div class="thumbs" id="mThumbs"></div>
 <button class="x" id="mClose" type="button" aria-label="Close">×</button>
 </div>
@@ -448,6 +470,13 @@ Bag <b id="bagCount">0</b>
 <p class="warn" id="mWarn" role="status"></p>
 <p class="note">Printed to order and posted to you. UK delivery £3.99.</p>
 </div>
+</div>
+<div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Photo, full screen">
+<img id="zImg" alt="" draggable="false">
+<button class="nav prev" id="zPrev" type="button" aria-label="Previous photo">‹</button>
+<button class="nav next" id="zNext" type="button" aria-label="Next photo">›</button>
+<span class="count" id="zCount"></span>
+<button class="x" id="zClose" type="button" aria-label="Close full screen photo">×</button>
 </div>
 <aside class="drawer" id="drawer" aria-label="Bag">
 <div class="dhead"><h3 class="disp">Your bag</h3><button class="x" id="dClose" type="button" aria-label="Close bag">×</button></div>
@@ -475,14 +504,14 @@ const CONTACT_EMAIL = '';
 
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'];
 const P = [
-  { id: 'tee', name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 22, imgs: ['img/tee.jpg', 'img/tee-model.jpg', 'img/tee-model2.jpg'], opts: '9 sizes · black', pick: { label: 'Size', options: SIZES }, desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
-  { id: 'hoodie', name: 'Crown Hoodie', type: 'Youth Heavy Blend hooded sweatshirt', cat: 'Clothing', price: 30, imgs: ['img/hoodie.jpg'], opts: '4 youth sizes · black', pick: { label: 'Size', options: ['Youth S', 'Youth M', 'Youth L', 'Youth XL'] }, desc: 'Black hoodie with the chrome TRIØ Clothing logo printed on the chest.' },
-  { id: 'anorak', name: 'Zipped Pocket Anorak', type: 'Sport-Tek anorak', cat: 'Clothing', price: 48, imgs: ['img/anorak.jpg'], opts: '8 sizes · charcoal', pick: { label: 'Size', options: SIZES.slice(0, 8) }, desc: 'Charcoal pullover anorak with a zipped pocket and a small logo patch on the chest.' },
-  { id: 'cap', name: 'Crown Snapback', type: 'Embroidered snapback cap', cat: 'Accessories', price: 22, imgs: ['img/cap.jpg', 'img/cap-grey.jpg', 'img/cap-white.jpg'], opts: 'One size · red, grey or white', pick: { label: 'Colour', options: ['Red', 'Grey', 'White'], photos: true, swatches: ['#c4122f', '#9b9b9b', '#ffffff'] }, desc: 'Snapback with a black flat peak and the crown embroidered on a black front patch.' },
-  { id: 'sneakers', name: 'Mesh Sneakers', type: "Men's mesh sneakers", cat: 'Shoes', price: 55, imgs: ['img/sneakers.jpg'], opts: '9 sizes', pick: { label: 'Size', options: ['UK 5', 'UK 6', 'UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11', 'UK 12', 'UK 13'] }, desc: 'Black mesh sneakers with a silver graffiti print.' },
+  { id: 'tee', name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 15, imgs: ['img/tee.jpg', 'img/tee-model.jpg', 'img/tee-model2.jpg', 'img/tee-back.jpg', 'img/tee-side.jpg'], opts: '9 sizes · black', pick: { label: 'Size', options: SIZES }, desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
+  { id: 'hoodie', name: 'Crown Hoodie', type: 'Youth Heavy Blend hooded sweatshirt', cat: 'Clothing', price: 22, imgs: ['img/hoodie.jpg', 'img/hoodie-back.jpg', 'img/hoodie-kid.jpg', 'img/hoodie-kid-back.jpg'], opts: '4 youth sizes · black', pick: { label: 'Size', options: ['Youth S', 'Youth M', 'Youth L', 'Youth XL'] }, desc: 'Black hoodie with the chrome TRIØ Clothing logo on the front and a big white crown on the back.' },
+  { id: 'anorak', name: 'Zipped Pocket Anorak', type: 'Sport-Tek anorak', cat: 'Clothing', price: 35, imgs: ['img/anorak.jpg'], opts: '8 sizes · charcoal', pick: { label: 'Size', options: SIZES.slice(0, 8) }, desc: 'Charcoal pullover anorak with a zipped pocket and a small logo patch on the chest.' },
+  { id: 'cap', name: 'Crown Snapback', type: 'Embroidered snapback cap', cat: 'Accessories', price: 22, imgs: ['img/cap.jpg', 'img/cap-grey.jpg', 'img/cap-white.jpg', 'img/cap-back.jpg', 'img/cap-model.jpg'], opts: 'One size · red, grey or white', pick: { label: 'Colour', options: ['Red', 'Grey', 'White'], photos: true, swatches: ['#c4122f', '#9b9b9b', '#ffffff'] }, desc: 'Snapback with a black flat peak and the crown embroidered on a black front patch.' },
+  { id: 'sneakers', name: 'Mesh Sneakers', type: "Men's mesh sneakers", cat: 'Shoes', price: 55, imgs: ['img/sneakers.jpg', 'img/sneakers-side.jpg', 'img/sneakers-top.jpg', 'img/sneakers-heel.jpg'], opts: '9 sizes', pick: { label: 'Size', options: ['UK 5', 'UK 6', 'UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11', 'UK 12', 'UK 13'] }, desc: 'Black mesh sneakers with a silver graffiti print.' },
   { id: 'slippers', name: 'Indoor Slippers', type: "Men's indoor slippers", cat: 'Shoes', price: 25, imgs: ['img/slippers.jpg'], opts: 'One size · black', desc: 'Black slip-on indoor slippers with a white lining.' },
   { id: 'powerbank', name: 'Crown Powerbank', type: 'Magnetic powerbank', cat: 'Accessories', price: 28, imgs: ['img/powerbank.jpg'], opts: 'Black · magnetic', desc: 'Magnetic phone powerbank in black with the white crown.' },
-  { id: 'puzzle', name: 'TRIØ Jigsaw Puzzle', type: 'Jigsaw puzzle with tin', cat: 'Accessories', price: 18, imgs: ['img/puzzle.jpg'], opts: 'Comes in a tin', desc: 'Jigsaw puzzle of the chrome TRIØ logo. Comes in a tin.' }
+  { id: 'puzzle', name: 'TRIØ Jigsaw Puzzle', type: 'Jigsaw puzzle with tin', cat: 'Accessories', price: 18, imgs: ['img/puzzle.jpg', 'img/puzzle-pieces.jpg', 'img/puzzle-tin.jpg'], opts: 'Comes in a tin', desc: 'Jigsaw puzzle of the chrome TRIØ logo. Comes in a tin.' }
 ];
 const CATS = ['All', 'Clothing', 'Shoes', 'Accessories'];
 const $ = (id) => document.getElementById(id);
@@ -510,7 +539,8 @@ function renderGrid() {
   const list = P.filter((p) => filter === 'All' || p.cat === filter);
   $('grid').innerHTML = list.map((p) => '<article class="card">' +
     '<button class="tile" type="button" data-open="' + p.id + '" aria-label="View ' + p.name + '"><img src="' + p.imgs[0] + '" alt="' + p.name + '" loading="lazy"' + (p.imgs[1] ? ' class="has-alt"' : '') + '>' +
-    (p.imgs[1] ? '<img class="alt" src="' + p.imgs[1] + '" alt="" loading="lazy">' : '') + (p.tag ? '<span class="tag">' + p.tag + '</span>' : '') + '</button>' +
+    (p.imgs[1] ? '<img class="alt" src="' + p.imgs[1] + '" alt="" loading="lazy">' : '') + (p.tag ? '<span class="tag">' + p.tag + '</span>' : '') +
+    (p.imgs.length > 1 ? '<span class="photos">' + p.imgs.length + ' photos</span>' : '') + '</button>' +
     '<div class="cbody"><div class="crow"><h3 class="cname">' + p.name + '</h3><span class="price">' + gbp(p.price) + '</span></div>' +
     '<p class="cdet">' + (p.pick && p.pick.swatches ? p.pick.swatches.map((c, k) => '<span class="sw" style="background:' + c + '" title="' + p.pick.options[k] + '"></span>').join('') : '') + '<span>' + p.opts + '</span></p>' +
     (p.pick
@@ -587,12 +617,42 @@ function openModal(id) {
   $('veil').classList.add('on');
   $('mClose').focus();
 }
+let gi = 0;
 function setImg(i) {
-  $('mImg').src = cur.imgs[i];
-  $('mImg').alt = cur.name;
-  $('mThumbs').innerHTML = cur.imgs.length > 1 ? cur.imgs.map((src, k) => '<button type="button" data-img="' + k + '" aria-label="Photo ' + (k + 1) + '" aria-pressed="' + (k === i) + '"><img src="' + src + '" alt=""></button>').join('') : '';
+  const n = cur.imgs.length;
+  gi = ((i % n) + n) % n;
+  $('mImg').src = cur.imgs[gi];
+  $('mImg').alt = cur.name + (n > 1 ? ', photo ' + (gi + 1) + ' of ' + n : '');
+  $('mThumbs').innerHTML = n > 1 ? cur.imgs.map((src, k) => '<button type="button" data-img="' + k + '" aria-label="Photo ' + (k + 1) + ' of ' + n + '" aria-pressed="' + (k === gi) + '"><img src="' + src + '" alt=""></button>').join('') : '';
+  $('mPrev').hidden = $('mNext').hidden = $('mCount').hidden = n < 2;
+  $('mCount').textContent = (gi + 1) + ' / ' + n;
+  const on = $('mThumbs').querySelector('[aria-pressed="true"]');
+  if (on) $('mThumbs').scrollLeft = on.offsetLeft - $('mThumbs').clientWidth / 2 + on.clientWidth / 2;
+  if ($('zoom').classList.contains('on')) showZoom();
+  // warm up the next photo so arrows feel instant
+  if (n > 1) { const pre = new Image(); pre.src = cur.imgs[(gi + 1) % n]; }
+}
+function showZoom() {
+  const n = cur.imgs.length;
+  $('zImg').src = cur.imgs[gi];
+  $('zImg').alt = $('mImg').alt;
+  $('zPrev').hidden = $('zNext').hidden = $('zCount').hidden = n < 2;
+  $('zCount').textContent = (gi + 1) + ' / ' + n;
+}
+function openZoom() { if (!cur) return; showZoom(); $('zoom').classList.add('on'); $('zClose').focus(); }
+function closeZoom() { $('zoom').classList.remove('on'); if ($('modal').classList.contains('on')) $('mZoom').focus(); }
+function swipe(el, onTap) {
+  let x0 = null, moved = false;
+  el.addEventListener('pointerdown', (e) => { x0 = e.clientX; moved = false; });
+  el.addEventListener('pointerup', (e) => {
+    if (x0 === null) return;
+    const dx = e.clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40 && cur && cur.imgs.length > 1) { moved = true; setImg(gi + (dx < 0 ? 1 : -1)); }
+  });
+  el.addEventListener('click', () => { if (moved) { moved = false; return; } onTap(); });
 }
 function closeAll() {
+  $('zoom').classList.remove('on');
   $('modal').classList.remove('on');
   $('drawer').classList.remove('on');
   $('veil').classList.remove('on');
@@ -712,7 +772,22 @@ $('dClose').addEventListener('click', closeAll);
 $('veil').addEventListener('click', closeAll);
 $('openBag').addEventListener('click', openBag);
 $('checkout').addEventListener('click', startCheckout);
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+$('mPrev').addEventListener('click', () => setImg(gi - 1));
+$('mNext').addEventListener('click', () => setImg(gi + 1));
+$('zPrev').addEventListener('click', () => setImg(gi - 1));
+$('zNext').addEventListener('click', () => setImg(gi + 1));
+$('mZoom').addEventListener('click', openZoom);
+$('zClose').addEventListener('click', closeZoom);
+swipe($('mImg'), openZoom);
+swipe($('zImg'), closeZoom);
+document.addEventListener('keydown', (e) => {
+  const zoomOn = $('zoom').classList.contains('on');
+  if (e.key === 'Escape') { if (zoomOn) closeZoom(); else closeAll(); }
+  else if ((zoomOn || $('modal').classList.contains('on')) && cur && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+    if (e.target.closest && e.target.closest('#mPick')) return;
+    e.preventDefault(); setImg(gi + (e.key === 'ArrowRight' ? 1 : -1));
+  }
+});
 
 renderChips();
 renderGrid();
