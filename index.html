@@ -384,7 +384,7 @@ Bag <b id="bagCount">0</b>
 <div class="veil" id="veil"></div>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mName">
 <div class="gal" style="position:relative">
-<img class="main" id="mImg" src="img/tee.png" alt="">
+<img class="main" id="mImg" src="img/tee.jpg" alt="">
 <div class="thumbs" id="mThumbs"></div>
 <button class="x" id="mClose" type="button" aria-label="Close">×</button>
 </div>
@@ -425,14 +425,14 @@ const SHIPPING = 3.99;
 
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'];
 const P = [
-  { id: 'tee', name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 22, imgs: ['img/tee.png', 'img/tee-close.png', 'img/tee-folded.png'], opts: '9 sizes · black', pick: { label: 'Size', options: SIZES }, desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
-  { id: 'hoodie', name: 'Crown Hoodie', type: 'Youth Heavy Blend hooded sweatshirt', cat: 'Clothing', price: 30, imgs: ['img/hoodie.png'], opts: '4 youth sizes · black', pick: { label: 'Size', options: ['Youth S', 'Youth M', 'Youth L', 'Youth XL'] }, desc: 'Black hoodie with the crown printed on the chest.' },
-  { id: 'anorak', name: 'Zipped Pocket Anorak', type: 'Sport-Tek anorak', cat: 'Clothing', price: 48, imgs: ['img/anorak.png'], opts: '8 sizes · charcoal', pick: { label: 'Size', options: SIZES.slice(0, 8) }, desc: 'Charcoal pullover anorak with a zipped pocket and a small logo patch on the chest.' },
-  { id: 'cap', name: 'Crown Snapback', type: 'Embroidered snapback cap', cat: 'Accessories', price: 22, imgs: ['img/cap.png'], opts: 'One size · red or black', pick: { label: 'Colour', options: ['Red', 'Black'] }, desc: 'Flat-peak snapback with the crown embroidered on the front.' },
-  { id: 'sneakers', name: 'Mesh Sneakers', type: "Men's mesh sneakers", cat: 'Shoes', price: 55, imgs: ['img/sneakers.png'], opts: '9 sizes', pick: { label: 'Size', options: ['UK 5', 'UK 6', 'UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11', 'UK 12', 'UK 13'] }, desc: 'Black mesh sneakers with a printed design.' },
-  { id: 'slippers', name: 'Indoor Slippers', type: "Men's indoor slippers", cat: 'Shoes', price: 25, imgs: ['img/slippers.png'], opts: 'One size · black', desc: 'Black slip-on indoor slippers with a white lining.' },
-  { id: 'powerbank', name: 'Crown Powerbank', type: 'Magnetic powerbank', cat: 'Accessories', price: 28, imgs: ['img/powerbank.png'], opts: 'Black · magnetic', desc: 'Magnetic phone powerbank in black with the chrome crown.' },
-  { id: 'puzzle', name: 'TRIØ Jigsaw Puzzle', type: 'Jigsaw puzzle with tin', cat: 'Accessories', price: 18, imgs: ['img/puzzle.png'], opts: 'Comes in a tin', desc: 'Jigsaw puzzle of the chrome TRIØ logo. Comes in a tin.' }
+  { id: 'tee', name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 22, imgs: ['img/tee.jpg', 'img/tee-model.jpg', 'img/tee-model2.jpg'], opts: '9 sizes · black', pick: { label: 'Size', options: SIZES }, desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
+  { id: 'hoodie', name: 'Crown Hoodie', type: 'Youth Heavy Blend hooded sweatshirt', cat: 'Clothing', price: 30, imgs: ['img/hoodie.jpg'], opts: '4 youth sizes · black', pick: { label: 'Size', options: ['Youth S', 'Youth M', 'Youth L', 'Youth XL'] }, desc: 'Black hoodie with the chrome TRIØ Clothing logo printed on the chest.' },
+  { id: 'anorak', name: 'Zipped Pocket Anorak', type: 'Sport-Tek anorak', cat: 'Clothing', price: 48, imgs: ['img/anorak.jpg'], opts: '8 sizes · charcoal', pick: { label: 'Size', options: SIZES.slice(0, 8) }, desc: 'Charcoal pullover anorak with a zipped pocket and a small logo patch on the chest.' },
+  { id: 'cap', name: 'Crown Snapback', type: 'Embroidered snapback cap', cat: 'Accessories', price: 22, imgs: ['img/cap.jpg', 'img/cap-grey.jpg', 'img/cap-white.jpg'], opts: 'One size · red, grey or white', pick: { label: 'Colour', options: ['Red', 'Grey', 'White'], photos: true }, desc: 'Snapback with a black flat peak and the crown embroidered on a black front patch.' },
+  { id: 'sneakers', name: 'Mesh Sneakers', type: "Men's mesh sneakers", cat: 'Shoes', price: 55, imgs: ['img/sneakers.jpg'], opts: '9 sizes', pick: { label: 'Size', options: ['UK 5', 'UK 6', 'UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11', 'UK 12', 'UK 13'] }, desc: 'Black mesh sneakers with a silver graffiti print.' },
+  { id: 'slippers', name: 'Indoor Slippers', type: "Men's indoor slippers", cat: 'Shoes', price: 25, imgs: ['img/slippers.jpg'], opts: 'One size · black', desc: 'Black slip-on indoor slippers with a white lining.' },
+  { id: 'powerbank', name: 'Crown Powerbank', type: 'Magnetic powerbank', cat: 'Accessories', price: 28, imgs: ['img/powerbank.jpg'], opts: 'Black · magnetic', desc: 'Magnetic phone powerbank in black with the white crown.' },
+  { id: 'puzzle', name: 'TRIØ Jigsaw Puzzle', type: 'Jigsaw puzzle with tin', cat: 'Accessories', price: 18, imgs: ['img/puzzle.jpg'], opts: 'Comes in a tin', desc: 'Jigsaw puzzle of the chrome TRIØ logo. Comes in a tin.' }
 ];
 const CATS = ['All', 'Clothing', 'Shoes', 'Accessories'];
 const $ = (id) => document.getElementById(id);
@@ -449,6 +449,7 @@ let filter = 'All';
 let bag = [];
 try { bag = JSON.parse(localStorage.getItem('trio-bag') || '[]').filter(valid); } catch (e) { bag = []; }
 const save = () => { try { localStorage.setItem('trio-bag', JSON.stringify(bag)); } catch (e) {} };
+const photoFor = (p, opt) => (p.pick && p.pick.photos && p.imgs[p.pick.options.indexOf(opt)]) || p.imgs[0];
 const subPence = () => bag.reduce((s, b) => s + Math.round(find(b.id).price * 100) * b.qty, 0);
 function say(text, ok) { $('msg').textContent = text; $('msg').classList.toggle('ok', !!ok); }
 
@@ -479,7 +480,7 @@ function renderBag() {
   } else {
     $('items').innerHTML = bag.map((b, i) => {
       const p = find(b.id);
-      return '<div class="item"><img src="' + p.imgs[0] + '" alt=""><div><div style="font-weight:700">' + p.name + '</div>' +
+      return '<div class="item"><img src="' + photoFor(p, b.opt) + '" alt=""><div><div style="font-weight:700">' + p.name + '</div>' +
         (b.opt ? '<div class="opt">' + p.pick.label + ': ' + b.opt + '</div>' : '') +
         '<div class="qty" style="margin-top:6px"><button type="button" data-dec="' + i + '" aria-label="One fewer ' + p.name + '">−</button><span>' + b.qty + '</span><button type="button" data-inc="' + i + '" aria-label="One more ' + p.name + '">+</button></div>' +
         '<button class="rm" type="button" data-rm="' + i + '">Remove</button></div><div class="price">' + gbp(p.price * b.qty) + '</div></div>';
@@ -628,6 +629,7 @@ document.addEventListener('click', (e) => {
     mopt = d.pick;
     $('mWarn').textContent = '';
     $('mPick').querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === t)));
+    if (cur.pick.photos) setImg(Math.max(0, cur.pick.options.indexOf(mopt)));
   }
   else if (d.img) setImg(Number(d.img));
   else if (d.inc) { const l = bag[Number(d.inc)]; if (l) { l.qty += 1; save(); renderBag(); } }
