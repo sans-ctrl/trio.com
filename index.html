@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TRIØ Clothing Store</title>
-<meta name="description" content="TRIØ Clothing: streetwear, shoes and accessories from Leeds.">
+<title>KING Clothing · Home of TRIØ and KAIVO</title>
+<meta name="description" content="KING Clothing from Leeds: TRIØ streetwear, shoes and accessories, and KAIVO perfume.">
 <link rel="icon" type="image/png" href="img/crown.png">
 <meta name="theme-color" content="#070707">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="TRIØ Clothing">
-<meta property="og:title" content="TRIØ Clothing · Drop 01 out now">
-<meta property="og:description" content="Streetwear, shoes and accessories from Leeds. Printed to order, UK delivery £3.99.">
+<meta property="og:site_name" content="KING Clothing">
+<meta property="og:title" content="KING Clothing · Home of TRIØ and KAIVO">
+<meta property="og:description" content="TRIØ streetwear and KAIVO perfume from Leeds. UK delivery £3.99.">
 <meta property="og:url" content="https://sans-ctrl.github.io/trio.com/">
 <meta property="og:image" content="https://sans-ctrl.github.io/trio.com/img/share.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap">
 <style>
 /* VOICE occasion: a streetwear drop, loud but clean
    IDEA the brand's shop window at night: chrome logo lit up, the rack below
@@ -138,7 +138,7 @@ footer a{text-decoration:none;margin-right:16px}
 .item .qty button{width:36px;height:36px;font-size:16px}
 .rm{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:6px 0;min-height:32px}
 .empty{color:var(--muted);padding:24px 0}
-.dfoot{padding:18px 20px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.dfoot{padding:18px 20px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px;max-height:80dvh;overflow:auto}
 .sub{display:flex;justify-content:space-between;font-weight:700;font-size:18px}
 .msg{color:var(--muted);font-size:14px;margin:0;min-height:1.2em}
 .msg.ok{color:var(--ink);font-weight:600}
@@ -173,7 +173,54 @@ footer a{text-decoration:none;margin-right:16px}
 .opt{color:var(--muted);font-size:14px}
 #paypal{display:none;background:#fff;border-radius:14px;padding:12px 12px 2px;min-height:60px}
 #paypal.on{display:block}
-@media(max-width:760px){.aboutcrown{max-width:180px!important}.modal.on{grid-template-columns:minmax(0,1fr)}.kingtxt,.about .wrap{grid-template-columns:minmax(0,1fr)}}
+#payarea{display:grid;gap:10px}
+#payarea[hidden],.rev[hidden],.paytabs[hidden],#revCopy[hidden]{display:none}
+.paytabs{display:flex;gap:8px}
+.paytabs button{flex:1;min-height:44px;border-radius:12px;border:1px solid var(--line);background:#0a0a0a;font-weight:700;cursor:pointer}
+.paytabs button[aria-pressed=true]{background:var(--ink);color:#0a0a0a;border-color:var(--ink)}
+.rev{display:grid;gap:10px}
+.rev label{display:grid;gap:4px;font-size:14px;font-weight:600}
+.rev input{min-height:44px;border-radius:10px;border:1px solid var(--line);background:#0a0a0a;color:var(--ink);padding:0 12px;font:inherit;width:100%}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.rev a[aria-disabled=true]{opacity:.45}
+.rev .btn{width:100%}
+.add:disabled{opacity:.6;cursor:default}
+.tag.soon{background:var(--red)}
+.tile.dark{background:#000}
+.modal.dark .gal,.zoom.dark{background:#000}
+.modal.dark .thumbs button{background:#000;border-color:#333}
+.modal.dark .thumbs button[aria-pressed=true]{border-color:#fff}
+.bl{margin:0 0 2px;font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--muted)}
+.bl.kv,.kv{font-family:Cinzel,Georgia,serif}
+.eyebrow{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.chrome{background:linear-gradient(180deg,#ffffff 0%,#bdbdbd 48%,#7e7e7e 52%,#f2f2f2 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kingmark{width:clamp(70px,9vw,104px);margin:0 auto 4px}
+.kingname{margin:0;display:grid;justify-items:center;line-height:.95}
+.kingname span{font-family:Cinzel,Georgia,serif;font-weight:700;font-size:clamp(72px,13vw,160px);letter-spacing:.1em;padding-left:.1em}
+.kingname small{font-family:Inter,sans-serif;font-weight:600;font-size:clamp(14px,1.8vw,20px);letter-spacing:.7em;padding-left:.7em;color:var(--ink);margin-top:10px}
+.brands{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:1040px;margin:clamp(26px,4vw,40px) auto 0}
+.brandcard{position:relative;display:block;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#000;text-decoration:none;aspect-ratio:16/11;text-align:left;color:var(--ink)}
+.brandcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.brandcard.trio img{object-fit:contain;mix-blend-mode:screen;padding:6% 10% 20%}
+.brandcard .cap2{position:absolute;left:0;right:0;bottom:0;padding:20px 22px;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.88) 42%);display:grid;gap:2px}
+.brandcard b{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(26px,3vw,34px);letter-spacing:.04em;line-height:1.1}
+.brandcard.kaivo b{font-family:Cinzel,Georgia,serif;font-weight:700;letter-spacing:.12em}
+.brandcard .cap2 span{color:var(--muted);font-size:15px}
+.brandcard em{font-style:normal;font-weight:700;margin-top:6px}
+@media(hover:hover){.brandcard:hover img{transform:scale(1.03)}}
+.trio .look{margin:0;max-width:none}
+.kaivo{background:#000;border-top:1px solid var(--line)}
+.kbanner{width:100%;border-radius:20px;border:1px solid var(--line)}
+.kgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:center;margin-top:clamp(22px,3vw,34px)}
+.kname{margin:0;font-family:Cinzel,Georgia,serif;font-weight:700;font-size:clamp(48px,7vw,80px);letter-spacing:.1em;line-height:1}
+.ktag{font-family:Cinzel,Georgia,serif;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);margin:8px 0 14px}
+.kaivo p{color:var(--muted);font-size:17px;max-width:56ch}
+.kbottles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.kb{background:#000;border:1px solid var(--line);border-radius:16px;padding:0;overflow:hidden;cursor:pointer;color:var(--ink);text-align:center}
+.kb img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform .35s ease}
+@media(hover:hover){.kb:hover img{transform:scale(1.03)}}
+.kb span{display:block;padding:12px;font-family:Cinzel,Georgia,serif;font-weight:700;letter-spacing:.3em}
+@media(max-width:760px){.kgrid{grid-template-columns:minmax(0,1fr)}.brands{grid-template-columns:minmax(0,1fr)}.aboutcrown{max-width:180px!important}.modal.on{grid-template-columns:minmax(0,1fr)}.kingtxt,.about .wrap{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:600px){.crow{flex-direction:column;gap:0}.pol{padding:6px 6px 2px}.look{gap:8px}.ticker span{font-size:17px}.links{order:3;width:100%;margin-left:0;gap:14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cbody{padding:10px 12px 12px}.cname{font-size:15px}.facts{grid-template-columns:minmax(0,1fr)}.info h3{font-size:28px}}
 @media(max-width:600px){.photos{right:6px;bottom:6px;font-size:11px;padding:3px 8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.drawer{transition:none}.ticker div{animation:none}.pol,.tile img{transition:none}}
@@ -182,8 +229,8 @@ footer a{text-decoration:none;margin-right:16px}
 <body>
 <nav aria-label="Main">
 <div class="navin">
-<a class="brand" href="#top"><img src="img/crown-t.png" alt=""><span>TRIØ</span></a>
-<div class="links"><a href="#shop">Shop</a><a href="#shop" data-jump="Shoes">Shoes</a><a href="#king-1">KING 1</a><a href="#about">About</a></div>
+<a class="brand" href="#top"><img src="img/crown-t.png" alt=""><span class="kv">KING</span></a>
+<div class="links"><a href="#shop">Shop</a><a href="#trio">TRIØ</a><a href="#kaivo">KAIVO</a><a href="#king-1">KING 1</a></div>
 <button class="bagbtn" id="openBag" type="button" aria-label="Open bag">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l1 13H5L6 7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>
 Bag <b id="bagCount">0</b>
@@ -192,23 +239,44 @@ Bag <b id="bagCount">0</b>
 </nav>
 <header class="band hero" id="top">
 <div class="wrap">
-<img class="logo" src="img/logo.jpg" alt="TRIØ Clothing chrome logo with crown">
-<h1 class="disp" style="font-size:clamp(40px,6vw,64px)">Drop 01 is here</h1>
-<p>Streetwear, shoes and accessories from TRIØ Clothing in Leeds. Every piece is printed to order.</p>
-<div class="btns"><a class="btn red" href="#shop">Shop the drop</a><a class="btn" href="#king-1">See the KING 1</a></div>
-<div class="look" id="look" aria-label="Featured pieces"></div>
+<img class="kingmark" src="img/crown-t.png" alt="">
+<h1 class="kingname"><span class="chrome">KING</span><small>CLOTHING</small></h1>
+<p>Home of two brands from Leeds: TRIØ streetwear and KAIVO perfume.</p>
+<div class="btns"><a class="btn red" href="#shop">Shop everything</a></div>
+<div class="brands">
+<a class="brandcard trio" href="#shop" data-jump="TRIØ"><img src="img/logo.jpg" alt="TRIØ Clothing"><span class="cap2"><span>Streetwear, shoes and accessories</span><em>Shop TRIØ →</em></span></a>
+<a class="brandcard kaivo" href="#kaivo"><img src="img/kaivo-mark.jpg" alt="KAIVO perfume"><span class="cap2"><span>Perfume · Noir and Blanc coming soon</span><em>See KAIVO →</em></span></a>
+</div>
 </div>
 </header>
-<div class="ticker" aria-label="Drop 01 out now. Printed in Leeds. UK delivery £3.99. Pay with card or PayPal.">
-<div aria-hidden="true"><span>Drop 01 out now&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card or PayPal&nbsp;&nbsp;✦&nbsp;&nbsp;Crown on everything&nbsp;&nbsp;✦&nbsp;&nbsp;</span><span>Drop 01 out now&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card or PayPal&nbsp;&nbsp;✦&nbsp;&nbsp;Crown on everything&nbsp;&nbsp;✦&nbsp;&nbsp;</span></div>
+<div class="ticker" aria-label="KING Clothing. TRIØ Drop 01 out now. KAIVO perfume coming soon. Printed in Leeds. UK delivery £3.99. Pay with card, PayPal or Revolut.">
+<div aria-hidden="true"><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ Drop 01 out now&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ Drop 01 out now&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span></div>
 </div>
 <section class="band shop" id="shop" aria-labelledby="shopTitle">
 <div class="wrap">
 <div class="shophead">
-<div><h2 class="disp" id="shopTitle">Shop the drop</h2><p class="note">Prices in GBP · Printed to order · UK delivery £3.99</p></div>
+<div><h2 class="disp" id="shopTitle">Shop the drop</h2><p class="note">TRIØ and KAIVO in one bag · Prices in GBP · UK delivery £3.99</p></div>
 <div class="chips" id="chips" role="group" aria-label="Filter products"></div>
 </div>
 <div class="grid" id="grid"></div>
+</div>
+</section>
+
+<section class="band about trio" id="trio" aria-labelledby="trioTitle">
+<div class="wrap">
+<div>
+<p class="eyebrow">A KING Clothing brand</p>
+<h2 class="disp" id="trioTitle">TRIØ · Crown on everything</h2>
+<p>TRIØ is the streetwear side of KING Clothing, from Leeds. The crown and the chrome TRIØ wordmark show up across the range, from caps and hoodies to powerbanks and puzzles.</p>
+<p>Everything is printed to order in Leeds and posted to you, so nothing sits in a warehouse and new designs can drop fast.</p>
+<div class="facts">
+<div><b>Leeds</b><span>Where it started</span></div>
+<div><b>8 pieces</b><span>In Drop 01</span></div>
+<div><b>Made to order</b><span>Printed when you buy</span></div>
+</div>
+<div class="btns" style="justify-content:flex-start;margin-top:18px"><a class="btn red" href="#shop" data-jump="TRIØ">Shop TRIØ</a><a class="btn" href="#king-1">See the KING 1</a></div>
+</div>
+<div class="look" id="look" aria-label="Featured TRIØ pieces"></div>
 </div>
 </section>
 <section class="band king" id="king-1" aria-labelledby="kingTitle">
@@ -405,7 +473,7 @@ Bag <b id="bagCount">0</b>
 </div>
 <div class="kingtxt">
 <div>
-<div class="hand">Signature shoe, in development</div>
+<div class="hand">TRIØ signature shoe, in development</div>
 <h2 class="disp" id="kingTitle">TRIØ KING 1</h2>
 <div class="sports"><span>Basketball</span><span>Football</span><span>Hiking</span></div>
 </div>
@@ -413,27 +481,30 @@ Bag <b id="bagCount">0</b>
 </div>
 </div>
 </section>
-<section class="band about" id="about" aria-labelledby="aboutTitle">
+<section class="band kaivo" id="kaivo" aria-labelledby="kaivoTitle">
 <div class="wrap">
+<img class="kbanner" src="img/kaivo-mark.jpg" alt="KAIVO perfume: a black glass bottle with a crown, the letter K and the words Leave Your Mark">
+<div class="kgrid">
 <div>
-<h2 class="disp" id="aboutTitle">Crown on everything</h2>
-<p>TRIØ Clothing is an independent streetwear brand from Leeds. The crown and the chrome TRIØ wordmark show up across the range, from caps and hoodies to powerbanks and puzzles.</p>
-<p>Everything is printed to order in Leeds and posted to you, so nothing sits in a warehouse and new designs can drop fast.</p>
-<div class="facts">
-<div><b>Leeds</b><span>Where TRIØ started</span></div>
-<div><b>8 pieces</b><span>In Drop 01</span></div>
-<div><b>Made to order</b><span>Printed when you buy</span></div>
+<p class="eyebrow">A KING Clothing brand</p>
+<h2 class="kname chrome" id="kaivoTitle">KAIVO</h2>
+<p class="ktag">Leave your mark</p>
+<p>KAIVO is the perfume house of KING Clothing. The first two scents come in black and white glass: Noir and Blanc. Both are coming soon.</p>
+<div class="btns" style="justify-content:flex-start;margin-top:18px"><a class="btn red" href="#shop" data-jump="KAIVO">See the perfumes</a></div>
+</div>
+<div class="kbottles">
+<button class="kb" type="button" data-open="kaivo-noir" aria-label="View KAIVO Noir"><img src="img/kaivo-noir.jpg" alt=""><span>NOIR</span></button>
+<button class="kb" type="button" data-open="kaivo-blanc" aria-label="View KAIVO Blanc"><img src="img/kaivo-blanc.jpg" alt=""><span>BLANC</span></button>
 </div>
 </div>
-<img class="aboutcrown" src="img/crown.png" alt="TRIØ crown logo" style="width:100%;max-width:460px;margin:0 auto;mix-blend-mode:screen">
 </div>
 </section>
 <section class="band help" id="help" aria-labelledby="helpTitle">
 <div class="wrap">
 <h2 class="disp" id="helpTitle">Good to know</h2>
 <div class="helpgrid">
-<div><b>Delivery</b><p>Every order is printed in Leeds, then posted to you. UK delivery is £3.99. We only deliver in the UK for now.</p></div>
-<div><b>Paying</b><p>Pay with PayPal or a debit or credit card. You get a receipt by email as soon as you pay.</p></div>
+<div><b>Delivery</b><p>TRIØ orders are printed in Leeds, then posted to you. UK delivery is £3.99. We only deliver in the UK for now.</p></div>
+<div><b>Paying</b><p id="payText">Pay with PayPal, a debit or credit card, or Revolut.</p></div>
 <div><b>Sizes</b><p>The tee and anorak come in unisex adult sizes. The hoodie comes in youth sizes, and the shoes in UK sizes.</p></div>
 <div><b>Returns</b><p>Changed your mind? You can cancel up to 14 days after your order arrives. <span class="contact"></span></p></div>
 </div>
@@ -441,8 +512,8 @@ Bag <b id="bagCount">0</b>
 </section>
 <footer>
 <div class="wrap">
-<div><a href="#shop">Shop</a><a href="#king-1">KING 1</a><a href="#about">About</a><a href="#help">Delivery &amp; returns</a><span class="contact-foot"></span></div>
-<div>© 2026 TRIØ Clothing · Leeds</div>
+<div><a href="#shop">Shop</a><a href="#trio">TRIØ</a><a href="#kaivo">KAIVO</a><a href="#king-1">KING 1</a><a href="#help">Delivery &amp; returns</a><span class="contact-foot"></span></div>
+<div>© 2026 KING Clothing · Leeds · Home of TRIØ and KAIVO</div>
 </div>
 </footer>
 <div class="veil" id="veil"></div>
@@ -465,10 +536,10 @@ Bag <b id="bagCount">0</b>
 <p style="margin:0;color:var(--muted)" id="mDesc"></p>
 <p style="margin:0;font-weight:600" id="mOpts"></p>
 <div class="pickwrap" id="mPickWrap"><p class="picklab" id="mPickLab">Size</p><div class="pick" id="mPick" role="group" aria-labelledby="mPickLab"></div></div>
-<div class="qty"><button type="button" id="mMinus" aria-label="Fewer">−</button><span id="mQty" style="min-width:24px;text-align:center;font-weight:700">1</span><button type="button" id="mPlus" aria-label="More">+</button></div>
+<div class="qty" id="mQtyRow"><button type="button" id="mMinus" aria-label="Fewer">−</button><span id="mQty" style="min-width:24px;text-align:center;font-weight:700">1</span><button type="button" id="mPlus" aria-label="More">+</button></div>
 <button class="btn red" type="button" id="mAdd">Add to bag</button>
 <p class="warn" id="mWarn" role="status"></p>
-<p class="note">Printed to order and posted to you. UK delivery £3.99.</p>
+<p class="note" id="mNote">Printed to order and posted to you. UK delivery £3.99.</p>
 </div>
 </div>
 <div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Photo, full screen">
@@ -486,9 +557,23 @@ Bag <b id="bagCount">0</b>
 <div class="row"><span>UK delivery</span><span id="shipping">£0</span></div>
 <div class="sub"><span>Total</span><span id="total">£0</span></div>
 <button class="btn red" type="button" id="checkout">Checkout</button>
+<div id="payarea" hidden>
+<div class="paytabs" id="paytabs" role="group" aria-label="How do you want to pay?"></div>
 <div id="paypal" aria-label="Pay with PayPal or card"></div>
+<form class="rev" id="rev" novalidate hidden>
+<p class="note" style="margin:0">Tell us where to post it, send us your order, then pay on Revolut.</p>
+<label>Full name<input name="name" autocomplete="name" required></label>
+<label>Email<input name="email" type="email" autocomplete="email" required></label>
+<label>Address<input name="line1" autocomplete="address-line1" required></label>
+<div class="two"><label>Town or city<input name="town" autocomplete="address-level2" required></label><label>Postcode<input name="postcode" autocomplete="postal-code" required></label></div>
+<button class="btn" type="submit">1. Send my order</button>
+<button class="btn" type="button" id="revCopy" hidden>Email app didn't open? Copy my order</button>
+<a class="btn red" id="revPay" href="#" target="_blank" rel="noopener" aria-disabled="true">2. Pay on Revolut</a>
+<p class="note" style="margin:0" id="revHelp"></p>
+</form>
+</div>
 <p class="msg" id="msg" role="status"></p>
-<p class="note" style="margin:0">Pay with PayPal or a debit or credit card. UK delivery only.</p>
+<p class="note" style="margin:0" id="payNote"></p>
 </div>
 </aside>
 <script>
@@ -500,20 +585,28 @@ const PAYPAL_CLIENT_ID = '';
 const SHIPPING = 3.99;
 // Email address customers can contact (UK law says online shops must show one).
 const CONTACT_EMAIL = '';
+// Your Revolut.me link, for example 'https://revolut.me/yourname'. Also needs CONTACT_EMAIL,
+// because Revolut orders (sizes and address) are emailed to you.
+const REVOLUT_LINK = '';
 // ========================================
 
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'];
 const P = [
-  { id: 'tee', name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 15, imgs: ['img/tee.jpg', 'img/tee-model.jpg', 'img/tee-model2.jpg', 'img/tee-back.jpg', 'img/tee-side.jpg'], opts: '9 sizes · black', pick: { label: 'Size', options: SIZES }, desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
-  { id: 'hoodie', name: 'Crown Hoodie', type: 'Youth Heavy Blend hooded sweatshirt', cat: 'Clothing', price: 22, imgs: ['img/hoodie.jpg', 'img/hoodie-back.jpg', 'img/hoodie-kid.jpg', 'img/hoodie-kid-back.jpg'], opts: '4 youth sizes · black', pick: { label: 'Size', options: ['Youth S', 'Youth M', 'Youth L', 'Youth XL'] }, desc: 'Black hoodie with the chrome TRIØ Clothing logo on the front and a big white crown on the back.' },
-  { id: 'anorak', name: 'Zipped Pocket Anorak', type: 'Sport-Tek anorak', cat: 'Clothing', price: 35, imgs: ['img/anorak.jpg'], opts: '8 sizes · charcoal', pick: { label: 'Size', options: SIZES.slice(0, 8) }, desc: 'Charcoal pullover anorak with a zipped pocket and a small logo patch on the chest.' },
-  { id: 'cap', name: 'Crown Snapback', type: 'Embroidered snapback cap', cat: 'Accessories', price: 22, imgs: ['img/cap.jpg', 'img/cap-grey.jpg', 'img/cap-white.jpg', 'img/cap-back.jpg', 'img/cap-model.jpg'], opts: 'One size · red, grey or white', pick: { label: 'Colour', options: ['Red', 'Grey', 'White'], photos: true, swatches: ['#c4122f', '#9b9b9b', '#ffffff'] }, desc: 'Snapback with a black flat peak and the crown embroidered on a black front patch.' },
-  { id: 'sneakers', name: 'Mesh Sneakers', type: "Men's mesh sneakers", cat: 'Shoes', price: 55, imgs: ['img/sneakers.jpg', 'img/sneakers-side.jpg', 'img/sneakers-top.jpg', 'img/sneakers-heel.jpg'], opts: '9 sizes', pick: { label: 'Size', options: ['UK 5', 'UK 6', 'UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11', 'UK 12', 'UK 13'] }, desc: 'Black mesh sneakers with a silver graffiti print.' },
-  { id: 'slippers', name: 'Indoor Slippers', type: "Men's indoor slippers", cat: 'Shoes', price: 25, imgs: ['img/slippers.jpg'], opts: 'One size · black', desc: 'Black slip-on indoor slippers with a white lining.' },
-  { id: 'powerbank', name: 'Crown Powerbank', type: 'Magnetic powerbank', cat: 'Accessories', price: 28, imgs: ['img/powerbank.jpg'], opts: 'Black · magnetic', desc: 'Magnetic phone powerbank in black with the white crown.' },
-  { id: 'puzzle', name: 'TRIØ Jigsaw Puzzle', type: 'Jigsaw puzzle with tin', cat: 'Accessories', price: 18, imgs: ['img/puzzle.jpg', 'img/puzzle-pieces.jpg', 'img/puzzle-tin.jpg'], opts: 'Comes in a tin', desc: 'Jigsaw puzzle of the chrome TRIØ logo. Comes in a tin.' }
+  { id: 'tee', brand: 'TRIØ', name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 15, imgs: ['img/tee.jpg', 'img/tee-model.jpg', 'img/tee-model2.jpg', 'img/tee-back.jpg', 'img/tee-side.jpg'], opts: '9 sizes · black', pick: { label: 'Size', options: SIZES }, desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
+  { id: 'hoodie', brand: 'TRIØ', name: 'Crown Hoodie', type: 'Youth Heavy Blend hooded sweatshirt', cat: 'Clothing', price: 22, imgs: ['img/hoodie.jpg', 'img/hoodie-back.jpg', 'img/hoodie-kid.jpg', 'img/hoodie-kid-back.jpg'], opts: '4 youth sizes · black', pick: { label: 'Size', options: ['Youth S', 'Youth M', 'Youth L', 'Youth XL'] }, desc: 'Black hoodie with the chrome TRIØ Clothing logo on the front and a big white crown on the back.' },
+  { id: 'anorak', brand: 'TRIØ', name: 'Zipped Pocket Anorak', type: 'Sport-Tek anorak', cat: 'Clothing', price: 35, imgs: ['img/anorak.jpg'], opts: '8 sizes · charcoal', pick: { label: 'Size', options: SIZES.slice(0, 8) }, desc: 'Charcoal pullover anorak with a zipped pocket and a small logo patch on the chest.' },
+  { id: 'cap', brand: 'TRIØ', name: 'Crown Snapback', type: 'Embroidered snapback cap', cat: 'Accessories', price: 22, imgs: ['img/cap.jpg', 'img/cap-grey.jpg', 'img/cap-white.jpg', 'img/cap-back.jpg', 'img/cap-model.jpg'], opts: 'One size · red, grey or white', pick: { label: 'Colour', options: ['Red', 'Grey', 'White'], photos: true, swatches: ['#c4122f', '#9b9b9b', '#ffffff'] }, desc: 'Snapback with a black flat peak and the crown embroidered on a black front patch.' },
+  { id: 'sneakers', brand: 'TRIØ', name: 'Mesh Sneakers', type: "Men's mesh sneakers", cat: 'Shoes', price: 55, imgs: ['img/sneakers.jpg', 'img/sneakers-side.jpg', 'img/sneakers-top.jpg', 'img/sneakers-heel.jpg'], opts: '9 sizes', pick: { label: 'Size', options: ['UK 5', 'UK 6', 'UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11', 'UK 12', 'UK 13'] }, desc: 'Black mesh sneakers with a silver graffiti print.' },
+  { id: 'slippers', brand: 'TRIØ', name: 'Indoor Slippers', type: "Men's indoor slippers", cat: 'Shoes', price: 25, imgs: ['img/slippers.jpg'], opts: 'One size · black', desc: 'Black slip-on indoor slippers with a white lining.' },
+  { id: 'powerbank', brand: 'TRIØ', name: 'Crown Powerbank', type: 'Magnetic powerbank', cat: 'Accessories', price: 28, imgs: ['img/powerbank.jpg'], opts: 'Black · magnetic', desc: 'Magnetic phone powerbank in black with the white crown.' },
+  { id: 'puzzle', brand: 'TRIØ', name: 'TRIØ Jigsaw Puzzle', type: 'Jigsaw puzzle with tin', cat: 'Accessories', price: 18, imgs: ['img/puzzle.jpg', 'img/puzzle-pieces.jpg', 'img/puzzle-tin.jpg'], opts: 'Comes in a tin', desc: 'Jigsaw puzzle of the chrome TRIØ logo. Comes in a tin.' },
+  // KAIVO perfumes are "coming soon": shown on the site but not for sale until soon is removed and a price is added.
+  { id: 'kaivo-noir', brand: 'KAIVO', name: 'KAIVO Noir', type: 'Eau de parfum · 50 ml', cat: 'Perfume', soon: true, dark: true, price: 0, imgs: ['img/kaivo-noir.jpg', 'img/kaivo-noir-wide.jpg'], opts: 'Black glass · 50 ml', desc: 'Black glass bottle with a faceted black cap and the silver KAIVO crown. Scent and price coming soon.' },
+  { id: 'kaivo-blanc', brand: 'KAIVO', name: 'KAIVO Blanc', type: 'Eau de parfum · 50 ml', cat: 'Perfume', soon: true, dark: true, price: 0, imgs: ['img/kaivo-blanc.jpg', 'img/kaivo-blanc-wide.jpg'], opts: 'White glass · 50 ml', desc: 'White glass bottle with a white faceted cap and the KAIVO crown. Scent and price coming soon.' }
 ];
-const CATS = ['All', 'Clothing', 'Shoes', 'Accessories'];
+const CATS = ['All', 'TRIØ', 'KAIVO', 'Clothing', 'Shoes', 'Accessories'];
+const HAS_PP = !!PAYPAL_CLIENT_ID;
+const HAS_REV = /^https:\/\/revolut\.me\/[A-Za-z0-9._-]+\/?$/.test(REVOLUT_LINK) && /^\S+@\S+\.\S+$/.test(CONTACT_EMAIL);
 const $ = (id) => document.getElementById(id);
 const gbp = (n) => '£' + (Number.isInteger(n) ? n : n.toFixed(2));
 const money = (pence) => (pence / 100).toFixed(2);
@@ -521,7 +614,7 @@ const SHIP_P = Math.round(SHIPPING * 100);
 const find = (id) => P.find((p) => p.id === id);
 const valid = (b) => {
   const p = b && find(b.id);
-  if (!p || !(Number.isInteger(b.qty) && b.qty >= 1)) return false;
+  if (!p || p.soon || !(Number.isInteger(b.qty) && b.qty >= 1)) return false;
   return p.pick ? p.pick.options.includes(b.opt) : !b.opt;
 };
 let filter = 'All';
@@ -536,16 +629,18 @@ function renderChips() {
   $('chips').innerHTML = CATS.map((c) => '<button class="chip" type="button" data-cat="' + c + '" aria-pressed="' + (c === filter) + '">' + c + '</button>').join('');
 }
 function renderGrid() {
-  const list = P.filter((p) => filter === 'All' || p.cat === filter);
+  const list = P.filter((p) => filter === 'All' || p.cat === filter || p.brand === filter);
   $('grid').innerHTML = list.map((p) => '<article class="card">' +
-    '<button class="tile" type="button" data-open="' + p.id + '" aria-label="View ' + p.name + '"><img src="' + p.imgs[0] + '" alt="' + p.name + '" loading="lazy"' + (p.imgs[1] ? ' class="has-alt"' : '') + '>' +
-    (p.imgs[1] ? '<img class="alt" src="' + p.imgs[1] + '" alt="" loading="lazy">' : '') + (p.tag ? '<span class="tag">' + p.tag + '</span>' : '') +
+    '<button class="tile' + (p.dark ? ' dark' : '') + '" type="button" data-open="' + p.id + '" aria-label="View ' + p.name + '"><img src="' + p.imgs[0] + '" alt="' + p.name + '" loading="lazy"' + (p.imgs[1] ? ' class="has-alt"' : '') + '>' +
+    (p.imgs[1] ? '<img class="alt" src="' + p.imgs[1] + '" alt="" loading="lazy">' : '') + (p.soon ? '<span class="tag soon">Coming soon</span>' : p.tag ? '<span class="tag">' + p.tag + '</span>' : '') +
     (p.imgs.length > 1 ? '<span class="photos">' + p.imgs.length + ' photos</span>' : '') + '</button>' +
-    '<div class="cbody"><div class="crow"><h3 class="cname">' + p.name + '</h3><span class="price">' + gbp(p.price) + '</span></div>' +
+    '<div class="cbody"><p class="bl' + (p.brand === 'KAIVO' ? ' kv' : '') + '">' + p.brand + '</p><div class="crow"><h3 class="cname">' + p.name + '</h3><span class="price">' + (p.soon ? 'Soon' : gbp(p.price)) + '</span></div>' +
     '<p class="cdet">' + (p.pick && p.pick.swatches ? p.pick.swatches.map((c, k) => '<span class="sw" style="background:' + c + '" title="' + p.pick.options[k] + '"></span>').join('') : '') + '<span>' + p.opts + '</span></p>' +
-    (p.pick
-      ? '<button class="add" type="button" data-open="' + p.id + '">Choose ' + p.pick.label.toLowerCase() + '</button>'
-      : '<button class="add" type="button" data-add="' + p.id + '">Add to bag</button>') +
+    (p.soon
+      ? '<button class="add" type="button" disabled>Coming soon</button>'
+      : p.pick
+        ? '<button class="add" type="button" data-open="' + p.id + '">Choose ' + p.pick.label.toLowerCase() + '</button>'
+        : '<button class="add" type="button" data-add="' + p.id + '">Add to bag</button>') +
     '</div></article>').join('');
 }
 function renderLook() {
@@ -559,8 +654,12 @@ function renderContact() {
   const mail = CONTACT_EMAIL ? '<a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a>' : '';
   document.querySelectorAll('.contact').forEach((el) => { el.innerHTML = mail ? 'Email ' + mail + ' and we will sort it out.' : 'Email us using the address on your PayPal receipt and we will sort it out.'; });
   document.querySelectorAll('.contact-foot').forEach((el) => { el.innerHTML = mail ? ' · ' + mail : ''; });
+  const ways = [HAS_PP && 'PayPal or a debit or credit card', HAS_REV && 'Revolut'].filter(Boolean);
+  $('payNote').textContent = ways.length ? 'Pay with ' + ways.join(', or ') + '. UK delivery only.' : 'Checkout is being switched on: PayPal, card and Revolut. UK delivery only.';
+  $('payText').textContent = ways.length ? 'Pay with ' + ways.join(', or ') + '. You get an order number straight away.' : 'Pay with PayPal, a debit or credit card, or Revolut. You get an order number straight away.';
 }
 function addToBag(id, qty, opt) {
+  if (!find(id) || find(id).soon) return;
   const line = bag.find((b) => b.id === id && (b.opt || '') === (opt || ''));
   if (line) line.qty += qty; else bag.push(opt ? { id: id, opt: opt, qty: qty } : { id: id, qty: qty });
   save(); renderBag();
@@ -585,6 +684,8 @@ function renderBag() {
   $('shipping').textContent = '£' + money(ship);
   $('total').textContent = '£' + money(sub + ship);
   if (!bag.length) hidePay();
+  revSent = false;
+  if (!$('payarea').hidden && payMethod === 'revolut') showRevolut();
   say('');
 }
 
@@ -596,9 +697,13 @@ function openModal(id) {
   if (!cur) return;
   mq = 1;
   mopt = '';
-  $('mType').textContent = cur.type;
+  $('mType').textContent = cur.brand + ' · ' + cur.type;
+  $('modal').classList.toggle('dark', !!cur.dark);
+  $('zoom').classList.toggle('dark', !!cur.dark);
   $('mName').textContent = cur.name;
-  $('mPrice').textContent = gbp(cur.price);
+  $('mPrice').textContent = cur.soon ? 'Coming soon' : gbp(cur.price);
+  $('mQtyRow').hidden = $('mAdd').hidden = !!cur.soon;
+  $('mNote').textContent = cur.soon ? 'Not on sale yet. Check back soon.' : 'Printed to order and posted to you. UK delivery £' + money(SHIP_P) + '.';
   $('mDesc').textContent = cur.desc;
   $('mOpts').textContent = cur.opts + (cur.tag ? ' · ' + cur.tag : '');
   $('mQty').textContent = mq;
@@ -667,7 +772,11 @@ function openBag() {
 // ===== Checkout with PayPal (PayPal or debit/credit card) =====
 let ppLoad = null;
 let ppRendered = false;
-function hidePay() { $('paypal').classList.remove('on'); $('checkout').style.display = ''; }
+let payMethod = HAS_PP ? 'paypal' : 'revolut';
+let orderRef = '';
+let revSent = false;
+let revBody = '';
+function hidePay() { $('payarea').hidden = true; $('paypal').classList.remove('on'); $('checkout').style.display = ''; }
 function loadPayPal() {
   if (window.paypal && window.paypal.Buttons) return Promise.resolve();
   if (!ppLoad) {
@@ -695,7 +804,7 @@ function orderBody() {
   return {
     intent: 'CAPTURE',
     purchase_units: [{
-      description: 'TRIØ Clothing order',
+      description: 'KING Clothing order',
       amount: {
         currency_code: 'GBP',
         value: money(sub + SHIP_P),
@@ -706,16 +815,45 @@ function orderBody() {
       },
       items: items
     }],
-    application_context: { brand_name: 'TRIØ Clothing', shipping_preference: 'GET_FROM_FILE' }
+    application_context: { brand_name: 'KING Clothing', shipping_preference: 'GET_FROM_FILE' }
   };
 }
 async function startCheckout() {
   if (!bag.length) { say('Add something to your bag first.'); return; }
-  if (!PAYPAL_CLIENT_ID) { say('Online payment is being switched on. Check back soon. Your bag is saved on this device.'); return; }
+  if (!HAS_PP && !HAS_REV) { say('Online payment is being switched on. Check back soon. Your bag is saved on this device.'); return; }
+  $('checkout').style.display = 'none';
+  $('payarea').hidden = false;
+  const both = HAS_PP && HAS_REV;
+  $('paytabs').hidden = !both;
+  $('paytabs').innerHTML = both ? '<button type="button" data-pay="paypal">PayPal or card</button><button type="button" data-pay="revolut">Revolut</button>' : '';
+  await showMethod(payMethod);
+}
+async function showMethod(m) {
+  payMethod = m;
+  $('paytabs').querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.pay === m)));
+  $('rev').hidden = m !== 'revolut';
+  $('paypal').classList.toggle('on', m === 'paypal');
+  say('');
+  if (m === 'paypal') await showPayPal(); else showRevolut();
+}
+function newRef() {
+  const c = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let r = 'KING-';
+  for (let i = 0; i < 4; i++) r += c[Math.floor(Math.random() * c.length)];
+  return r;
+}
+function showRevolut() {
+  if (!orderRef) orderRef = newRef();
+  const total = money(subPence() + SHIP_P);
+  $('revPay').href = REVOLUT_LINK || '#';
+  $('revPay').textContent = '2. Pay £' + total + ' on Revolut';
+  $('revPay').setAttribute('aria-disabled', String(!revSent));
+  $('revCopy').hidden = !revSent;
+  $('revHelp').innerHTML = 'Your order number is <b>' + orderRef + '</b>. On Revolut, enter <b>£' + total + '</b> and put <b>' + orderRef + '</b> in the note so we can match your payment.';
+}
+async function showPayPal() {
   say('Loading secure checkout…');
   try { await loadPayPal(); } catch (e) { say('Checkout could not load. Check your internet and try again.'); return; }
-  $('checkout').style.display = 'none';
-  $('paypal').classList.add('on');
   say('');
   if (ppRendered) return;
   ppRendered = true;
@@ -772,6 +910,38 @@ $('dClose').addEventListener('click', closeAll);
 $('veil').addEventListener('click', closeAll);
 $('openBag').addEventListener('click', openBag);
 $('checkout').addEventListener('click', startCheckout);
+$('paytabs').addEventListener('click', (e) => { const b = e.target.closest('[data-pay]'); if (b) showMethod(b.dataset.pay); });
+$('rev').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const f = $('rev');
+  const v = {};
+  for (const k of ['name', 'email', 'line1', 'town', 'postcode']) {
+    v[k] = String(f.elements[k].value || '').trim();
+    if (!v[k]) { f.elements[k].focus(); say('Please fill in every box.'); return; }
+  }
+  if (!/^\S+@\S+\.\S+$/.test(v.email)) { f.elements.email.focus(); say('Please check your email address.'); return; }
+  if (!bag.length) { say('Add something to your bag first.'); return; }
+  if (!orderRef) orderRef = newRef();
+  const lines = bag.map((b) => { const p = find(b.id); return b.qty + ' x ' + p.brand + ' ' + p.name.replace(/^KAIVO /, '') + (b.opt ? ' (' + p.pick.label + ': ' + b.opt + ')' : '') + ' - £' + money(Math.round(p.price * 100) * b.qty); });
+  revBody = ['KING Clothing order ' + orderRef, '', ...lines, 'UK delivery - £' + money(SHIP_P), 'Total - £' + money(subPence() + SHIP_P), '', 'Paying with Revolut. Note on the payment: ' + orderRef, '', 'Post to:', v.name, v.line1, v.town, v.postcode.toUpperCase(), '', 'Email: ' + v.email].join('\n');
+  window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('KING Clothing order ' + orderRef) + '&body=' + encodeURIComponent(revBody);
+  revSent = true;
+  showRevolut();
+  say('Your email app should open with your order. Press send, then pay on Revolut.', true);
+});
+$('revCopy').addEventListener('click', () => {
+  const done = () => say('Copied. Paste it into an email to ' + CONTACT_EMAIL + ', then pay on Revolut.', true);
+  if (navigator.clipboard) navigator.clipboard.writeText(revBody).then(done, () => say('Copy did not work. Email ' + CONTACT_EMAIL + ' with your order number ' + orderRef + ' and address.'));
+  else say('Email ' + CONTACT_EMAIL + ' with your order number ' + orderRef + ' and address.');
+});
+$('revPay').addEventListener('click', (e) => {
+  if (!revSent) { e.preventDefault(); say('Send your order first (step 1).'); return; }
+  const ref = orderRef;
+  setTimeout(() => {
+    bag = []; save(); orderRef = ''; renderBag(); hidePay();
+    say('Thanks! Once your Revolut payment for order ' + ref + ' arrives, we will print your order and post it to you.', true);
+  }, 400);
+});
 $('mPrev').addEventListener('click', () => setImg(gi - 1));
 $('mNext').addEventListener('click', () => setImg(gi + 1));
 $('zPrev').addEventListener('click', () => setImg(gi - 1));
