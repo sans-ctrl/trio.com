@@ -261,7 +261,7 @@ Bag <b id="bagCount">0</b>
 </div>
 </header>
 <div class="ticker" aria-label="KING Clothing. TRIØ for men, women and kids. KAIVO perfume and beauty coming soon. Printed in Leeds. UK delivery £3.99. Pay with card, PayPal or Revolut.">
-<div aria-hidden="true"><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span></div>
+<div aria-hidden="true"><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;New graphic designs on tees and joggers&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;New graphic designs on tees and joggers&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span></div>
 </div>
 <section class="band shop" id="shop" aria-labelledby="shopTitle">
 <div class="wrap">
@@ -522,7 +522,7 @@ Bag <b id="bagCount">0</b>
 <div class="helpgrid">
 <div><b>Delivery</b><p>TRIØ orders are printed in Leeds, then posted to you. UK delivery is £3.99. We only deliver in the UK for now.</p></div>
 <div><b>Paying</b><p id="payText">Pay with PayPal, a debit or credit card, or Revolut.</p></div>
-<div><b>Sizes</b><p>Women's pieces come in UK 6 to 18, and kids' tees in ages 3 to 13. The kids' hoodie comes in youth S to XL. The unisex tee and anorak come in adult sizes, and the shoes in UK sizes.</p></div>
+<div><b>Sizes</b><p>Women's pieces come in UK 6 to 18, and kids' tees in ages 3 to 13. The kids' hoodie comes in youth S to XL. The unisex tee and anorak come in adult sizes, and the shoes in UK sizes. Graphic designs come in XS to 5XL tees and XS to 2XL joggers.</p></div>
 <div><b>Returns</b><p>Changed your mind? You can cancel up to 14 days after your order arrives. <span class="contact"></span></p></div>
 </div>
 </div>
@@ -553,6 +553,7 @@ Bag <b id="bagCount">0</b>
 <p style="margin:0;color:var(--muted)" id="mDesc"></p>
 <p style="margin:0;font-weight:600" id="mOpts"></p>
 <div class="pickwrap" id="mPickWrap"><p class="picklab" id="mPickLab">Size</p><div class="pick" id="mPick" role="group" aria-labelledby="mPickLab"></div></div>
+<div class="pickwrap" id="mSizeWrap" hidden><p class="picklab" id="mSizeLab">Pick a size</p><div class="pick" id="mSize" role="group" aria-labelledby="mSizeLab"></div></div>
 <div class="qty" id="mQtyRow"><button type="button" id="mMinus" aria-label="Fewer">−</button><span id="mQty" style="min-width:24px;text-align:center;font-weight:700">1</span><button type="button" id="mPlus" aria-label="More">+</button></div>
 <button class="btn red" type="button" id="mAdd">Add to bag</button>
 <p class="warn" id="mWarn" role="status"></p>
@@ -611,6 +612,10 @@ const SIZES = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'];
 const WSIZES = ['UK 6', 'UK 8', 'UK 10', 'UK 12', 'UK 14', 'UK 16', 'UK 18'];
 const KSIZES = ['3–4 yrs', '5–6 yrs', '7–8 yrs', '9–10 yrs', '11–12 yrs', '13 yrs'];
 const NB = { label: 'Scent', options: ['Noir', 'Blanc'], photos: true, swatches: ['#0b0b0b', '#f4f4f4'] };
+// Graphic designs: one design, on a T-shirt or joggers. Prices are per style.
+const STYLE = { label: 'Style', options: ['T-shirt', 'Joggers'], photos: true, prices: [15, 22] };
+const STYLE_SIZES = { 'T-shirt': SIZES, 'Joggers': SIZES.slice(0, 6) };
+const design = (key, name, desc) => ({ id: 'd-' + key, brand: 'TRIØ', for: ['Men', 'Women'], name: name, type: 'Graphic design · T-shirt or joggers', cat: 'Designs', price: 15, imgs: ['img/d-' + key + '-tee.jpg', 'img/d-' + key + '-joggers.jpg'], opts: 'T-shirt £15 · Joggers £22', pick: STYLE, sizes: STYLE_SIZES, desc: desc + ' Printed on a black T-shirt, or on the leg of black joggers.' });
 const P = [
   { id: 'tee', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 15, imgs: ['img/tee.jpg', 'img/tee-model.jpg', 'img/tee-model2.jpg', 'img/tee-back.jpg', 'img/tee-side.jpg'], opts: '9 sizes · black', pick: { label: 'Size', options: SIZES }, desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
   { id: 'hoodie', brand: 'TRIØ', for: ['Kids'], name: 'Kids Crown Hoodie', type: 'Kids\' Heavy Blend hoodie', cat: 'Clothing', price: 22, imgs: ['img/hoodie.jpg', 'img/hoodie-back.jpg', 'img/hoodie-kid.jpg', 'img/hoodie-kid-back.jpg'], opts: 'Youth S–XL · black', pick: { label: 'Size', options: ['Youth S', 'Youth M', 'Youth L', 'Youth XL'] }, desc: 'Black hoodie with the chrome TRIØ Clothing logo on the front and a big white crown on the back.' },
@@ -625,6 +630,13 @@ const P = [
   { id: 'slippers', brand: 'TRIØ', for: ['Men'], name: 'Indoor Slippers', type: "Men's indoor slippers", cat: 'Shoes', price: 25, imgs: ['img/slippers.jpg'], opts: 'One size · black', desc: 'Black slip-on indoor slippers with a white lining.' },
   { id: 'powerbank', brand: 'TRIØ', name: 'Crown Powerbank', type: 'Magnetic powerbank', cat: 'Accessories', price: 28, imgs: ['img/powerbank.jpg'], opts: 'Black · magnetic', desc: 'Magnetic phone powerbank in black with the white crown.' },
   { id: 'puzzle', brand: 'TRIØ', name: 'TRIØ Jigsaw Puzzle', type: 'Jigsaw puzzle with tin', cat: 'Accessories', price: 18, imgs: ['img/puzzle.jpg', 'img/puzzle-pieces.jpg', 'img/puzzle-tin.jpg'], opts: 'Comes in a tin', desc: 'Jigsaw puzzle of the chrome TRIØ logo. Comes in a tin.' },
+  design('yinyang', 'Yin Yang', 'YIN · YANG in chrome under the TRIØ crown, with a bold black and white yin yang and "balance is everything".'),
+  design('forgeform', 'FORGEFORM', 'FORGEFORM in chrome under the TRIØ crown, an orange PROTEIN POWDER bar and snowy mountain peaks.'),
+  design('sandwich', 'Good Sandwich', '"A good sandwich is a good day" around a stacked sandwich wearing the TRIØ crown.'),
+  design('gym', 'Hit The Gym', '"I hit the gym today" over a heavy dumbbell on a red stripe, topped with the TRIØ crown.'),
+  design('live', 'Live Laugh Love', '"live laugh love" under a pink sunset arch with hearts and the TRIØ crown.'),
+  design('coffee', 'Jolly Coffee', '"If I had a cup of coffee, I am jolly" around a smiling coffee cup wearing the TRIØ crown.'),
+  design('football', 'Football Is Life', '"Football is life" in chrome, with the TRIØ crown on a classic football.'),
   // KAIVO perfumes are "coming soon": shown on the site but not for sale until soon is removed and a price is added.
   { id: 'kaivo-noir', brand: 'KAIVO', name: 'KAIVO Noir', type: 'Eau de parfum · 50 ml', cat: 'Perfume', soon: true, dark: true, price: 0, imgs: ['img/kaivo-noir.jpg', 'img/kaivo-noir-wide.jpg'], opts: 'Black glass · 50 ml', desc: 'Black glass bottle with a faceted black cap and the silver KAIVO crown. Scent and price coming soon.' },
   { id: 'kaivo-blanc', brand: 'KAIVO', name: 'KAIVO Blanc', type: 'Eau de parfum · 50 ml', cat: 'Perfume', soon: true, dark: true, price: 0, imgs: ['img/kaivo-blanc.jpg', 'img/kaivo-blanc-wide.jpg'], opts: 'White glass · 50 ml', desc: 'White glass bottle with a white faceted cap and the KAIVO crown. Scent and price coming soon.' },
@@ -634,7 +646,7 @@ const P = [
   { id: 'kaivo-cream', brand: 'KAIVO', name: 'KAIVO Hand Cream', type: 'Hand cream · 75 ml', cat: 'Beauty', soon: true, dark: true, price: 0, imgs: ['img/kaivo-cream-noir.jpg', 'img/kaivo-cream-blanc.jpg'], opts: 'Noir or Blanc · 75 ml', pick: NB, desc: 'Hand cream in the Noir or Blanc scent, in a black or white tube. Price coming soon.' },
   { id: 'kaivo-balm', brand: 'KAIVO', name: 'KAIVO Lip Balm', type: 'Lip balm', cat: 'Beauty', soon: true, dark: true, price: 0, imgs: ['img/kaivo-balm-noir.jpg', 'img/kaivo-balm-blanc.jpg'], opts: 'Black or white', pick: { label: 'Style', options: ['Noir', 'Blanc'], photos: true, swatches: ['#0b0b0b', '#f4f4f4'] }, desc: 'Lip balm in a black Noir or white Blanc case with a chrome band. Price coming soon.' }
 ];
-const CATS = ['All', 'Men', 'Women', 'Kids', 'Shoes', 'Accessories', 'KAIVO'];
+const CATS = ['All', 'Men', 'Women', 'Kids', 'Designs', 'Shoes', 'Accessories', 'KAIVO'];
 const HAS_PP = !!PAYPAL_CLIENT_ID;
 const HAS_REV = /^https:\/\/revolut\.me\/[A-Za-z0-9._-]+\/?$/.test(REVOLUT_LINK) && /^\S+@\S+\.\S+$/.test(CONTACT_EMAIL);
 const $ = (id) => document.getElementById(id);
@@ -642,17 +654,22 @@ const gbp = (n) => '£' + (Number.isInteger(n) ? n : n.toFixed(2));
 const money = (pence) => (pence / 100).toFixed(2);
 const SHIP_P = Math.round(SHIPPING * 100);
 const find = (id) => P.find((p) => p.id === id);
+const styleOf = (p, opt) => (p.sizes && opt) ? String(opt).split(' · ')[0] : opt;
+const sizeOf = (opt) => (opt && String(opt).includes(' · ')) ? String(opt).split(' · ')[1] : '';
+const priceOf = (p, opt) => (p.pick && p.pick.prices && opt) ? p.pick.prices[p.pick.options.indexOf(styleOf(p, opt))] : p.price;
+const optLabel = (p, opt) => p.sizes ? styleOf(p, opt) + ' · Size ' + sizeOf(opt) : p.pick.label + ': ' + opt;
 const valid = (b) => {
   const p = b && find(b.id);
   if (!p || p.soon || !(Number.isInteger(b.qty) && b.qty >= 1)) return false;
+  if (p.sizes) { const st = styleOf(p, b.opt); return p.pick.options.includes(st) && (p.sizes[st] || []).includes(sizeOf(b.opt)); }
   return p.pick ? p.pick.options.includes(b.opt) : !b.opt;
 };
 let filter = 'All';
 let bag = [];
 try { bag = JSON.parse(localStorage.getItem('trio-bag') || '[]').filter(valid); } catch (e) { bag = []; }
 const save = () => { try { localStorage.setItem('trio-bag', JSON.stringify(bag)); } catch (e) {} };
-const photoFor = (p, opt) => (p.pick && p.pick.photos && p.imgs[p.pick.options.indexOf(opt)]) || p.imgs[0];
-const subPence = () => bag.reduce((s, b) => s + Math.round(find(b.id).price * 100) * b.qty, 0);
+const photoFor = (p, opt) => (p.pick && p.pick.photos && p.imgs[p.pick.options.indexOf(styleOf(p, opt))]) || p.imgs[0];
+const subPence = () => bag.reduce((s, b) => s + Math.round(priceOf(find(b.id), b.opt) * 100) * b.qty, 0);
 function say(text, ok) { $('msg').textContent = text; $('msg').classList.toggle('ok', !!ok); }
 
 function renderChips() {
@@ -665,7 +682,7 @@ function renderGrid() {
     '<button class="tile' + (p.dark ? ' dark' : '') + '" type="button" data-open="' + p.id + '" aria-label="View ' + p.name + '"><img src="' + p.imgs[0] + '" alt="' + p.name + '" loading="lazy"' + (p.imgs[1] ? ' class="has-alt"' : '') + '>' +
     (p.imgs[1] ? '<img class="alt" src="' + p.imgs[1] + '" alt="" loading="lazy">' : '') + (p.soon ? '<span class="tag soon">Coming soon</span>' : p.tag ? '<span class="tag">' + p.tag + '</span>' : '') +
     (p.imgs.length > 1 ? '<span class="photos">' + p.imgs.length + ' photos</span>' : '') + '</button>' +
-    '<div class="cbody"><p class="bl' + (p.brand === 'KAIVO' ? ' kv' : '') + '">' + p.brand + '</p><div class="crow"><h3 class="cname">' + p.name + '</h3><span class="price">' + (p.soon ? 'Soon' : gbp(p.price)) + '</span></div>' +
+    '<div class="cbody"><p class="bl' + (p.brand === 'KAIVO' ? ' kv' : '') + '">' + p.brand + '</p><div class="crow"><h3 class="cname">' + p.name + '</h3><span class="price">' + (p.soon ? 'Soon' : (p.pick && p.pick.prices) ? 'From ' + gbp(Math.min(...p.pick.prices)) : gbp(p.price)) + '</span></div>' +
     '<p class="cdet">' + (p.pick && p.pick.swatches ? p.pick.swatches.map((c, k) => '<span class="sw" style="background:' + c + '" title="' + p.pick.options[k] + '"></span>').join('') : '') + '<span>' + p.opts + '</span></p>' +
     (p.soon
       ? '<button class="add" type="button" disabled>Coming soon</button>'
@@ -708,9 +725,9 @@ function renderBag() {
     $('items').innerHTML = bag.map((b, i) => {
       const p = find(b.id);
       return '<div class="item"><img src="' + photoFor(p, b.opt) + '" alt=""><div><div style="font-weight:700">' + p.name + '</div>' +
-        (b.opt ? '<div class="opt">' + p.pick.label + ': ' + b.opt + '</div>' : '') +
+        (b.opt ? '<div class="opt">' + optLabel(p, b.opt) + '</div>' : '') +
         '<div class="qty" style="margin-top:6px"><button type="button" data-dec="' + i + '" aria-label="One fewer ' + p.name + '">−</button><span>' + b.qty + '</span><button type="button" data-inc="' + i + '" aria-label="One more ' + p.name + '">+</button></div>' +
-        '<button class="rm" type="button" data-rm="' + i + '">Remove</button></div><div class="price">' + gbp(p.price * b.qty) + '</div></div>';
+        '<button class="rm" type="button" data-rm="' + i + '">Remove</button></div><div class="price">' + gbp(priceOf(p, b.opt) * b.qty) + '</div></div>';
     }).join('');
   }
   const sub = subPence();
@@ -727,16 +744,20 @@ function renderBag() {
 let cur = null;
 let mq = 1;
 let mopt = '';
+let msize = '';
 function openModal(id) {
   cur = find(id);
   if (!cur) return;
   mq = 1;
   mopt = '';
+  msize = '';
+  $('mSizeWrap').hidden = true;
+  $('mSize').innerHTML = '';
   $('mType').textContent = cur.brand + ' · ' + cur.type;
   $('modal').classList.toggle('dark', !!cur.dark);
   $('zoom').classList.toggle('dark', !!cur.dark);
   $('mName').textContent = cur.name;
-  $('mPrice').textContent = cur.soon ? 'Coming soon' : gbp(cur.price);
+  $('mPrice').textContent = cur.soon ? 'Coming soon' : (cur.pick && cur.pick.prices) ? 'From ' + gbp(Math.min(...cur.pick.prices)) : gbp(cur.price);
   $('mQtyRow').hidden = $('mAdd').hidden = !!cur.soon;
   $('mNote').textContent = cur.soon ? 'Not on sale yet. Check back soon.' : 'Printed to order and posted to you. UK delivery £' + money(SHIP_P) + '.';
   $('mDesc').textContent = cur.desc;
@@ -830,8 +851,8 @@ function orderBody() {
   const items = bag.map((b) => {
     const p = find(b.id);
     return {
-      name: (p.name + (b.opt ? ' (' + p.pick.label + ': ' + b.opt + ')' : '')).slice(0, 127),
-      unit_amount: { currency_code: 'GBP', value: money(Math.round(p.price * 100)) },
+      name: (p.name + (b.opt ? ' (' + optLabel(p, b.opt) + ')' : '')).slice(0, 127),
+      unit_amount: { currency_code: 'GBP', value: money(Math.round(priceOf(p, b.opt) * 100)) },
       quantity: String(b.qty),
       category: 'PHYSICAL_GOODS'
     };
@@ -926,6 +947,18 @@ document.addEventListener('click', (e) => {
     $('mWarn').textContent = '';
     $('mPick').querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === t)));
     if (cur.pick.photos) setImg(Math.max(0, cur.pick.options.indexOf(mopt)));
+    if (cur.pick.prices) $('mPrice').textContent = gbp(priceOf(cur, mopt + ' · x'));
+    if (cur.sizes) {
+      msize = '';
+      $('mSizeWrap').hidden = false;
+      $('mSizeLab').textContent = 'Pick a ' + (mopt === 'Shoes' ? 'shoe size' : 'size');
+      $('mSize').innerHTML = (cur.sizes[mopt] || []).map((o) => '<button type="button" data-size="' + o + '" aria-pressed="false">' + o + '</button>').join('');
+    }
+  }
+  else if (d.size) {
+    msize = d.size;
+    $('mWarn').textContent = '';
+    $('mSize').querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === t)));
   }
   else if (d.img) setImg(Number(d.img));
   else if (d.inc) { const l = bag[Number(d.inc)]; if (l) { l.qty += 1; save(); renderBag(); } }
@@ -937,7 +970,8 @@ $('mMinus').addEventListener('click', () => { mq = Math.max(1, mq - 1); $('mQty'
 $('mAdd').addEventListener('click', () => {
   if (!cur) return;
   if (cur.pick && !mopt) { $('mWarn').textContent = 'Pick a ' + cur.pick.label.toLowerCase() + ' first.'; return; }
-  addToBag(cur.id, mq, cur.pick ? mopt : '');
+  if (cur.sizes && !msize) { $('mWarn').textContent = 'Pick a size first.'; return; }
+  addToBag(cur.id, mq, cur.sizes ? mopt + ' · ' + msize : cur.pick ? mopt : '');
   openBag();
 });
 $('mClose').addEventListener('click', closeAll);
@@ -957,7 +991,7 @@ $('rev').addEventListener('submit', (e) => {
   if (!/^\S+@\S+\.\S+$/.test(v.email)) { f.elements.email.focus(); say('Please check your email address.'); return; }
   if (!bag.length) { say('Add something to your bag first.'); return; }
   if (!orderRef) orderRef = newRef();
-  const lines = bag.map((b) => { const p = find(b.id); return b.qty + ' x ' + p.brand + ' ' + p.name.replace(/^KAIVO /, '') + (b.opt ? ' (' + p.pick.label + ': ' + b.opt + ')' : '') + ' - £' + money(Math.round(p.price * 100) * b.qty); });
+  const lines = bag.map((b) => { const p = find(b.id); return b.qty + ' x ' + p.brand + ' ' + p.name.replace(/^KAIVO /, '') + (b.opt ? ' (' + optLabel(p, b.opt) + ')' : '') + ' - £' + money(Math.round(priceOf(p, b.opt) * 100) * b.qty); });
   revBody = ['KING Clothing order ' + orderRef, '', ...lines, 'UK delivery - £' + money(SHIP_P), 'Total - £' + money(subPence() + SHIP_P), '', 'Paying with Revolut. Note on the payment: ' + orderRef, '', 'Post to:', v.name, v.line1, v.town, v.postcode.toUpperCase(), '', 'Email: ' + v.email].join('\n');
   window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('KING Clothing order ' + orderRef) + '&body=' + encodeURIComponent(revBody);
   revSent = true;
@@ -989,7 +1023,7 @@ document.addEventListener('keydown', (e) => {
   const zoomOn = $('zoom').classList.contains('on');
   if (e.key === 'Escape') { if (zoomOn) closeZoom(); else closeAll(); }
   else if ((zoomOn || $('modal').classList.contains('on')) && cur && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
-    if (e.target.closest && e.target.closest('#mPick')) return;
+    if (e.target.closest && e.target.closest('#mPick, #mSize')) return;
     e.preventDefault(); setImg(gi + (e.key === 'ArrowRight' ? 1 : -1));
   }
 });
