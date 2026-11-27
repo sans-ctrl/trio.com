@@ -108,6 +108,7 @@ footer a{text-decoration:none;margin-right:16px}
 .stage .main{cursor:zoom-in;touch-action:pan-y;user-select:none;-webkit-user-drag:none}
 .nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid #ddd;background:rgba(255,255,255,.94);color:#111;font-size:26px;line-height:1;cursor:pointer;display:grid;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.18)}
 .nav.prev{left:4px}.nav.next{right:4px}
+[hidden]{display:none!important}
 .nav[hidden],.count[hidden]{display:none}
 .count{position:absolute;left:8px;bottom:8px;background:rgba(10,10,10,.82);color:#fff;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px}
 .zoombtn{position:absolute;right:8px;bottom:8px;min-height:36px;padding:0 12px;border-radius:999px;border:1px solid #ddd;background:rgba(255,255,255,.94);color:#111;cursor:pointer;font-size:13px;font-weight:700}
@@ -261,7 +262,7 @@ Bag <b id="bagCount">0</b>
 </div>
 </header>
 <div class="ticker" aria-label="KING Clothing. TRIØ for men, women and kids. KAIVO perfume and beauty coming soon. Printed in Leeds. UK delivery £3.99. Pay with card, PayPal or Revolut.">
-<div aria-hidden="true"><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;New graphic designs on tees and joggers&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;New graphic designs on tees and joggers&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span></div>
+<div aria-hidden="true"><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;Heat-pressed designs on tees, joggers and caps&nbsp;&nbsp;✦&nbsp;&nbsp;Signature ski tracksuit coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;Heat-pressed designs on tees, joggers and caps&nbsp;&nbsp;✦&nbsp;&nbsp;Signature ski tracksuit coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span></div>
 </div>
 <section class="band shop" id="shop" aria-labelledby="shopTitle">
 <div class="wrap">
@@ -522,7 +523,7 @@ Bag <b id="bagCount">0</b>
 <div class="helpgrid">
 <div><b>Delivery</b><p>TRIØ orders are printed in Leeds, then posted to you. UK delivery is £3.99. We only deliver in the UK for now.</p></div>
 <div><b>Paying</b><p id="payText">Pay with PayPal, a debit or credit card, or Revolut.</p></div>
-<div><b>Sizes</b><p>Women's pieces come in UK 6 to 18, and kids' tees in ages 3 to 13. The kids' hoodie comes in youth S to XL. The unisex tee and anorak come in adult sizes, and the shoes in UK sizes. Graphic designs come in XS to 5XL tees and XS to 2XL joggers.</p></div>
+<div><b>Sizes</b><p>Women's pieces come in UK 6 to 18, and kids' tees in ages 3 to 13. The kids' hoodie comes in youth S to XL. The unisex tee and anorak come in adult sizes, and the shoes in UK sizes. Graphic designs come in XS to 5XL tees, XS to 2XL joggers and a one-size snapback cap.</p></div>
 <div><b>Returns</b><p>Changed your mind? You can cancel up to 14 days after your order arrives. <span class="contact"></span></p></div>
 </div>
 </div>
@@ -612,14 +613,15 @@ const SIZES = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'];
 const WSIZES = ['UK 6', 'UK 8', 'UK 10', 'UK 12', 'UK 14', 'UK 16', 'UK 18'];
 const KSIZES = ['3–4 yrs', '5–6 yrs', '7–8 yrs', '9–10 yrs', '11–12 yrs', '13 yrs'];
 const NB = { label: 'Scent', options: ['Noir', 'Blanc'], photos: true, swatches: ['#0b0b0b', '#f4f4f4'] };
-// Graphic designs: one design, on a T-shirt or joggers. Prices are per style.
-const STYLE = { label: 'Style', options: ['T-shirt', 'Joggers'], photos: true, prices: [15, 22] };
-const STYLE_SIZES = { 'T-shirt': SIZES, 'Joggers': SIZES.slice(0, 6) };
-const design = (key, name, desc) => ({ id: 'd-' + key, brand: 'TRIØ', for: ['Men', 'Women'], name: name, type: 'Graphic design · T-shirt or joggers', cat: 'Designs', price: 15, imgs: ['img/d-' + key + '-tee.jpg', 'img/d-' + key + '-joggers.jpg'], opts: 'T-shirt £15 · Joggers £22', pick: STYLE, sizes: STYLE_SIZES, desc: desc + ' Printed on a black T-shirt, or on the leg of black joggers.' });
+// Graphic designs: one design, heat-pressed on a T-shirt, joggers or a cap. Prices are per style.
+const STYLE = { label: 'Style', options: ['T-shirt', 'Joggers', 'Cap'], photos: true, prices: [15, 22, 14] };
+const STYLE_SIZES = { 'T-shirt': SIZES, 'Joggers': SIZES.slice(0, 6), 'Cap': ['One size'] };
+const design = (key, name, desc, tee = 'black') => ({ id: 'd-' + key, brand: 'TRIØ', for: ['Men', 'Women'], name: name, type: 'Graphic design · T-shirt, joggers or cap', cat: 'Designs', price: 15, imgs: ['img/d-' + key + '-tee.jpg', 'img/d-' + key + '-joggers.jpg', 'img/d-' + key + '-cap.jpg'], opts: 'Tee £15 · Joggers £22 · Cap £14', pick: STYLE, sizes: STYLE_SIZES, desc: desc + ' Heat-pressed on a ' + tee + ' T-shirt, on the leg of black joggers, or on the front patch of a red snapback cap.' });
 const P = [
   { id: 'tee', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 15, imgs: ['img/tee.jpg', 'img/tee-model.jpg', 'img/tee-model2.jpg', 'img/tee-back.jpg', 'img/tee-side.jpg'], opts: '9 sizes · black', pick: { label: 'Size', options: SIZES }, desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
   { id: 'hoodie', brand: 'TRIØ', for: ['Kids'], name: 'Kids Crown Hoodie', type: 'Kids\' Heavy Blend hoodie', cat: 'Clothing', price: 22, imgs: ['img/hoodie.jpg', 'img/hoodie-back.jpg', 'img/hoodie-kid.jpg', 'img/hoodie-kid-back.jpg'], opts: 'Youth S–XL · black', pick: { label: 'Size', options: ['Youth S', 'Youth M', 'Youth L', 'Youth XL'] }, desc: 'Black hoodie with the chrome TRIØ Clothing logo on the front and a big white crown on the back.' },
   { id: 'anorak', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Zipped Pocket Anorak', type: 'Sport-Tek anorak', cat: 'Clothing', price: 35, imgs: ['img/anorak.jpg'], opts: '8 sizes · charcoal', pick: { label: 'Size', options: SIZES.slice(0, 8) }, desc: 'Charcoal pullover anorak with a zipped pocket and a small logo patch on the chest.' },
+  { id: 'ski-tracksuit', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Signature Ski Tracksuit', type: 'Winter ski-style tracksuit · jacket and trousers', cat: 'Clothing', soon: true, price: 0, imgs: ['img/tracksuit-set.jpg', 'img/tracksuit-winter.jpg', 'img/tracksuit-jacket.jpg', 'img/tracksuit-trousers.jpg'], opts: 'Jacket + trousers · winter', desc: 'A quilted puffer jacket with a funnel collar, a red chest yoke, the white TRIØ crown, "Signature" in script and a ski-pass pocket on the sleeve. It comes with padded trousers that have quilted knees, red side stripes and TRIØ SIGNATURE down the leg. Price coming soon.' },
   { id: 'w-crop-tee', brand: 'TRIØ', for: ['Women'], name: "Women's Crown Crop Tee", type: "Women's cropped T-shirt", cat: 'Clothing', price: 14, imgs: ['img/women-crop-tee.jpg'], opts: 'UK 6–18 · black', pick: { label: 'Size', options: WSIZES }, desc: 'Black fitted crop tee with the white TRIØ crown on the chest.' },
   { id: 'w-crop-hoodie', brand: 'TRIØ', for: ['Women'], name: "Women's Crop Hoodie", type: "Women's cropped hoodie", cat: 'Clothing', price: 24, imgs: ['img/women-crop-hoodie.jpg'], opts: 'UK 6–18 · black', pick: { label: 'Size', options: WSIZES }, desc: 'Black cropped hoodie with the chrome TRIØ Clothing logo on the front.' },
   { id: 'w-joggers', brand: 'TRIØ', for: ['Women'], name: "Women's Crown Joggers", type: "Women's joggers", cat: 'Clothing', price: 22, imgs: ['img/women-joggers.jpg'], opts: 'UK 6–18 · black', pick: { label: 'Size', options: WSIZES }, desc: 'Black cuffed joggers with a small white crown on the left leg.' },
@@ -628,6 +630,9 @@ const P = [
   { id: 'cap', brand: 'TRIØ', name: 'Crown Snapback', type: 'Embroidered snapback cap', cat: 'Accessories', price: 22, imgs: ['img/cap.jpg', 'img/cap-grey.jpg', 'img/cap-white.jpg', 'img/cap-back.jpg', 'img/cap-model.jpg'], opts: 'One size · red, grey or white', pick: { label: 'Colour', options: ['Red', 'Grey', 'White'], photos: true, swatches: ['#c4122f', '#9b9b9b', '#ffffff'] }, desc: 'Snapback with a black flat peak and the crown embroidered on a black front patch.' },
   { id: 'sneakers', brand: 'TRIØ', for: ['Men'], name: 'Mesh Sneakers', type: "Men's mesh sneakers", cat: 'Shoes', price: 55, imgs: ['img/sneakers.jpg', 'img/sneakers-side.jpg', 'img/sneakers-top.jpg', 'img/sneakers-heel.jpg'], opts: '9 sizes', pick: { label: 'Size', options: ['UK 5', 'UK 6', 'UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11', 'UK 12', 'UK 13'] }, desc: 'Black mesh sneakers with a silver graffiti print.' },
   { id: 'slippers', brand: 'TRIØ', for: ['Men'], name: 'Indoor Slippers', type: "Men's indoor slippers", cat: 'Shoes', price: 25, imgs: ['img/slippers.jpg'], opts: 'One size · black', desc: 'Black slip-on indoor slippers with a white lining.' },
+  { id: 'shoe-court-low', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Crown Court Low', type: 'Factory-made low-top court shoe', cat: 'Shoes', soon: true, price: 0, imgs: ['img/shoe-court-low.jpg'], opts: 'White and black', desc: 'White low-top court shoe with a black heel panel, a red TRIØ heel tab and the red crown on the side. Designed by TRIØ, to be made in a shoe factory. Price coming soon.' },
+  { id: 'shoe-court-high', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Crown Court High', type: 'Factory-made high-top', cat: 'Shoes', soon: true, price: 0, imgs: ['img/shoe-court-high.jpg'], opts: 'Black and red', desc: 'Black high-top with a padded collar, a red KING CLOTHING ankle strap and the red crown. Designed by TRIØ, to be made in a shoe factory. Price coming soon.' },
+  { id: 'shoe-crown-slide', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Crown Slide', type: 'Factory-made slides', cat: 'Shoes', soon: true, price: 0, imgs: ['img/shoe-crown-slide.jpg'], opts: 'Black with a white strap', desc: 'Black slides with a soft footbed and a white strap printed with the crown and TRIØ. Designed by TRIØ, to be made in a shoe factory. Price coming soon.' },
   { id: 'powerbank', brand: 'TRIØ', name: 'Crown Powerbank', type: 'Magnetic powerbank', cat: 'Accessories', price: 28, imgs: ['img/powerbank.jpg'], opts: 'Black · magnetic', desc: 'Magnetic phone powerbank in black with the white crown.' },
   { id: 'puzzle', brand: 'TRIØ', name: 'TRIØ Jigsaw Puzzle', type: 'Jigsaw puzzle with tin', cat: 'Accessories', price: 18, imgs: ['img/puzzle.jpg', 'img/puzzle-pieces.jpg', 'img/puzzle-tin.jpg'], opts: 'Comes in a tin', desc: 'Jigsaw puzzle of the chrome TRIØ logo. Comes in a tin.' },
   design('yinyang', 'Yin Yang', 'YIN · YANG in chrome under the TRIØ crown, with a bold black and white yin yang and "balance is everything".'),
@@ -639,6 +644,7 @@ const P = [
   design('football', 'Football Is Life', '"Football is life" in chrome, with the TRIØ crown on a classic football.'),
   design('fuji', 'Mount Fuji', '"You met me at a very Japanese time of my life. Meet me at Mount Fuji", around Mount Fuji with cherry blossom, under the TRIØ crown.'),
   design('dnd', 'DND', 'DND in split green and orange under the TRIØ crown, over a green d20 dice and "roll for initiative".'),
+  { ...design('moneyup', 'Money Up', '"Tryna get my money up" with a money bag full of cash, a big UP arrow and the TRIØ crown.', 'red'), tag: 'New' },
   // KAIVO perfumes are "coming soon": shown on the site but not for sale until soon is removed and a price is added.
   { id: 'kaivo-noir', brand: 'KAIVO', name: 'KAIVO Noir', type: 'Eau de parfum · 50 ml', cat: 'Perfume', soon: true, dark: true, price: 0, imgs: ['img/kaivo-noir.jpg', 'img/kaivo-noir-wide.jpg'], opts: 'Black glass · 50 ml', desc: 'Black glass bottle with a faceted black cap and the silver KAIVO crown. Scent and price coming soon.' },
   { id: 'kaivo-blanc', brand: 'KAIVO', name: 'KAIVO Blanc', type: 'Eau de parfum · 50 ml', cat: 'Perfume', soon: true, dark: true, price: 0, imgs: ['img/kaivo-blanc.jpg', 'img/kaivo-blanc-wide.jpg'], opts: 'White glass · 50 ml', desc: 'White glass bottle with a white faceted cap and the KAIVO crown. Scent and price coming soon.' },
@@ -659,7 +665,7 @@ const find = (id) => P.find((p) => p.id === id);
 const styleOf = (p, opt) => (p.sizes && opt) ? String(opt).split(' · ')[0] : opt;
 const sizeOf = (opt) => (opt && String(opt).includes(' · ')) ? String(opt).split(' · ')[1] : '';
 const priceOf = (p, opt) => (p.pick && p.pick.prices && opt) ? p.pick.prices[p.pick.options.indexOf(styleOf(p, opt))] : p.price;
-const optLabel = (p, opt) => p.sizes ? styleOf(p, opt) + ' · Size ' + sizeOf(opt) : p.pick.label + ': ' + opt;
+const optLabel = (p, opt) => p.sizes ? styleOf(p, opt) + (sizeOf(opt) === 'One size' ? ' · One size' : ' · Size ' + sizeOf(opt)) : p.pick.label + ': ' + opt;
 const valid = (b) => {
   const p = b && find(b.id);
   if (!p || p.soon || !(Number.isInteger(b.qty) && b.qty >= 1)) return false;
@@ -955,6 +961,7 @@ document.addEventListener('click', (e) => {
       $('mSizeWrap').hidden = false;
       $('mSizeLab').textContent = 'Pick a ' + (mopt === 'Shoes' ? 'shoe size' : 'size');
       $('mSize').innerHTML = (cur.sizes[mopt] || []).map((o) => '<button type="button" data-size="' + o + '" aria-pressed="false">' + o + '</button>').join('');
+      if ((cur.sizes[mopt] || []).length === 1) { msize = cur.sizes[mopt][0]; $('mSize').firstChild.setAttribute('aria-pressed', 'true'); }
     }
   }
   else if (d.size) {
