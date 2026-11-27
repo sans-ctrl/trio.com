@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KING Clothing · Home of TRIØ and KAIVO</title>
-<meta name="description" content="KING Clothing from Leeds: TRIØ streetwear for men, women and kids, and KAIVO perfume and beauty.">
+<meta name="description" content="KING Clothing from Leeds: TRIØ streetwear for men, women and kids, the CROWNED Signature line, and KAIVO perfume and beauty.">
 <link rel="icon" type="image/png" href="img/crown.png">
 <meta name="theme-color" content="#070707">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KING Clothing">
 <meta property="og:title" content="KING Clothing · Home of TRIØ and KAIVO">
-<meta property="og:description" content="TRIØ streetwear for men, women and kids, and KAIVO perfume and beauty. From Leeds, UK delivery £3.99.">
+<meta property="og:description" content="TRIØ streetwear for men, women and kids, the CROWNED Signature line, and KAIVO perfume and beauty. From Leeds, UK delivery £3.99.">
 <meta property="og:url" content="https://sans-ctrl.github.io/trio.com/">
 <meta property="og:image" content="https://sans-ctrl.github.io/trio.com/img/share.jpg">
 <meta property="og:image:width" content="1200">
@@ -193,13 +193,24 @@ footer a{text-decoration:none;margin-right:16px}
 .modal.dark .thumbs button[aria-pressed=true]{border-color:#fff}
 .bl{margin:0 0 2px;font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--muted)}
 .bl.kv,.kv{font-family:Cinzel,Georgia,serif}
+.bl.cr{color:var(--red)}
+.crowned{background:radial-gradient(ellipse at 50% 0%,#1c2638 0%,#000 70%);border-top:1px solid var(--line)}
+.crowned p{color:var(--muted);font-size:17px;max-width:56ch}
+.crname{margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(52px,8vw,96px);letter-spacing:.12em;line-height:1}
+.ctag{font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:#c9d4e6 !important;margin:10px 0 14px;font-size:14px !important}
+.crowned .kb img{object-fit:contain;background:#fff;aspect-ratio:1}
+.crowned .kb span{font-family:Anton,Impact,sans-serif;font-weight:400;letter-spacing:.18em}
+.crowned .krange h3{font-family:Anton,Impact,sans-serif;font-weight:400;letter-spacing:.14em}
+@media(min-width:900px){.crowned .krange{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.crowned .krange .kb img{aspect-ratio:4/3;object-fit:cover}
 .eyebrow{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .chrome{background:linear-gradient(180deg,#ffffff 0%,#bdbdbd 48%,#7e7e7e 52%,#f2f2f2 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .kingmark{width:clamp(70px,9vw,104px);margin:0 auto 4px}
 .kingname{margin:0;display:grid;justify-items:center;line-height:.95}
 .kingname span{font-family:Cinzel,Georgia,serif;font-weight:700;font-size:clamp(72px,13vw,160px);letter-spacing:.1em;padding-left:.1em}
 .kingname small{font-family:Inter,sans-serif;font-weight:600;font-size:clamp(14px,1.8vw,20px);letter-spacing:.7em;padding-left:.7em;color:var(--ink);margin-top:10px}
-.brands{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:1040px;margin:clamp(26px,4vw,40px) auto 0}
+.brands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:1240px;margin:clamp(26px,4vw,40px) auto 0}
+@media(max-width:999px){.brands{grid-template-columns:minmax(0,1fr);max-width:600px}}
 .brandcard{position:relative;display:block;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#000;text-decoration:none;aspect-ratio:16/11;text-align:left;color:var(--ink)}
 .brandcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
 .brandcard.trio img{object-fit:contain;mix-blend-mode:screen;padding:6% 10% 20%}
@@ -235,6 +246,7 @@ footer a{text-decoration:none;margin-right:16px}
 @media(max-width:760px){.kgrid{grid-template-columns:minmax(0,1fr)}.brands{grid-template-columns:minmax(0,1fr)}.aboutcrown{max-width:180px!important}.modal.on{grid-template-columns:minmax(0,1fr)}.kingtxt,.about .wrap{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:600px){.who{gap:8px}.whocard{aspect-ratio:4/5}.whocard img{left:10%;right:10%;top:5%;width:80%;height:50%}.whocard b{left:10px;bottom:28px;font-size:19px}.whocard span{left:10px;bottom:9px;font-size:11px}.crow{flex-direction:column;gap:0}.pol{padding:6px 6px 2px}.look{gap:8px}.ticker span{font-size:17px}.links{order:3;width:100%;margin-left:0;gap:14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cbody{padding:10px 12px 12px}.cname{font-size:15px}.facts{grid-template-columns:minmax(0,1fr)}.info h3{font-size:28px}}
 @media(max-width:600px){.photos{right:6px;bottom:6px;font-size:11px;padding:3px 8px}}
+@media(max-width:600px){.links{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:12px}.links::-webkit-scrollbar{display:none}.links a{white-space:nowrap;font-size:15px}.brandcard.trio img{padding:3% 16% 36%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.drawer{transition:none}.ticker div{animation:none}.pol,.tile img{transition:none}}
 </style>
 </head>
@@ -242,7 +254,7 @@ footer a{text-decoration:none;margin-right:16px}
 <nav aria-label="Main">
 <div class="navin">
 <a class="brand" href="#top"><img src="img/crown-t.png" alt=""><span class="kv">KING</span></a>
-<div class="links"><a href="#shop" data-jump="Men">Men</a><a href="#shop" data-jump="Women">Women</a><a href="#shop" data-jump="Kids">Kids</a><a href="#kaivo">KAIVO</a><a href="#king-1">KING 1</a></div>
+<div class="links"><a href="#shop" data-jump="Men">Men</a><a href="#shop" data-jump="Women">Women</a><a href="#shop" data-jump="Kids">Kids</a><a href="#crowned">CROWNED</a><a href="#kaivo">KAIVO</a><a href="#king-1">KING 1</a></div>
 <button class="bagbtn" id="openBag" type="button" aria-label="Open bag">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l1 13H5L6 7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>
 Bag <b id="bagCount">0</b>
@@ -253,16 +265,17 @@ Bag <b id="bagCount">0</b>
 <div class="wrap">
 <img class="kingmark" src="img/crown-t.png" alt="">
 <h1 class="kingname"><span class="chrome">KING</span><small>CLOTHING</small></h1>
-<p>Home of two brands from Leeds: TRIØ streetwear for men, women and kids, and KAIVO perfume and beauty.</p>
+<p>Home of three brands from Leeds: TRIØ streetwear for men, women and kids, CROWNED winter wear and shoes, and KAIVO perfume and beauty.</p>
 <div class="btns"><a class="btn red" href="#shop">Shop everything</a></div>
 <div class="brands">
 <a class="brandcard trio" href="#shop" data-jump="TRIØ"><img src="img/logo.jpg" alt="TRIØ Clothing"><span class="cap2"><span>Men, women and kids · Shoes · Accessories</span><em>Shop TRIØ →</em></span></a>
+<a class="brandcard crowned" href="#crowned"><img src="img/crowned-mark.jpg" alt="CROWNED: the Signature ski tracksuit, visor and shoes"><span class="cap2"><span>Signature tracksuit, visor and shoes · coming soon</span><em>See CROWNED →</em></span></a>
 <a class="brandcard kaivo" href="#kaivo"><img src="img/kaivo-mark.jpg" alt="KAIVO perfume"><span class="cap2"><span>Perfume, body care and beauty · coming soon</span><em>See KAIVO →</em></span></a>
 </div>
 </div>
 </header>
-<div class="ticker" aria-label="KING Clothing. TRIØ for men, women and kids. KAIVO perfume and beauty coming soon. Printed in Leeds. UK delivery £3.99. Pay with card, PayPal or Revolut.">
-<div aria-hidden="true"><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;Heat-pressed designs on tees, joggers and caps&nbsp;&nbsp;✦&nbsp;&nbsp;Signature ski tracksuit coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;Heat-pressed designs on tees, joggers and caps&nbsp;&nbsp;✦&nbsp;&nbsp;Signature ski tracksuit coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span></div>
+<div class="ticker" aria-label="KING Clothing. TRIØ for men, women and kids. CROWNED Signature line coming soon. KAIVO perfume and beauty coming soon. Printed in Leeds. UK delivery £3.99. Pay with card, PayPal or Revolut.">
+<div aria-hidden="true"><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;Heat-pressed designs on tees, joggers and caps&nbsp;&nbsp;✦&nbsp;&nbsp;CROWNED Signature line coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;Heat-pressed designs on tees, joggers and caps&nbsp;&nbsp;✦&nbsp;&nbsp;CROWNED Signature line coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span></div>
 </div>
 <section class="band shop" id="shop" aria-labelledby="shopTitle">
 <div class="wrap">
@@ -498,6 +511,29 @@ Bag <b id="bagCount">0</b>
 </div>
 </div>
 </section>
+<section class="band crowned" id="crowned" aria-labelledby="crownedTitle">
+<div class="wrap">
+<img class="kbanner" src="img/crowned-mark.jpg" alt="CROWNED: the Signature ski tracksuit, visor and shoes on a snowy night">
+<div class="kgrid">
+<div>
+<p class="eyebrow">A KING Clothing brand</p>
+<h2 class="crname chrome" id="crownedTitle">CROWNED</h2>
+<p class="ctag">The Signature line</p>
+<p>CROWNED is the Signature line of KING Clothing: winter wear and shoes made in factories, in black and red with the white crown. The Signature Ski Tracksuit, the matching Signature Visor and three crown shoes are all coming soon.</p>
+<div class="btns" style="justify-content:flex-start;margin-top:18px"><a class="btn red" href="#shop" data-jump="CROWNED">Shop CROWNED</a></div>
+</div>
+<div class="kbottles">
+<button class="kb" type="button" data-open="ski-tracksuit" aria-label="View Tracksuit"><img src="img/tracksuit-set.jpg" alt="" loading="lazy"><span>TRACKSUIT</span></button>
+<button class="kb" type="button" data-open="crowned-visor" aria-label="View Visor"><img src="img/crowned-visor.jpg" alt="" loading="lazy"><span>VISOR</span></button>
+</div>
+</div>
+<div class="krange" aria-label="CROWNED shoes"><h3>Shoes</h3>
+<button class="kb" type="button" data-open="shoe-court-low" aria-label="View Court Low"><img src="img/shoe-court-low.jpg" alt="" loading="lazy"><span>COURT LOW</span></button>
+<button class="kb" type="button" data-open="shoe-court-high" aria-label="View Court High"><img src="img/shoe-court-high.jpg" alt="" loading="lazy"><span>COURT HIGH</span></button>
+<button class="kb" type="button" data-open="shoe-crown-slide" aria-label="View Crown Slide"><img src="img/shoe-crown-slide.jpg" alt="" loading="lazy"><span>CROWN SLIDE</span></button>
+</div>
+</div>
+</section>
 <section class="band kaivo" id="kaivo" aria-labelledby="kaivoTitle">
 <div class="wrap">
 <img class="kbanner" src="img/kaivo-mark.jpg" alt="KAIVO perfume: a black glass bottle with a crown, the letter K and the words Leave Your Mark">
@@ -530,7 +566,7 @@ Bag <b id="bagCount">0</b>
 </section>
 <footer>
 <div class="wrap">
-<div><a href="#shop">Shop</a><a href="#trio">TRIØ</a><a href="#kaivo">KAIVO</a><a href="#king-1">KING 1</a><a href="#help">Delivery &amp; returns</a><span class="contact-foot"></span></div>
+<div><a href="#shop">Shop</a><a href="#trio">TRIØ</a><a href="#crowned">CROWNED</a><a href="#kaivo">KAIVO</a><a href="#king-1">KING 1</a><a href="#help">Delivery &amp; returns</a><span class="contact-foot"></span></div>
 <div>© 2026 KING Clothing · Leeds · Home of TRIØ and KAIVO</div>
 </div>
 </footer>
@@ -621,7 +657,8 @@ const P = [
   { id: 'tee', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 15, imgs: ['img/tee.jpg', 'img/tee-model.jpg', 'img/tee-model2.jpg', 'img/tee-back.jpg', 'img/tee-side.jpg'], opts: '9 sizes · black', pick: { label: 'Size', options: SIZES }, desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
   { id: 'hoodie', brand: 'TRIØ', for: ['Kids'], name: 'Kids Crown Hoodie', type: 'Kids\' Heavy Blend hoodie', cat: 'Clothing', price: 22, imgs: ['img/hoodie.jpg', 'img/hoodie-back.jpg', 'img/hoodie-kid.jpg', 'img/hoodie-kid-back.jpg'], opts: 'Youth S–XL · black', pick: { label: 'Size', options: ['Youth S', 'Youth M', 'Youth L', 'Youth XL'] }, desc: 'Black hoodie with the chrome TRIØ Clothing logo on the front and a big white crown on the back.' },
   { id: 'anorak', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Zipped Pocket Anorak', type: 'Sport-Tek anorak', cat: 'Clothing', price: 35, imgs: ['img/anorak.jpg'], opts: '8 sizes · charcoal', pick: { label: 'Size', options: SIZES.slice(0, 8) }, desc: 'Charcoal pullover anorak with a zipped pocket and a small logo patch on the chest.' },
-  { id: 'ski-tracksuit', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Signature Ski Tracksuit', type: 'Winter ski-style tracksuit · jacket and trousers', cat: 'Clothing', soon: true, price: 0, imgs: ['img/tracksuit-set.jpg', 'img/tracksuit-winter.jpg', 'img/tracksuit-jacket.jpg', 'img/tracksuit-trousers.jpg'], opts: 'Jacket + trousers · winter', desc: 'A quilted puffer jacket with a funnel collar, a red chest yoke, the white TRIØ crown, "Signature" in script and a ski-pass pocket on the sleeve. It comes with padded trousers that have quilted knees, red side stripes and TRIØ SIGNATURE down the leg. Price coming soon.' },
+  { id: 'ski-tracksuit', brand: 'CROWNED', for: ['Men', 'Women'], name: 'Signature Ski Tracksuit', type: 'Winter ski-style tracksuit · jacket and trousers', cat: 'Clothing', soon: true, price: 0, imgs: ['img/tracksuit-set.jpg', 'img/tracksuit-winter.jpg', 'img/tracksuit-jacket.jpg', 'img/tracksuit-trousers.jpg'], opts: 'Jacket + trousers · winter', desc: 'A quilted puffer jacket with a funnel collar, a red chest yoke, the white TRIØ crown, "Signature" in script and a ski-pass pocket on the sleeve. It comes with padded trousers that have quilted knees, red side stripes and TRIØ SIGNATURE down the leg. Price coming soon.' },
+  { id: 'crowned-visor', brand: 'CROWNED', for: ['Men', 'Women'], name: 'Signature Visor', type: 'Quilted puffer visor · matches the Signature tracksuit', cat: 'Accessories', soon: true, price: 0, imgs: ['img/crowned-visor.jpg', 'img/crowned-set.jpg'], opts: 'One size · red and black', desc: 'A quilted red band with the white crown on the front, and a black quilted peak with "Signature" in script and a red edge. Made to match the Signature Ski Tracksuit. Price coming soon.' },
   { id: 'w-crop-tee', brand: 'TRIØ', for: ['Women'], name: "Women's Crown Crop Tee", type: "Women's cropped T-shirt", cat: 'Clothing', price: 14, imgs: ['img/women-crop-tee.jpg'], opts: 'UK 6–18 · black', pick: { label: 'Size', options: WSIZES }, desc: 'Black fitted crop tee with the white TRIØ crown on the chest.' },
   { id: 'w-crop-hoodie', brand: 'TRIØ', for: ['Women'], name: "Women's Crop Hoodie", type: "Women's cropped hoodie", cat: 'Clothing', price: 24, imgs: ['img/women-crop-hoodie.jpg'], opts: 'UK 6–18 · black', pick: { label: 'Size', options: WSIZES }, desc: 'Black cropped hoodie with the chrome TRIØ Clothing logo on the front.' },
   { id: 'w-joggers', brand: 'TRIØ', for: ['Women'], name: "Women's Crown Joggers", type: "Women's joggers", cat: 'Clothing', price: 22, imgs: ['img/women-joggers.jpg'], opts: 'UK 6–18 · black', pick: { label: 'Size', options: WSIZES }, desc: 'Black cuffed joggers with a small white crown on the left leg.' },
@@ -630,9 +667,9 @@ const P = [
   { id: 'cap', brand: 'TRIØ', name: 'Crown Snapback', type: 'Embroidered snapback cap', cat: 'Accessories', price: 22, imgs: ['img/cap.jpg', 'img/cap-grey.jpg', 'img/cap-white.jpg', 'img/cap-back.jpg', 'img/cap-model.jpg'], opts: 'One size · red, grey or white', pick: { label: 'Colour', options: ['Red', 'Grey', 'White'], photos: true, swatches: ['#c4122f', '#9b9b9b', '#ffffff'] }, desc: 'Snapback with a black flat peak and the crown embroidered on a black front patch.' },
   { id: 'sneakers', brand: 'TRIØ', for: ['Men'], name: 'Mesh Sneakers', type: "Men's mesh sneakers", cat: 'Shoes', price: 55, imgs: ['img/sneakers.jpg', 'img/sneakers-side.jpg', 'img/sneakers-top.jpg', 'img/sneakers-heel.jpg'], opts: '9 sizes', pick: { label: 'Size', options: ['UK 5', 'UK 6', 'UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11', 'UK 12', 'UK 13'] }, desc: 'Black mesh sneakers with a silver graffiti print.' },
   { id: 'slippers', brand: 'TRIØ', for: ['Men'], name: 'Indoor Slippers', type: "Men's indoor slippers", cat: 'Shoes', price: 25, imgs: ['img/slippers.jpg'], opts: 'One size · black', desc: 'Black slip-on indoor slippers with a white lining.' },
-  { id: 'shoe-court-low', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Crown Court Low', type: 'Factory-made low-top court shoe', cat: 'Shoes', soon: true, price: 0, imgs: ['img/shoe-court-low.jpg'], opts: 'White and black', desc: 'White low-top court shoe with a black heel panel, a red TRIØ heel tab and the red crown on the side. Designed by TRIØ, to be made in a shoe factory. Price coming soon.' },
-  { id: 'shoe-court-high', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Crown Court High', type: 'Factory-made high-top', cat: 'Shoes', soon: true, price: 0, imgs: ['img/shoe-court-high.jpg'], opts: 'Black and red', desc: 'Black high-top with a padded collar, a red KING CLOTHING ankle strap and the red crown. Designed by TRIØ, to be made in a shoe factory. Price coming soon.' },
-  { id: 'shoe-crown-slide', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Crown Slide', type: 'Factory-made slides', cat: 'Shoes', soon: true, price: 0, imgs: ['img/shoe-crown-slide.jpg'], opts: 'Black with a white strap', desc: 'Black slides with a soft footbed and a white strap printed with the crown and TRIØ. Designed by TRIØ, to be made in a shoe factory. Price coming soon.' },
+  { id: 'shoe-court-low', brand: 'CROWNED', for: ['Men', 'Women'], name: 'Crown Court Low', type: 'Factory-made low-top court shoe', cat: 'Shoes', soon: true, price: 0, imgs: ['img/shoe-court-low.jpg'], opts: 'White and black', desc: 'White low-top court shoe with a black heel panel, a red TRIØ heel tab and the red crown on the side. Part of the CROWNED Signature line, to be made in a shoe factory. Price coming soon.' },
+  { id: 'shoe-court-high', brand: 'CROWNED', for: ['Men', 'Women'], name: 'Crown Court High', type: 'Factory-made high-top', cat: 'Shoes', soon: true, price: 0, imgs: ['img/shoe-court-high.jpg'], opts: 'Black and red', desc: 'Black high-top with a padded collar, a red KING CLOTHING ankle strap and the red crown. Part of the CROWNED Signature line, to be made in a shoe factory. Price coming soon.' },
+  { id: 'shoe-crown-slide', brand: 'CROWNED', for: ['Men', 'Women'], name: 'Crown Slide', type: 'Factory-made slides', cat: 'Shoes', soon: true, price: 0, imgs: ['img/shoe-crown-slide.jpg'], opts: 'Black with a white strap', desc: 'Black slides with a soft footbed and a white strap printed with the crown and TRIØ. Part of the CROWNED Signature line, to be made in a shoe factory. Price coming soon.' },
   { id: 'powerbank', brand: 'TRIØ', name: 'Crown Powerbank', type: 'Magnetic powerbank', cat: 'Accessories', price: 28, imgs: ['img/powerbank.jpg'], opts: 'Black · magnetic', desc: 'Magnetic phone powerbank in black with the white crown.' },
   { id: 'puzzle', brand: 'TRIØ', name: 'TRIØ Jigsaw Puzzle', type: 'Jigsaw puzzle with tin', cat: 'Accessories', price: 18, imgs: ['img/puzzle.jpg', 'img/puzzle-pieces.jpg', 'img/puzzle-tin.jpg'], opts: 'Comes in a tin', desc: 'Jigsaw puzzle of the chrome TRIØ logo. Comes in a tin.' },
   design('yinyang', 'Yin Yang', 'YIN · YANG in chrome under the TRIØ crown, with a bold black and white yin yang and "balance is everything".'),
@@ -654,7 +691,7 @@ const P = [
   { id: 'kaivo-cream', brand: 'KAIVO', name: 'KAIVO Hand Cream', type: 'Hand cream · 75 ml', cat: 'Beauty', soon: true, dark: true, price: 0, imgs: ['img/kaivo-cream-noir.jpg', 'img/kaivo-cream-blanc.jpg'], opts: 'Noir or Blanc · 75 ml', pick: NB, desc: 'Hand cream in the Noir or Blanc scent, in a black or white tube. Price coming soon.' },
   { id: 'kaivo-balm', brand: 'KAIVO', name: 'KAIVO Lip Balm', type: 'Lip balm', cat: 'Beauty', soon: true, dark: true, price: 0, imgs: ['img/kaivo-balm-noir.jpg', 'img/kaivo-balm-blanc.jpg'], opts: 'Black or white', pick: { label: 'Style', options: ['Noir', 'Blanc'], photos: true, swatches: ['#0b0b0b', '#f4f4f4'] }, desc: 'Lip balm in a black Noir or white Blanc case with a chrome band. Price coming soon.' }
 ];
-const CATS = ['All', 'Men', 'Women', 'Kids', 'Designs', 'Shoes', 'Accessories', 'KAIVO'];
+const CATS = ['All', 'Men', 'Women', 'Kids', 'Designs', 'Shoes', 'Accessories', 'CROWNED', 'KAIVO'];
 const HAS_PP = !!PAYPAL_CLIENT_ID;
 const HAS_REV = /^https:\/\/revolut\.me\/[A-Za-z0-9._-]+\/?$/.test(REVOLUT_LINK) && /^\S+@\S+\.\S+$/.test(CONTACT_EMAIL);
 const $ = (id) => document.getElementById(id);
@@ -690,7 +727,7 @@ function renderGrid() {
     '<button class="tile' + (p.dark ? ' dark' : '') + '" type="button" data-open="' + p.id + '" aria-label="View ' + p.name + '"><img src="' + p.imgs[0] + '" alt="' + p.name + '" loading="lazy"' + (p.imgs[1] ? ' class="has-alt"' : '') + '>' +
     (p.imgs[1] ? '<img class="alt" src="' + p.imgs[1] + '" alt="" loading="lazy">' : '') + (p.soon ? '<span class="tag soon">Coming soon</span>' : p.tag ? '<span class="tag">' + p.tag + '</span>' : '') +
     (p.imgs.length > 1 ? '<span class="photos">' + p.imgs.length + ' photos</span>' : '') + '</button>' +
-    '<div class="cbody"><p class="bl' + (p.brand === 'KAIVO' ? ' kv' : '') + '">' + p.brand + '</p><div class="crow"><h3 class="cname">' + p.name + '</h3><span class="price">' + (p.soon ? 'Soon' : (p.pick && p.pick.prices) ? 'From ' + gbp(Math.min(...p.pick.prices)) : gbp(p.price)) + '</span></div>' +
+    '<div class="cbody"><p class="bl' + (p.brand === 'KAIVO' ? ' kv' : p.brand === 'CROWNED' ? ' cr' : '') + '">' + p.brand + '</p><div class="crow"><h3 class="cname">' + p.name + '</h3><span class="price">' + (p.soon ? 'Soon' : (p.pick && p.pick.prices) ? 'From ' + gbp(Math.min(...p.pick.prices)) : gbp(p.price)) + '</span></div>' +
     '<p class="cdet">' + (p.pick && p.pick.swatches ? p.pick.swatches.map((c, k) => '<span class="sw" style="background:' + c + '" title="' + p.pick.options[k] + '"></span>').join('') : '') + '<span>' + p.opts + '</span></p>' +
     (p.soon
       ? '<button class="add" type="button" disabled>Coming soon</button>'
