@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KING Clothing · Home of TRIØ and KAIVO</title>
-<meta name="description" content="KING Clothing from Leeds: TRIØ streetwear, shoes and accessories, and KAIVO perfume.">
+<meta name="description" content="KING Clothing from Leeds: TRIØ streetwear for men, women and kids, and KAIVO perfume and beauty.">
 <link rel="icon" type="image/png" href="img/crown.png">
 <meta name="theme-color" content="#070707">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KING Clothing">
 <meta property="og:title" content="KING Clothing · Home of TRIØ and KAIVO">
-<meta property="og:description" content="TRIØ streetwear and KAIVO perfume from Leeds. UK delivery £3.99.">
+<meta property="og:description" content="TRIØ streetwear for men, women and kids, and KAIVO perfume and beauty. From Leeds, UK delivery £3.99.">
 <meta property="og:url" content="https://sans-ctrl.github.io/trio.com/">
 <meta property="og:image" content="https://sans-ctrl.github.io/trio.com/img/share.jpg">
 <meta property="og:image:width" content="1200">
@@ -220,8 +220,19 @@ footer a{text-decoration:none;margin-right:16px}
 .kb img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform .35s ease}
 @media(hover:hover){.kb:hover img{transform:scale(1.03)}}
 .kb span{display:block;padding:12px;font-family:Cinzel,Georgia,serif;font-weight:700;letter-spacing:.3em}
+.who{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 22px}
+.whocard{position:relative;display:block;background:#fff;border:0;border-radius:18px;overflow:hidden;aspect-ratio:16/10;cursor:pointer;color:#111;text-align:left;padding:0}
+.whocard img{position:absolute;right:4%;top:8%;height:84%;width:56%;object-fit:contain;transition:transform .35s ease}
+.whocard b{position:absolute;left:20px;bottom:44px;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(28px,3.4vw,42px);letter-spacing:.02em}
+.whocard span{position:absolute;left:20px;bottom:18px;font-weight:700;font-size:14px}
+.whocard[aria-pressed=true]{outline:3px solid var(--red);outline-offset:3px}
+@media(hover:hover){.whocard:hover img{transform:scale(1.05)}}
+.krange{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(170px,46%),1fr));gap:12px;margin-top:clamp(22px,3vw,34px)}
+.krange .kb span{font-size:13px;letter-spacing:.14em;padding:10px 8px}
+@media(min-width:900px){.krange{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.krange h3{grid-column:1/-1;margin:0;font-family:Cinzel,Georgia,serif;font-weight:700;letter-spacing:.16em;font-size:18px;color:var(--ink)}
 @media(max-width:760px){.kgrid{grid-template-columns:minmax(0,1fr)}.brands{grid-template-columns:minmax(0,1fr)}.aboutcrown{max-width:180px!important}.modal.on{grid-template-columns:minmax(0,1fr)}.kingtxt,.about .wrap{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:600px){.crow{flex-direction:column;gap:0}.pol{padding:6px 6px 2px}.look{gap:8px}.ticker span{font-size:17px}.links{order:3;width:100%;margin-left:0;gap:14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cbody{padding:10px 12px 12px}.cname{font-size:15px}.facts{grid-template-columns:minmax(0,1fr)}.info h3{font-size:28px}}
+@media(max-width:600px){.who{gap:8px}.whocard{aspect-ratio:4/5}.whocard img{left:10%;right:10%;top:5%;width:80%;height:50%}.whocard b{left:10px;bottom:28px;font-size:19px}.whocard span{left:10px;bottom:9px;font-size:11px}.crow{flex-direction:column;gap:0}.pol{padding:6px 6px 2px}.look{gap:8px}.ticker span{font-size:17px}.links{order:3;width:100%;margin-left:0;gap:14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cbody{padding:10px 12px 12px}.cname{font-size:15px}.facts{grid-template-columns:minmax(0,1fr)}.info h3{font-size:28px}}
 @media(max-width:600px){.photos{right:6px;bottom:6px;font-size:11px;padding:3px 8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.drawer{transition:none}.ticker div{animation:none}.pol,.tile img{transition:none}}
 </style>
@@ -230,7 +241,7 @@ footer a{text-decoration:none;margin-right:16px}
 <nav aria-label="Main">
 <div class="navin">
 <a class="brand" href="#top"><img src="img/crown-t.png" alt=""><span class="kv">KING</span></a>
-<div class="links"><a href="#shop">Shop</a><a href="#trio">TRIØ</a><a href="#kaivo">KAIVO</a><a href="#king-1">KING 1</a></div>
+<div class="links"><a href="#shop" data-jump="Men">Men</a><a href="#shop" data-jump="Women">Women</a><a href="#shop" data-jump="Kids">Kids</a><a href="#kaivo">KAIVO</a><a href="#king-1">KING 1</a></div>
 <button class="bagbtn" id="openBag" type="button" aria-label="Open bag">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l1 13H5L6 7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>
 Bag <b id="bagCount">0</b>
@@ -241,22 +252,27 @@ Bag <b id="bagCount">0</b>
 <div class="wrap">
 <img class="kingmark" src="img/crown-t.png" alt="">
 <h1 class="kingname"><span class="chrome">KING</span><small>CLOTHING</small></h1>
-<p>Home of two brands from Leeds: TRIØ streetwear and KAIVO perfume.</p>
+<p>Home of two brands from Leeds: TRIØ streetwear for men, women and kids, and KAIVO perfume and beauty.</p>
 <div class="btns"><a class="btn red" href="#shop">Shop everything</a></div>
 <div class="brands">
-<a class="brandcard trio" href="#shop" data-jump="TRIØ"><img src="img/logo.jpg" alt="TRIØ Clothing"><span class="cap2"><span>Streetwear, shoes and accessories</span><em>Shop TRIØ →</em></span></a>
-<a class="brandcard kaivo" href="#kaivo"><img src="img/kaivo-mark.jpg" alt="KAIVO perfume"><span class="cap2"><span>Perfume · Noir and Blanc coming soon</span><em>See KAIVO →</em></span></a>
+<a class="brandcard trio" href="#shop" data-jump="TRIØ"><img src="img/logo.jpg" alt="TRIØ Clothing"><span class="cap2"><span>Men, women and kids · Shoes · Accessories</span><em>Shop TRIØ →</em></span></a>
+<a class="brandcard kaivo" href="#kaivo"><img src="img/kaivo-mark.jpg" alt="KAIVO perfume"><span class="cap2"><span>Perfume, body care and beauty · coming soon</span><em>See KAIVO →</em></span></a>
 </div>
 </div>
 </header>
-<div class="ticker" aria-label="KING Clothing. TRIØ Drop 01 out now. KAIVO perfume coming soon. Printed in Leeds. UK delivery £3.99. Pay with card, PayPal or Revolut.">
-<div aria-hidden="true"><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ Drop 01 out now&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ Drop 01 out now&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span></div>
+<div class="ticker" aria-label="KING Clothing. TRIØ for men, women and kids. KAIVO perfume and beauty coming soon. Printed in Leeds. UK delivery £3.99. Pay with card, PayPal or Revolut.">
+<div aria-hidden="true"><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span><span>KING Clothing&nbsp;&nbsp;✦&nbsp;&nbsp;TRIØ for men, women and kids&nbsp;&nbsp;✦&nbsp;&nbsp;KAIVO perfume and beauty coming soon&nbsp;&nbsp;✦&nbsp;&nbsp;Printed in Leeds&nbsp;&nbsp;✦&nbsp;&nbsp;UK delivery £3.99&nbsp;&nbsp;✦&nbsp;&nbsp;Pay with card, PayPal or Revolut&nbsp;&nbsp;✦&nbsp;&nbsp;</span></div>
 </div>
 <section class="band shop" id="shop" aria-labelledby="shopTitle">
 <div class="wrap">
 <div class="shophead">
 <div><h2 class="disp" id="shopTitle">Shop the drop</h2><p class="note">TRIØ and KAIVO in one bag · Prices in GBP · UK delivery £3.99</p></div>
 <div class="chips" id="chips" role="group" aria-label="Filter products"></div>
+</div>
+<div class="who" role="group" aria-label="Shop for">
+<button class="whocard" type="button" data-cat="Men" aria-pressed="false"><img src="img/anorak.jpg" alt=""><b>Men</b><span>Shop now →</span></button>
+<button class="whocard" type="button" data-cat="Women" aria-pressed="false"><img src="img/women-crop-hoodie.jpg" alt=""><b>Women</b><span>Shop now →</span></button>
+<button class="whocard" type="button" data-cat="Kids" aria-pressed="false"><img src="img/kids-going-up-tee.jpg" alt=""><b>Kids</b><span>Shop now →</span></button>
 </div>
 <div class="grid" id="grid"></div>
 </div>
@@ -267,11 +283,11 @@ Bag <b id="bagCount">0</b>
 <div>
 <p class="eyebrow">A KING Clothing brand</p>
 <h2 class="disp" id="trioTitle">TRIØ · Crown on everything</h2>
-<p>TRIØ is the streetwear side of KING Clothing, from Leeds. The crown and the chrome TRIØ wordmark show up across the range, from caps and hoodies to powerbanks and puzzles.</p>
+<p>TRIØ is the streetwear side of KING Clothing, from Leeds, for men, women and kids. The crown and the chrome TRIØ wordmark show up across the range, from crop tees and hoodies to caps, powerbanks and puzzles.</p>
 <p>Everything is printed to order in Leeds and posted to you, so nothing sits in a warehouse and new designs can drop fast.</p>
 <div class="facts">
 <div><b>Leeds</b><span>Where it started</span></div>
-<div><b>8 pieces</b><span>In Drop 01</span></div>
+<div><b>For everyone</b><span>Men, women and kids</span></div>
 <div><b>Made to order</b><span>Printed when you buy</span></div>
 </div>
 <div class="btns" style="justify-content:flex-start;margin-top:18px"><a class="btn red" href="#shop" data-jump="TRIØ">Shop TRIØ</a><a class="btn" href="#king-1">See the KING 1</a></div>
@@ -489,14 +505,15 @@ Bag <b id="bagCount">0</b>
 <p class="eyebrow">A KING Clothing brand</p>
 <h2 class="kname chrome" id="kaivoTitle">KAIVO</h2>
 <p class="ktag">Leave your mark</p>
-<p>KAIVO is the perfume house of KING Clothing. The first two scents come in black and white glass: Noir and Blanc. Both are coming soon.</p>
-<div class="btns" style="justify-content:flex-start;margin-top:18px"><a class="btn red" href="#shop" data-jump="KAIVO">See the perfumes</a></div>
+<p>KAIVO is the perfume and beauty house of KING Clothing. Every product comes in two scents and two looks: Noir in black and Blanc in white. Perfume, deodorant, shower gel, body lotion, hand cream and lip balm are all coming soon.</p>
+<div class="btns" style="justify-content:flex-start;margin-top:18px"><a class="btn red" href="#shop" data-jump="KAIVO">Shop KAIVO</a></div>
 </div>
 <div class="kbottles">
 <button class="kb" type="button" data-open="kaivo-noir" aria-label="View KAIVO Noir"><img src="img/kaivo-noir.jpg" alt=""><span>NOIR</span></button>
 <button class="kb" type="button" data-open="kaivo-blanc" aria-label="View KAIVO Blanc"><img src="img/kaivo-blanc.jpg" alt=""><span>BLANC</span></button>
 </div>
 </div>
+<div class="krange" id="krange" aria-label="KAIVO body care and beauty"></div>
 </div>
 </section>
 <section class="band help" id="help" aria-labelledby="helpTitle">
@@ -505,7 +522,7 @@ Bag <b id="bagCount">0</b>
 <div class="helpgrid">
 <div><b>Delivery</b><p>TRIØ orders are printed in Leeds, then posted to you. UK delivery is £3.99. We only deliver in the UK for now.</p></div>
 <div><b>Paying</b><p id="payText">Pay with PayPal, a debit or credit card, or Revolut.</p></div>
-<div><b>Sizes</b><p>The tee and anorak come in unisex adult sizes. The hoodie comes in youth sizes, and the shoes in UK sizes.</p></div>
+<div><b>Sizes</b><p>Women's pieces come in UK 6 to 18, and kids' tees in ages 3 to 13. The kids' hoodie comes in youth S to XL. The unisex tee and anorak come in adult sizes, and the shoes in UK sizes.</p></div>
 <div><b>Returns</b><p>Changed your mind? You can cancel up to 14 days after your order arrives. <span class="contact"></span></p></div>
 </div>
 </div>
@@ -591,20 +608,33 @@ const REVOLUT_LINK = '';
 // ========================================
 
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'];
+const WSIZES = ['UK 6', 'UK 8', 'UK 10', 'UK 12', 'UK 14', 'UK 16', 'UK 18'];
+const KSIZES = ['3–4 yrs', '5–6 yrs', '7–8 yrs', '9–10 yrs', '11–12 yrs', '13 yrs'];
+const NB = { label: 'Scent', options: ['Noir', 'Blanc'], photos: true, swatches: ['#0b0b0b', '#f4f4f4'] };
 const P = [
-  { id: 'tee', brand: 'TRIØ', name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 15, imgs: ['img/tee.jpg', 'img/tee-model.jpg', 'img/tee-model2.jpg', 'img/tee-back.jpg', 'img/tee-side.jpg'], opts: '9 sizes · black', pick: { label: 'Size', options: SIZES }, desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
-  { id: 'hoodie', brand: 'TRIØ', name: 'Crown Hoodie', type: 'Youth Heavy Blend hooded sweatshirt', cat: 'Clothing', price: 22, imgs: ['img/hoodie.jpg', 'img/hoodie-back.jpg', 'img/hoodie-kid.jpg', 'img/hoodie-kid-back.jpg'], opts: '4 youth sizes · black', pick: { label: 'Size', options: ['Youth S', 'Youth M', 'Youth L', 'Youth XL'] }, desc: 'Black hoodie with the chrome TRIØ Clothing logo on the front and a big white crown on the back.' },
-  { id: 'anorak', brand: 'TRIØ', name: 'Zipped Pocket Anorak', type: 'Sport-Tek anorak', cat: 'Clothing', price: 35, imgs: ['img/anorak.jpg'], opts: '8 sizes · charcoal', pick: { label: 'Size', options: SIZES.slice(0, 8) }, desc: 'Charcoal pullover anorak with a zipped pocket and a small logo patch on the chest.' },
+  { id: 'tee', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Going Up Tee', type: 'Unisex Softstyle T-shirt', cat: 'Clothing', price: 15, imgs: ['img/tee.jpg', 'img/tee-model.jpg', 'img/tee-model2.jpg', 'img/tee-back.jpg', 'img/tee-side.jpg'], opts: '9 sizes · black', pick: { label: 'Size', options: SIZES }, desc: 'Black Softstyle tee with the "I\'m going up" stock chart printed on the front.' },
+  { id: 'hoodie', brand: 'TRIØ', for: ['Kids'], name: 'Kids Crown Hoodie', type: 'Kids\' Heavy Blend hoodie', cat: 'Clothing', price: 22, imgs: ['img/hoodie.jpg', 'img/hoodie-back.jpg', 'img/hoodie-kid.jpg', 'img/hoodie-kid-back.jpg'], opts: 'Youth S–XL · black', pick: { label: 'Size', options: ['Youth S', 'Youth M', 'Youth L', 'Youth XL'] }, desc: 'Black hoodie with the chrome TRIØ Clothing logo on the front and a big white crown on the back.' },
+  { id: 'anorak', brand: 'TRIØ', for: ['Men', 'Women'], name: 'Zipped Pocket Anorak', type: 'Sport-Tek anorak', cat: 'Clothing', price: 35, imgs: ['img/anorak.jpg'], opts: '8 sizes · charcoal', pick: { label: 'Size', options: SIZES.slice(0, 8) }, desc: 'Charcoal pullover anorak with a zipped pocket and a small logo patch on the chest.' },
+  { id: 'w-crop-tee', brand: 'TRIØ', for: ['Women'], name: "Women's Crown Crop Tee", type: "Women's cropped T-shirt", cat: 'Clothing', price: 14, imgs: ['img/women-crop-tee.jpg'], opts: 'UK 6–18 · black', pick: { label: 'Size', options: WSIZES }, desc: 'Black fitted crop tee with the white TRIØ crown on the chest.' },
+  { id: 'w-crop-hoodie', brand: 'TRIØ', for: ['Women'], name: "Women's Crop Hoodie", type: "Women's cropped hoodie", cat: 'Clothing', price: 24, imgs: ['img/women-crop-hoodie.jpg'], opts: 'UK 6–18 · black', pick: { label: 'Size', options: WSIZES }, desc: 'Black cropped hoodie with the chrome TRIØ Clothing logo on the front.' },
+  { id: 'w-joggers', brand: 'TRIØ', for: ['Women'], name: "Women's Crown Joggers", type: "Women's joggers", cat: 'Clothing', price: 22, imgs: ['img/women-joggers.jpg'], opts: 'UK 6–18 · black', pick: { label: 'Size', options: WSIZES }, desc: 'Black cuffed joggers with a small white crown on the left leg.' },
+  { id: 'k-going-up', brand: 'TRIØ', for: ['Kids'], name: 'Kids Going Up Tee', type: "Kids' T-shirt", cat: 'Clothing', price: 12, imgs: ['img/kids-going-up-tee.jpg'], opts: 'Ages 3–13 · black', pick: { label: 'Size', options: KSIZES }, desc: 'Black kids tee with the "I\'m going up" stock chart printed on the front.' },
+  { id: 'k-crown-tee', brand: 'TRIØ', for: ['Kids'], name: 'Kids Crown Tee', type: "Kids' T-shirt", cat: 'Clothing', price: 12, imgs: ['img/kids-crown-tee.jpg'], opts: 'Ages 3–13 · white', pick: { label: 'Size', options: KSIZES }, desc: 'White kids tee with the black TRIØ crown on the chest.' },
   { id: 'cap', brand: 'TRIØ', name: 'Crown Snapback', type: 'Embroidered snapback cap', cat: 'Accessories', price: 22, imgs: ['img/cap.jpg', 'img/cap-grey.jpg', 'img/cap-white.jpg', 'img/cap-back.jpg', 'img/cap-model.jpg'], opts: 'One size · red, grey or white', pick: { label: 'Colour', options: ['Red', 'Grey', 'White'], photos: true, swatches: ['#c4122f', '#9b9b9b', '#ffffff'] }, desc: 'Snapback with a black flat peak and the crown embroidered on a black front patch.' },
-  { id: 'sneakers', brand: 'TRIØ', name: 'Mesh Sneakers', type: "Men's mesh sneakers", cat: 'Shoes', price: 55, imgs: ['img/sneakers.jpg', 'img/sneakers-side.jpg', 'img/sneakers-top.jpg', 'img/sneakers-heel.jpg'], opts: '9 sizes', pick: { label: 'Size', options: ['UK 5', 'UK 6', 'UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11', 'UK 12', 'UK 13'] }, desc: 'Black mesh sneakers with a silver graffiti print.' },
-  { id: 'slippers', brand: 'TRIØ', name: 'Indoor Slippers', type: "Men's indoor slippers", cat: 'Shoes', price: 25, imgs: ['img/slippers.jpg'], opts: 'One size · black', desc: 'Black slip-on indoor slippers with a white lining.' },
+  { id: 'sneakers', brand: 'TRIØ', for: ['Men'], name: 'Mesh Sneakers', type: "Men's mesh sneakers", cat: 'Shoes', price: 55, imgs: ['img/sneakers.jpg', 'img/sneakers-side.jpg', 'img/sneakers-top.jpg', 'img/sneakers-heel.jpg'], opts: '9 sizes', pick: { label: 'Size', options: ['UK 5', 'UK 6', 'UK 7', 'UK 8', 'UK 9', 'UK 10', 'UK 11', 'UK 12', 'UK 13'] }, desc: 'Black mesh sneakers with a silver graffiti print.' },
+  { id: 'slippers', brand: 'TRIØ', for: ['Men'], name: 'Indoor Slippers', type: "Men's indoor slippers", cat: 'Shoes', price: 25, imgs: ['img/slippers.jpg'], opts: 'One size · black', desc: 'Black slip-on indoor slippers with a white lining.' },
   { id: 'powerbank', brand: 'TRIØ', name: 'Crown Powerbank', type: 'Magnetic powerbank', cat: 'Accessories', price: 28, imgs: ['img/powerbank.jpg'], opts: 'Black · magnetic', desc: 'Magnetic phone powerbank in black with the white crown.' },
   { id: 'puzzle', brand: 'TRIØ', name: 'TRIØ Jigsaw Puzzle', type: 'Jigsaw puzzle with tin', cat: 'Accessories', price: 18, imgs: ['img/puzzle.jpg', 'img/puzzle-pieces.jpg', 'img/puzzle-tin.jpg'], opts: 'Comes in a tin', desc: 'Jigsaw puzzle of the chrome TRIØ logo. Comes in a tin.' },
   // KAIVO perfumes are "coming soon": shown on the site but not for sale until soon is removed and a price is added.
   { id: 'kaivo-noir', brand: 'KAIVO', name: 'KAIVO Noir', type: 'Eau de parfum · 50 ml', cat: 'Perfume', soon: true, dark: true, price: 0, imgs: ['img/kaivo-noir.jpg', 'img/kaivo-noir-wide.jpg'], opts: 'Black glass · 50 ml', desc: 'Black glass bottle with a faceted black cap and the silver KAIVO crown. Scent and price coming soon.' },
-  { id: 'kaivo-blanc', brand: 'KAIVO', name: 'KAIVO Blanc', type: 'Eau de parfum · 50 ml', cat: 'Perfume', soon: true, dark: true, price: 0, imgs: ['img/kaivo-blanc.jpg', 'img/kaivo-blanc-wide.jpg'], opts: 'White glass · 50 ml', desc: 'White glass bottle with a white faceted cap and the KAIVO crown. Scent and price coming soon.' }
+  { id: 'kaivo-blanc', brand: 'KAIVO', name: 'KAIVO Blanc', type: 'Eau de parfum · 50 ml', cat: 'Perfume', soon: true, dark: true, price: 0, imgs: ['img/kaivo-blanc.jpg', 'img/kaivo-blanc-wide.jpg'], opts: 'White glass · 50 ml', desc: 'White glass bottle with a white faceted cap and the KAIVO crown. Scent and price coming soon.' },
+  { id: 'kaivo-deo', brand: 'KAIVO', name: 'KAIVO Deodorant', type: 'Body spray · 150 ml', cat: 'Beauty', soon: true, dark: true, price: 0, imgs: ['img/kaivo-deo-noir.jpg', 'img/kaivo-deo-blanc.jpg'], opts: 'Noir or Blanc · 150 ml', pick: NB, desc: 'Deodorant body spray in the Noir or Blanc scent. Black can for Noir, white can for Blanc. Price coming soon.' },
+  { id: 'kaivo-gel', brand: 'KAIVO', name: 'KAIVO Shower Gel', type: 'Shower gel · 250 ml', cat: 'Beauty', soon: true, dark: true, price: 0, imgs: ['img/kaivo-gel-noir.jpg', 'img/kaivo-gel-blanc.jpg'], opts: 'Noir or Blanc · 250 ml', pick: NB, desc: 'Shower gel in the Noir or Blanc scent, in a black or white flip-cap bottle. Price coming soon.' },
+  { id: 'kaivo-lotion', brand: 'KAIVO', name: 'KAIVO Body Lotion', type: 'Body lotion · 200 ml', cat: 'Beauty', soon: true, dark: true, price: 0, imgs: ['img/kaivo-lotion-noir.jpg', 'img/kaivo-lotion-blanc.jpg'], opts: 'Noir or Blanc · 200 ml', pick: NB, desc: 'Body lotion in the Noir or Blanc scent, in a pump bottle with a chrome pump. Price coming soon.' },
+  { id: 'kaivo-cream', brand: 'KAIVO', name: 'KAIVO Hand Cream', type: 'Hand cream · 75 ml', cat: 'Beauty', soon: true, dark: true, price: 0, imgs: ['img/kaivo-cream-noir.jpg', 'img/kaivo-cream-blanc.jpg'], opts: 'Noir or Blanc · 75 ml', pick: NB, desc: 'Hand cream in the Noir or Blanc scent, in a black or white tube. Price coming soon.' },
+  { id: 'kaivo-balm', brand: 'KAIVO', name: 'KAIVO Lip Balm', type: 'Lip balm', cat: 'Beauty', soon: true, dark: true, price: 0, imgs: ['img/kaivo-balm-noir.jpg', 'img/kaivo-balm-blanc.jpg'], opts: 'Black or white', pick: { label: 'Style', options: ['Noir', 'Blanc'], photos: true, swatches: ['#0b0b0b', '#f4f4f4'] }, desc: 'Lip balm in a black Noir or white Blanc case with a chrome band. Price coming soon.' }
 ];
-const CATS = ['All', 'TRIØ', 'KAIVO', 'Clothing', 'Shoes', 'Accessories'];
+const CATS = ['All', 'Men', 'Women', 'Kids', 'Shoes', 'Accessories', 'KAIVO'];
 const HAS_PP = !!PAYPAL_CLIENT_ID;
 const HAS_REV = /^https:\/\/revolut\.me\/[A-Za-z0-9._-]+\/?$/.test(REVOLUT_LINK) && /^\S+@\S+\.\S+$/.test(CONTACT_EMAIL);
 const $ = (id) => document.getElementById(id);
@@ -629,7 +659,8 @@ function renderChips() {
   $('chips').innerHTML = CATS.map((c) => '<button class="chip" type="button" data-cat="' + c + '" aria-pressed="' + (c === filter) + '">' + c + '</button>').join('');
 }
 function renderGrid() {
-  const list = P.filter((p) => filter === 'All' || p.cat === filter || p.brand === filter);
+  const list = P.filter((p) => filter === 'All' || p.cat === filter || p.brand === filter || (p.for || []).includes(filter));
+  document.querySelectorAll('.whocard').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cat === filter)));
   $('grid').innerHTML = list.map((p) => '<article class="card">' +
     '<button class="tile' + (p.dark ? ' dark' : '') + '" type="button" data-open="' + p.id + '" aria-label="View ' + p.name + '"><img src="' + p.imgs[0] + '" alt="' + p.name + '" loading="lazy"' + (p.imgs[1] ? ' class="has-alt"' : '') + '>' +
     (p.imgs[1] ? '<img class="alt" src="' + p.imgs[1] + '" alt="" loading="lazy">' : '') + (p.soon ? '<span class="tag soon">Coming soon</span>' : p.tag ? '<span class="tag">' + p.tag + '</span>' : '') +
@@ -644,11 +675,15 @@ function renderGrid() {
     '</div></article>').join('');
 }
 function renderLook() {
-  const LOOK = [['tee', 'img/tee-model2.jpg'], ['hoodie', 'img/hoodie.jpg'], ['cap', 'img/cap.jpg']];
+  const LOOK = [['tee', 'img/tee-model2.jpg'], ['w-crop-hoodie', 'img/women-crop-hoodie.jpg'], ['hoodie', 'img/hoodie-kid.jpg']];
   $('look').innerHTML = LOOK.map(([id, img]) => {
     const p = find(id);
     return '<button class="pol" type="button" data-open="' + id + '" aria-label="View ' + p.name + ', ' + gbp(p.price) + '"><img src="' + img + '" alt=""><span>' + p.name + ' <b>' + gbp(p.price) + '</b></span></button>';
   }).join('');
+}
+function renderRange() {
+  const items = P.filter((p) => p.brand === 'KAIVO' && p.cat === 'Beauty');
+  $('krange').innerHTML = '<h3>Body care and beauty</h3>' + items.map((p) => '<button class="kb" type="button" data-open="' + p.id + '" aria-label="View ' + p.name + '"><img src="' + p.imgs[0] + '" alt="" loading="lazy"><span>' + p.name.replace('KAIVO ', '').toUpperCase() + '</span></button>').join('');
 }
 function renderContact() {
   const mail = CONTACT_EMAIL ? '<a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a>' : '';
@@ -710,7 +745,7 @@ function openModal(id) {
   $('mWarn').textContent = '';
   if (cur.pick) {
     $('mPickWrap').hidden = false;
-    $('mPickLab').textContent = 'Pick a ' + cur.pick.label.toLowerCase();
+    $('mPickLab').textContent = cur.soon ? cur.pick.label + 's' : 'Pick a ' + cur.pick.label.toLowerCase();
     $('mPick').innerHTML = cur.pick.options.map((o) => '<button type="button" data-pick="' + o + '" aria-pressed="false">' + o + '</button>').join('');
   } else {
     $('mPickWrap').hidden = true;
@@ -963,6 +998,7 @@ renderChips();
 renderGrid();
 renderBag();
 renderLook();
+renderRange();
 renderContact();
 }
 </script>
